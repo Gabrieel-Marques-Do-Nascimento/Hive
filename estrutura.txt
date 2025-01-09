@@ -1,0 +1,7 @@
+meu_app/
+├── main.py
+├── meu_app.kv
+├── assets/
+│   ├── icon.png
+│   └── background.jpg
+└── buildozer.spec

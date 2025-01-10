@@ -1,0 +1,125 @@
+*{
+  margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    font-style: normal;
+    background-image: url('https://source.unsplash.com/random/1920x1080');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 99vh;
+    overflow: hidden;
+}
+
+header {
+  background-color: rgb(78, 77, 76);
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  height: 20%;
+}
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+header h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+}
+header button {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  color: black;
+}
+main {
+
+  height: 70%;
+}
+main #msgs{
+  margin: 10px;
+  padding: 10px;
+  background-color: beige;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 90%;
+}
+main #sender-msg {
+  margin: 10px;
+  padding: 10px;
+  background-color: rgb(231, 231, 231);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 50px;
+}
+main #user-msg {
+  margin: 10px;
+  padding: 10px;
+  color: white;
+  background-color: rgb(146, 144, 144);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(84, 83, 83);
+  height: 50px;
+}
+main #msg {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+
+}
+main #msg input {
+position: relative;
+font-size: large;
+left: 50%;
+transform: translateX(-50%);
+height: 40px;
+width: 80%;
+padding: 10px;
+border-radius: 10px;
+}
+main #msg button {
+  position: fixed;
+  left: 88%;
+  border-radius:  0 10px 10px 0;
+  transform: translateX(-50%);
+  height: 40px;
+  width: 60px;
+  font-weight: bold;
+}
+main #msg button:hover {
+  background-color: #333;
+  color: #fff;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  font-family: 'Roboto', sans-serif;
+  height: 6%;
+}
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+footer a:hover {
+  color: #ccc;
+}

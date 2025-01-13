@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HIVE MSG</title>
+
+    {% block conteudo %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='claude.css') }}"
+    />
+
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      <button>
+        <img
+          src="{{ url_for('static', filename='claude.svg') }}"
+          alt=""
+        />
+      </button>
+      <h1>sender: {{sender}}</h1>
+      <h2>user: {{user}}</h2>
+    </header>
+    <main>
+      <section id="msgs">
+        <p id="sender-msg">sender teste</p>
+        <p id="user-msg">user teste</p>
+      </section>
+      <div id="msg">
+        <input type="text" name="msg" />
+        <button id="send">enviar</button>
+      </div>
+    </main>
+    <footer>
+      <p>
+        direitos reservados a
+        <a
+          href="http://gabrieelmarques.com.br"
+          target="_blank"
+          rel="noopener noreferrer"
+          >gabrieel marques</a
+        >
+      </p>
+    </footer>
+
+      <!-- Armazena o dado em um atributo data-* -->
+      <div id="data-container" data-sensitive="{{ sensitive_data }}" style="display: none;"></div>
+
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+  </body>
+</html>

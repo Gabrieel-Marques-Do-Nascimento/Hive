@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant Cliente
+    participant Servidor
+    
+    Note over Cliente,Servidor: Estabelecimento de Conexão
+    Cliente->>Servidor: Solicita conexão
+    Servidor-->>Cliente: Aceita conexão
+    
+    Note over Cliente,Servidor: Envio de Mensagem
+    Cliente->>Servidor: Envia mensagem
+    Servidor-->>Cliente: Confirma recebimento
+    
+    Note over Servidor: Processa mensagem
+    
+    alt Mensagem para outro cliente
+        Servidor->>Servidor: Identifica destinatário
+        Servidor->>Cliente2: Encaminha mensagem
+        Cliente2-->>Servidor: Confirma recebimento
+        Servidor-->>Cliente: Notifica entrega
+    else Mensagem para armazenamento
+        Servidor->>Servidor: Salva mensagem
+        Servidor-->>Cliente: Confirma armazenamento
+    end
+    
+    Note over Cliente,Servidor: Desconexão
+    Cliente->>Servidor: Solicita desconexão
+    Servidor-->>Cliente: Confirma desconexão

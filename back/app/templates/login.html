@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #6b46c1, #4299e1);
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 1rem;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #4299e1;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #3182ce;
+        }
+
+        .links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .links a {
+            color: #4299e1;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">E-mail or name</label>
+                <input type="text" id="email" required placeholder="Digite seu e-mail ou nome">
+            </div>
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input  autocomplete="on" type="password" id="password" required placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="submit-btn">Entrar</button>
+        </form>
+        <div class="links">
+            <a href="#">Esqueceu a senha?</a> • 
+            <a href="#">Criar conta</a>
+        </div>
+    </div>
+    <script>
+        const form = document.getElementById('login-form');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({email: email, password:password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                localStorage.setItem(data['token_name'], data['token']);
+                if (data['status'] === 'ok') {
+                    window.location.href = '/home';
+                } else {
+                    alert('Credenciais inválidas');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        })
+    </script>
+</body>
+</html>

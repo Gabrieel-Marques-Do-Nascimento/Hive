@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import jsonify, request
 import jwt
-from .JWT import token_crietor
+from .JWT_C import token_crietor
 from auth import jwt_config
 
 

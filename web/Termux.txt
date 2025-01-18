@@ -1,0 +1,80 @@
+Vou te mostrar como criar um servidor web simples usando apenas Node.js nativo, sem Express:
+
+1. Primeiro, instale o Node.js no Termux:
+```bash
+pkg install nodejs
+```
+
+2. Crie uma pasta e os arquivos do projeto:
+```bash
+mkdir meu-site
+cd meu-site
+touch index.html
+touch server.js
+```
+
+3. No arquivo index.html:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Site</title>
+</head>
+<body>
+    <h1>Meu Site no Termux</h1>
+    <script>
+        // Seu código JavaScript aqui
+        console.log("Site rodando!");
+    </script>
+</body>
+</html>
+```
+
+4. No arquivo server.js:
+```javascript
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const server = http.createServer((req, res) => {
+    if (req.url === '/' || req.url === '/index.html') {
+        fs.readFile('index.html', (err, content) => {
+            if (err) {
+                res.writeHead(500);
+                res.end('Erro ao carregar o arquivo');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(content);
+        });
+    } else {
+        res.writeHead(404);
+        res.end('Página não encontrada');
+    }
+});
+
+const PORT = 8080;
+server.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+```
+
+5. Para iniciar o servidor:
+```bash
+node server.js
+```
+
+Agora você pode acessar:
+- http://localhost:8080 (no próprio dispositivo)
+- http://seu-ip:8080 (de outros dispositivos na mesma rede)
+
+Para ver seu IP use:
+```bash
+ifconfig
+```
+ou
+```bash
+ip addr
+```
+
+Isto cria um servidor web básico que serve sua página HTML com JavaScript. Quer que eu explique alguma parte em mais detalhes?

@@ -1,0 +1,1 @@
+DELET: quando o user deletar uma msg apenas deletar alguns campos e manter o id e outros

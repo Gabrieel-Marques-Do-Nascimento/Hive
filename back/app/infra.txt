@@ -1,0 +1,7 @@
+  solicita acesso
+  Client --> Login --> Server
+  Client <-- Token <-- Server
+  Client --> Token + msg + destino --> Server
+  Se user -> database: Server -> msg save in database
+  Destino --> ✓ or ! --> Server
+  Client <-- Status <-- Server

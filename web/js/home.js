@@ -41,26 +41,6 @@ for (let i = 0; i < users.length; i++) {
     clone.children[1].innerHTML = users[i]["time"]
     lista.appendChild(clone);
 }
-document.body.appendChild(lista);
+document.querySelector(".container").appendChild(lista);
 
-//alert("hello");
-/*
-          <ul>
-                {% for item in users %}
-                <li>
-                    <div class="user-info">
-                        <div class="avatar"></div>
-                        <div>
-                            <span class="username">{{ item["username"] }}</span>
-                            <br />
-                            <span class="message-preview"
-                                >{{ item["preview"] }}</span
-                            >
-                        </div>
-                    </div>
-                    <div class="time">{{ item["time"] }}</div>
-                </li>
-                {% endfor %}
-            </ul>
 
-*/

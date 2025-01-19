@@ -193,6 +193,7 @@ footer a:hover {
   }
   
   main #msg input {
+ 
     width: 75%;
   }
   
@@ -210,7 +211,9 @@ footer a:hover {
   main {
     height: 75%;
   }
-  
+  main #msg {
+  	position: fixed;
+  }
   main #msg input {
     width: 70%;
   }

@@ -49,6 +49,7 @@ const server = http.createServer((req, res) => {
 });
 
 // Definindo o IP e a porta do servidor
+let casa = "192.168.0.107";
 let mercearia = "192.168.1.9"; // Endereço IP configurado
 const PORT = 8081; // Definindo a porta do servidor
 

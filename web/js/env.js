@@ -1,0 +1,17 @@
+//require('dotenv').config();
+//import {dotenv} from "./dotenv"
+//dotenv.config()
+
+
+export let URL='http://127.0.0.1:5000'
+// Exemplo de uso das variáveis
+/*
+const port = process.env.PORT;
+const dbUrl = process.env.DATABASE_URL;
+
+console.log(`Aplicação rodando na porta ${port}`);
+console.log(`Conectando ao banco de dados em: ${dbUrl}`);
+
+   export let url = process.env.URL
+// env.js (CommonJS)
+*/

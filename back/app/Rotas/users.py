@@ -75,10 +75,10 @@ def login():
     return jsonify({'message': 'Credenciais inválidas!', 'status': 'error'})
 
 
-@users_blueprint.route('/login-page', methods=['GET'])
-def login_page():
-    """ login page"""
-    return render_template('login.html')
+#@users_blueprint.route('/login-page', methods=['GET'])
+#def login_page():
+#    """ login page"""
+#    return render_template('login.html')
 
 
 @users_blueprint.route("/teste")

@@ -100,16 +100,21 @@ def mymesgs(token):
 
 
 
-@app.route("/")
-def index():
-    user_name = "Camila"
-    sender_name = "Gabriel"
-    return render_template("index.html", sender=sender_name, user=user_name,sensitive_data="er5543token554346")
+#@app.route("/")
+#def index():
+#    user_name = "Camila"
+#    sender_name = "Gabriel"
+#    return render_template("index.html", sender=sender_name, user=user_name,sensitive_data="er5543token554346")
 
-@app.route("/home")
-def home():
-    users = [{"username":"gabriel","time":"15:00","preview":"hello world"},{"username":"camila","time":"15:00","preview":"hello world"},{"username":"joao","time":"15:00","preview":"hello world"}]
-    return render_template("home.html", users= users, user="gau")
+
+
+
+#@app.route("/home")
+#def home():
+#    users = [{"username":"gabriel","time":"15:00","preview":"hello world"},{"username":"camila","time":"15:00","preview":"hello world"},{"username":"joao","time":"15:00","preview":"hello world"}]
+#    return render_template("home.html", users= users, user="gau")
+
+
 
 
 #@app.route("/login")

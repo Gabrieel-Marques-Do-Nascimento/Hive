@@ -81,7 +81,7 @@ def mymesgs(token):
     
     curl -X POST http://localhost:5000/my_msgs \
      -H "Content-Type: application/json" \
-     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk1NTUwOTIsInVpZCI6MX0.eu7tBI_lx42kYF_EdzQEQ2-qkEjZnSOON5YpA8cz_xc" \
+     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk5MzQ5MTIsInVpZCI6MX0.6uk2tajbWL63judZYGyrsrsaMWbHe_xDxp74Y0KPQzc" \
      -H "uid: 1" \
      -d '{ "id": 1 }'
     """
@@ -93,7 +93,7 @@ def mymesgs(token):
     user.view = Messages.query.order_by(Messages.id.desc()).first().id
     db.session.commit()
     msgs = [{"message":msg.message, "pessoa":msg.pessoaId, "enviado":msg.senderId, "online": None} for msg in msg_all]
-    return msgs
+    return jsonify(msgs)
 
 
 

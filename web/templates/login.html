@@ -132,7 +132,7 @@
 		})
 		.then(response => response.json())
 		.then(data => {
-		console.log(data);
+		console.log("data",data);
 		localStorage.setItem(data['token_name'], data['token']);
 		localStorage.setItem("hiveid", data["id"]);
 		if (data['status'] === 'ok') {

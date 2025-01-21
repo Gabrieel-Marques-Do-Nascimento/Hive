@@ -93,6 +93,7 @@ def mymesgs(token):
     user.view = Messages.query.order_by(Messages.id.desc()).first().id
     db.session.commit()
     msgs = [{"message":msg.message, "pessoa":msg.pessoaId, "enviado":msg.senderId, "online": None} for msg in msg_all]
+    app.logger.info('fim')
     return jsonify(msgs)
 
 

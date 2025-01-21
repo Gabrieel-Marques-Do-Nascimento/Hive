@@ -37,6 +37,10 @@ class Messages(db.Model):
         db.Integer, db.ForeignKey("Users.id"))
     senderId = db.Column(
         db.Integer)
+    online = db.Column(db.String(20))
+    pessoa = db.Column(
+    db.String(200))
+    
     pessoaId = db.Column(
     	db.Integer)
     message = db.Column(
@@ -53,9 +57,9 @@ class Messages(db.Model):
 if __name__ == "__main__":
     # novo user
     novo_usuario = Users(
-        username='usuario123',
-        password='senha_segura',
-        email='usuario123@example.com'
+        username="Gabriel",
+        password='20211613',
+        email='gabriel@gmail.com'
     )
     db.session.add(novo_usuario)
     db.session.commit()
@@ -65,19 +69,19 @@ if __name__ == "__main__":
     for usuario in usuarios:
         print(f'Usuário: {usuario.username}, Email: {usuario.email}')
 	# auterar campo do user
-    usuario = Users.query.filter_by(username='usuario123').first()
-    if usuario:
-        usuario.email_verify = True
-        usuario.online = datetime.strftime(datetime.now(), "%d %m %Y %H:%M")
-        db.session.commit()
-        print(f'Informações atualizadas: {usuario}')
-    else:
-        print('Usuário não encontrado.')
-    # deletar user
-    usuario = Users.query.filter_by(username='usuario123').first()
-    if usuario:
-        db.session.delete(usuario)
-        db.session.commit()
-        print(f'Usuário {usuario.username} deletado com sucesso.')
-    else:
-        print('Usuário não encontrado.')        
+#    usuario = Users.query.filter_by(username='usuario123').first()
+#    if usuario:
+#        usuario.email_verify = True
+#        usuario.online = datetime.strftime(datetime.now(), "%d %m %Y %H:%M")
+#        db.session.commit()
+#        print(f'Informações atualizadas: {usuario}')
+#    else:
+#        print('Usuário não encontrado.')
+#    # deletar user
+#    usuario = Users.query.filter_by(username='usuario123').first()
+#    if usuario:
+#        db.session.delete(usuario)
+#        db.session.commit()
+#        print(f'Usuário {usuario.username} deletado com sucesso.')
+#    else:
+#        print('Usuário não encontrado.')        

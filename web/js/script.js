@@ -32,28 +32,13 @@ if (load("1463token-as-savekjg", "string")) {
     load("hiveid");
 }
 
-// teste user-msg
-// simula os dados salvos lacalmente
-let users = [
-    { username: "gabriel", id: 2, time: "15:00", preview: "hello world" },
-    { username: "camila", id: 3, time: "15:00", preview: "hello world" },
-    { username: "joao", id: 4, time: "15:00", preview: "hello world" },
-    { username: "maria", id: 5, time: "16:00", preview: "good afternoon" },
-    { username: "ana", id: 6, time: "16:30", preview: "how are you?" },
-    { username: "lucas", id: 7, time: "17:00", preview: "what's up?" },
-    { username: "carla", id: 8, time: "17:30", preview: "good evening" },
-    { username: "paulo", id: 9, time: "18:00", preview: "hey there" },
-    { username: "renato", id: 10, time: "18:30", preview: "long time no see" },
-    { username: "larissa", id: 11, time: "19:00", preview: "good night" }
-];
-
 if (true) {
     let userInd = load("HiveSender");
 
     if (userInd) {
         const sendername = document.querySelector("#sendername");
         const username = document.getElementById("username");
-        sendername.innerHTML = users[parseInt(userInd)]["username"];
+        sendername.innerHTML = ""
     }
     const msgs_container = document.getElementById("msgs");
     const msgs = document.createElement("p");
@@ -67,19 +52,14 @@ if (true) {
         for (let i = 0; i < messages.length; i++) {
             const clone = msgs.cloneNode(true);
             message = messages[i];
-            
-            userId = users[parseInt(userInd)]["id"];
-            if (
-                message["pessoaId"] == userId &&
-                message["senderId"] == userId
-            ) {
-                
+			
+            userId = load("HiveSender");
+            if (message["pessoa"] == message["enviado"]) {
                 clone.innerHTML = messages[i]["message"];
                 clone.id = "sender-msg";
                 msgs_container.appendChild(clone);
             }
-            if (message["senderId"] == 1 && message["pessoaId"] == userId) {
-                
+            if (JSON.parse(message["enviado"]) == null && message["pessoa"] == userId) {
                 clone.innerHTML = messages[i]["message"];
                 clone.id = "user-msg";
                 msgs_container.appendChild(clone);

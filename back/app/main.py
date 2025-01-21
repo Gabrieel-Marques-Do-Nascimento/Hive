@@ -66,7 +66,9 @@ def send_msg(token):
     msg_db = Messages(userId=id,pessoaId=dest_id, message=msg, is_my=True, senderId=id)
     d_msg_db = Messages(
     					userId=dest_id, message=msg,
-    					pessoaId=id, senderId=id, is_my=False)
+    					pessoaId=id, senderId=id,
+    					online=data_str,
+    					 is_my=False)
     db.session.add(msg_db)
     db.session.add(d_msg_db)
     db.session.commit()
@@ -93,7 +95,6 @@ def mymesgs(token):
     user.view = Messages.query.order_by(Messages.id.desc()).first().id
     db.session.commit()
     msgs = [{"message":msg.message, "pessoa":msg.pessoaId, "enviado":msg.senderId, "online": None} for msg in msg_all]
-    app.logger.info('fim')
     return jsonify(msgs)
 
 

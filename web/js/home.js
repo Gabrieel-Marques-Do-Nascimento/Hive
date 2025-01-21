@@ -47,27 +47,27 @@ let messages = [];
 if (!localStorage.getItem("messages")) {
     console.log("messages");
     fetch(`${URL}/my_msgs`, {
-    method: "POST",
-    headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer token`
-    },
-    body: JSON.stringify({ id: 1 })
-})
-    .then(resp => {
-        if (!resp.ok) {
-            throw new Error(`HTTP error! Status: ${resp.status}`);
-        }
-        return resp.json(); // Retorna a Promise contendo os dados
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer token`
+        },
+        body: JSON.stringify({ id: 1 })
     })
-    .then(data => {
-        console.log(data); // Exibe os dados no console
-        messages = data; // Atualiza a variável messages
-    })
-    .catch(error => {
-        console.error('Erro ao realizar a requisição:', error);
-    });
+        .then(resp => {
+            if (!resp.ok) {
+                throw new Error(`HTTP error! Status: ${resp.status}`);
+            }
+            return resp.json(); // Retorna a Promise contendo os dados
+        })
+        .then(data => {
+            console.log(data); // Exibe os dados no console
+            messages = data; // Atualiza a variável messages
+        })
+        .catch(error => {
+            console.error("Erro ao realizar a requisição:", error);
+        });
 
     if (messages.length > 0) {
         localStorage.setItem("messages", JSON.stringify(messages));

@@ -26,6 +26,15 @@ function save(name, data) {
     localStorage.setItem(name, data);
 }
 
+export function new_msg(message) {
+    const msgs_container = document.getElementById("msgs");
+    const msgs = document.createElement("p");
+    const clone = msgs.cloneNode(true);
+    clone.innerHTML = message;
+    clone.id = "user-msg";
+    msgs_container.appendChild(clone);
+}
+
 console.log("hello");
 if (load("1463token-as-savekjg", "string")) {
     console.log("token já existe");
@@ -35,7 +44,7 @@ if (load("1463token-as-savekjg", "string")) {
     if (userInd) {
         const sendername = document.querySelector("#sendername");
         const username = document.getElementById("username");
-        sendername.innerHTML = ""
+        sendername.innerHTML = "";
     }
     const msgs_container = document.getElementById("msgs");
     const msgs = document.createElement("p");
@@ -49,15 +58,18 @@ if (load("1463token-as-savekjg", "string")) {
         for (let i = 0; i < messages.length; i++) {
             const clone = msgs.cloneNode(true);
             let message = messages[i];
-			
+
             let userId = load("HiveSender");
-            console.log(message["pessoa"] ,'  ',message["enviado"]);
+            console.log(message["pessoa"], "  ", message["enviado"]);
             if (message["pessoa"] == message["enviado"]) {
                 clone.innerHTML = messages[i]["message"];
                 clone.id = "sender-msg";
                 msgs_container.appendChild(clone);
             }
-            if (JSON.parse(message["enviado"]) == 1 && message["pessoa"] == userId) {
+            if (
+                JSON.parse(message["enviado"]) == 1 &&
+                message["pessoa"] == userId
+            ) {
                 clone.innerHTML = messages[i]["message"];
                 clone.id = "user-msg";
                 msgs_container.appendChild(clone);

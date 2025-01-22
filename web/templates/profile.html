@@ -26,7 +26,7 @@
         
       </section>
       <div id="msg">
-        <input type="text" name="msg" />
+        <input type="text" name="msg" id="msg-input"/>
         <button id="send">enviar</button>
       </div>
     </main>
@@ -45,6 +45,8 @@
       <!-- Armazena o dado em um atributo data-* -->
       <div id="data-container" data-sensitive="{{ sensitive_data }}" style="display: none;"></div>
 
-    <script src="../js/script.js"></script>
+    <script type="module" src="../js/script.js"></script>
+    <script type="module" src="../js/to_send.js"></script>
+    <script type="module" src="../js/env.js"></script>
   </body>
 </html>

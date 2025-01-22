@@ -95,6 +95,7 @@ console.log(users);
 users = JSON.parse(users);
 let idlist = [];
 let userlist = [];
+
 for (let i = 0; i < users.length; i++) {
     let clone = item.cloneNode(true);
     let user = users[i];

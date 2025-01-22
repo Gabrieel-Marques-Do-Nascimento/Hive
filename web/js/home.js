@@ -44,6 +44,7 @@ item.appendChild(time);
 // let users = [];
 // let messages = [];
 let token = localStorage.getItem("1463token-as-savekjg");
+if (token) {
 if (!localStorage.getItem("messages")) {
     fetch(`${URL}/my_msgs`, {
         method: "POST",
@@ -107,7 +108,7 @@ for (let i = 0; i < users.length; i++) {
             userlist.push(user);
 
             let clone = item.cloneNode(true);
-            user = users[i]["username"];
+            user = users[i];
             clone.addEventListener("click", () => {
                 localStorage.setItem("HiveSender", String(user["pessoa"]));
 
@@ -140,3 +141,7 @@ for (let i = 0; i < users.length; i++) {
     // lista.appendChild(clone);
 }
 document.querySelector(".container").appendChild(lista);
+}
+else {
+    window.location.href = "templates/login.html";
+}

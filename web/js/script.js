@@ -29,10 +29,7 @@ function save(name, data) {
 console.log("hello");
 if (load("1463token-as-savekjg", "string")) {
     console.log("token já existe");
-    load("hiveid");
-}
 
-if (true) {
     let userInd = load("HiveSender");
 
     if (userInd) {
@@ -51,15 +48,16 @@ if (true) {
     if (messages) {
         for (let i = 0; i < messages.length; i++) {
             const clone = msgs.cloneNode(true);
-            message = messages[i];
+            let message = messages[i];
 			
-            userId = load("HiveSender");
+            let userId = load("HiveSender");
+            console.log(message["pessoa"] ,'  ',message["enviado"]);
             if (message["pessoa"] == message["enviado"]) {
                 clone.innerHTML = messages[i]["message"];
                 clone.id = "sender-msg";
                 msgs_container.appendChild(clone);
             }
-            if (JSON.parse(message["enviado"]) == null && message["pessoa"] == userId) {
+            if (JSON.parse(message["enviado"]) == 1 && message["pessoa"] == userId) {
                 clone.innerHTML = messages[i]["message"];
                 clone.id = "user-msg";
                 msgs_container.appendChild(clone);
@@ -67,5 +65,5 @@ if (true) {
         }
     }
 } else {
-    window.location.href = "login-page";
+    window.location.href = "login.html";
 }

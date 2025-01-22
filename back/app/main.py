@@ -44,7 +44,7 @@ def send_msg(token):
     """
     camila: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk1NTU1NTUsInVpZCI6Mn0.Xd-9S0ar9WoThUGCS6fdjslc66htPMmFM06x_mZarQk
     
-	gabriel: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk1NTUwOTIsInVpZCI6MX0.eu7tBI_lx42kYF_EdzQEQ2-qkEjZnSOON5YpA8cz_xc    
+	gabriel: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQ5MzcsInVpZCI6Mn0.ZaBYCkKbilMBdRbrLxiBLLhzObZqOKssIaGkO-PUZSg   
     
     curl -X POST "http://localhost:5000/send_msg" \
      -H "Content-Type: application/json" \
@@ -88,11 +88,12 @@ def mymesgs(token):
      -d '{ "id": 1 }'
     """
     resp = request.get_json()
+    app.logger.info(resp)
     id = resp["id"]
     user = Users.query.filter_by(id=id).first()
     db_msg = Messages.query.filter_by(userId=id)
     msg_all = db_msg.all()
-    user.view = Messages.query.order_by(Messages.id.desc()).first().id
+    user.view = Messages.query.order_by(Messages.id.desc()).first().id if Messages.query.order_by(Messages.id.desc()).first() else -1
     db.session.commit()
     msgs = [{"message":msg.message, "pessoa":msg.pessoaId, "enviado":msg.senderId, "online": None} for msg in msg_all]
     return jsonify(msgs)

@@ -12,7 +12,8 @@ const br = document.createElement("br");
 const preview = document.createElement("span");
 
 const time = document.createElement("div");
-
+const noview = document.createElement("div");
+noview.classList.add("noview")
 const div = document.createElement("div");
 user_info.classList.add("user-info");
 avatar.classList.add("avatar");
@@ -26,8 +27,11 @@ div.appendChild(preview);
 user_info.appendChild(avatar);
 user_info.appendChild(div);
 item.appendChild(user_info);
+//item.appendChild(noview)
 item.appendChild(time);
+item.appendChild(noview)
 
+let socket = io.connect()
 // exemplos
 // let users = [
 
@@ -115,12 +119,13 @@ for (let i = 0; i < users.length; i++) {
 
                 window.location.href = `templates/profile.html`;
             });
-            clone.children[0].children[0].innerHTML = ""; // AVATAR
+            clone.children[0].children[0].innerHTML = "Hive"; // AVATAR
             //
-            clone.children[0].children[1].children[0].innerHTML = user;
+            clone.children[0].children[1].children[0].innerHTML = "Hive user";
             clone.children[0].children[1].children[2].innerHTML =
-                users[i]["preview"];
-            clone.children[1].innerHTML = users[i]["time"];
+                "preview";
+                console.log(JSON.stringify(user))
+            clone.children[1].innerHTML = "08:00";
             lista.appendChild(clone);
         }
         // console.log(JSON.stringify(idlist))

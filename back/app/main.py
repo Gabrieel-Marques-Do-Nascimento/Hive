@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for
-
+from datetime import  datetime
 
 from auth import token_verify
 
@@ -53,13 +53,13 @@ def send_msg(token):
     msg = resp["msg"]
     dest_id = resp["P-id"]
     user = Users.query.filter_by(id=id).first()
-    user.online = data_str
-    msg_db = Messages(userId=id,pessoaId=dest_id, message=msg, is_my=True, senderId=id)
+    dest_user = Users.query.filter_by(id=dest_id).first()
+    user.online = datetime.utcnow()
+    msg_db = Messages(user=user,pessoaId=dest_id, message=msg, senderId=id)
     d_msg_db = Messages(
-    					userId=dest_id, message=msg,
-    					pessoaId=id, senderId=id,
-    					online=data_str,
-    					 is_my=False)
+    					user=dest_user, message=msg,
+    					pessoaId=id, senderId=id
+    					)
     db.session.add(msg_db)
     db.session.add(d_msg_db)
     db.session.commit()
@@ -82,12 +82,16 @@ def mymesgs(token):
     app.logger.info(resp)
     id = resp["id"]
     user = Users.query.filter_by(id=id).first()
-    db_msg = Messages.query.filter_by(userId=id)
-    msg_all = db_msg.all()
-    user.view = Messages.query.order_by(Messages.id.desc()).first().id if Messages.query.order_by(Messages.id.desc()).first() else -1
-    db.session.commit()
-    msgs = [{"message":msg.message, "pessoa":msg.pessoaId, "enviado":msg.senderId, "online": None} for msg in msg_all]
-    return jsonify(msgs)
+    msgs = []
+    for mensage in user.messages:
+    	msgs.append({"message":mensage.message, "pessoa":mensage.pessoaId, "enviado":mensage.senderId, "online": None})
+    return msgs
+#    db_msg = Messages.query.filter_by(userId=id)
+#    msg_all = db_msg.all()
+#    user.view = Messages.query.order_by(Messages.id.desc()).first().id if Messages.query.order_by(Messages.id.desc()).first() else -1
+#    db.session.commit()
+#    msgs = [{"message":msg.message, "pessoa":msg.pessoaId, "enviado":msg.senderId, "online": None} for msg in msg_all]
+#    return jsonify(msgs)
 
 
 
@@ -119,4 +123,6 @@ def mymesgs(token):
 
 if __name__ == "__main__":
     #app.run(debug=True)
-    socketIo.run(app)
+    import  os
+    print(os.path.join(os.path.dirname(__file__),""))
+    socketIo.run(app,host="0.0.0.0")

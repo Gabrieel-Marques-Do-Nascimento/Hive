@@ -37,7 +37,7 @@ def create_user():
 
 curl -X POST http://localhost:5000/create \
      -H "Content-Type: application/json" \
-     -d '{"username": "Gabriel", "password": "20211613", "email":"gabriel@gmail.com"}'
+     -d '{"username": "Gabriel", "password": "20211613", "email":"gabriel@gmail.com"}' 
    """
 
     data = request.get_json()
@@ -87,3 +87,10 @@ def info():
 	curl -X GET http://localhost:5000/teste
 	"""
 	return jsonify({"users":[{"id":user.id, "name":user.username, "email":user.email, "online":user.online, "vew":user.view} for user in Users.query.all()]})
+	
+	
+	
+@users_blueprint.route("/contact/add")
+def add():
+	
+	return 

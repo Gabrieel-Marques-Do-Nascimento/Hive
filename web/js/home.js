@@ -60,7 +60,7 @@ if (token) {
         Authorization: `Bearer ${token}`,
         uid: 1,
       },
-      body: JSON.stringify({ id: 1 }),
+      body: JSON.stringify({ id: localStorage.getItem("hiveid") }),
     })
       .then((resp) => {
         if (!resp.ok) {
@@ -160,6 +160,6 @@ add.addEventListener("click", () => {
   new_contact.addEventListener("submit", (e) => {
     e.preventDefault();
     const user = document.getElementById("name");
-    
+
   })
 });

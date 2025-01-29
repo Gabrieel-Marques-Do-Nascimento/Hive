@@ -33,3 +33,7 @@ def socket_register(socketio: SocketIO):
 	def leave(data):
 		leave_room(data["room"])
 		emit("leave", data["name"]+" (-_-)"+data["room"])
+
+	@socketio.on('new-contact')
+	def new_contact(data):
+		pass

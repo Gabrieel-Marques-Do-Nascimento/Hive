@@ -78,14 +78,21 @@ def mymesgs(token):
      -H "uid: 1" \
      -d '{ "id": 1 }'
     """
-    resp = request.get_json()
-    app.logger.info(resp)
-    id = resp["id"]
-    user = Users.query.filter_by(id=id).first()
-    msgs = []
-    for mensage in user.messages:
-    	msgs.append({"message":mensage.message, "pessoa":mensage.pessoaId, "enviado":mensage.senderId, "online": None})
-    return msgs
+    try:
+        resp = request.get_json()
+        app.logger.info(resp)
+        id = resp["id"]
+        user = Users.query.filter_by(id=id).first()
+        msgs = []
+        for mensage in user.messages:
+            msgs.append({"message":mensage.message, "pessoa":mensage.pessoaId, "enviado":mensage.senderId, "online": None})
+        return msgs
+    except Exception as e:
+        app.logger.error(e)
+        return jsonify({"respost": "received"})
+    except AttributeError as e:
+        app.logger.error(e)
+        return []
 #    db_msg = Messages.query.filter_by(userId=id)
 #    msg_all = db_msg.all()
 #    user.view = Messages.query.order_by(Messages.id.desc()).first().id if Messages.query.order_by(Messages.id.desc()).first() else -1

@@ -7,7 +7,7 @@ const user_info = document.createElement("div");
 const avatar = document.createElement("div");
 
 const username = document.createElement("span");
-
+// username.setAttribute("translate", "yes");
 const br = document.createElement("br");
 const preview = document.createElement("span");
 
@@ -18,6 +18,7 @@ const div = document.createElement("div");
 user_info.classList.add("user-info");
 avatar.classList.add("avatar");
 username.classList.add("username");
+
 preview.classList.add("message-preview");
 time.classList.add("time");
 
@@ -31,7 +32,7 @@ item.appendChild(user_info);
 item.appendChild(time);
 item.appendChild(noview)
 
-let socket = io.connect()
+let socket = io.connect('//' + document.domain + ':' + 5000)//location.port);
 // exemplos
 // let users = [
 
@@ -47,6 +48,11 @@ let socket = io.connect()
 // apos o login o servidor envia todas as mensagens salvas do user
 // let users = [];
 // let messages = [];
+
+
+
+
+
 let token = localStorage.getItem("1463token-as-savekjg");
 if (token) {
 if (!localStorage.getItem("messages")) {

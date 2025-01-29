@@ -1,2 +1,0 @@
-buildozer
-kivy==2.2.1

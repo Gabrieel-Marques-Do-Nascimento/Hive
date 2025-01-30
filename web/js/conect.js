@@ -1,4 +1,6 @@
-export var socket = io.connect('http://127.0.0.1:5000');
+
+
+export var socket = io.connect('http://192.168.1.4:5000');
 console.log("conectando...")
 
 /*

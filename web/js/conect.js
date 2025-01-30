@@ -1,19 +1,19 @@
+import { URL } from "../js/env.js";
 
-
-export var socket = io.connect('http://192.168.1.4:5000');
+export var socket = io.connect(URL);
 console.log("conectando...")
 
 /*
 ** conecta a um cannal específico tipo a conversa de um amigo e tal
 */
-export function join(room){
-	socket.emit("join",{room:room })
+export function join(room,name='sender'){
+	socket.emit("join",{room:room, name:name})
 }
 /*
 ** desconecta a um cannal específico tipo a conversa de um amigo e tal
 */
-export function leave(room){
-	socket.emit("leave", {room: room})
+export function leave(room,name='sender'){
+	socket.emit("leave", {room:room, name:name})
 }
 
 export let userId = localStorage.getItem("HiveSender")

@@ -18,7 +18,7 @@ function sendMessage(message, room) {
     if (message.trim() === "") {
         return;
     }
-    socket.emit("channel", { room: room, message: message });
+    socket.emit("channel", { room: room, message: message, id: user, "d-id":from, });
     console.log(message)
 }
 

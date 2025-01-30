@@ -1,26 +1,37 @@
 import { URL } from "./env.js";
 import { new_msg } from "./script.js";
+import { socket, join, leave } from "./conect.js";
 
-function room(user_id, from_id){
-	if (parseInt(user_id) <= parseInt(from_id)){
-		
-	}
-	else {
-		return toString(from_id) + toString(user_id)
-	}
+function room(user_id, from_id) {
+    if (parseInt(user_id) <= parseInt(from_id)) {
+    	
+    	return toString(user_id) + toString(from_id);
+    } else {
+    	console.log(toString(from_id) + toString(user_id);)
+        return toString(from_id) + toString(user_id);
+    }
 }
-
-
-
+let user = localStorage.getItem("hiveid");
+    let from = localStorage.getItem("HiveSender");
+join(room(user, from))
+function sendMessage(message, room) {
+    if (message.trim() === "") {
+        return;
+    }
+    socket.emit("channel", { room: room, message: message });
+    console.log(message)
+}
 
 const input = document.getElementById("msg-input");
 const send_button = document.getElementById("send");
 let token = localStorage.getItem("1463token-as-savekjg");
 send_button.addEventListener("click", () => {
-	new_msg(input.value)
-	input.value = null
-	let user = localStorage.getItem("hiveid")
-	let from = localStorage.getItem("HiveSender")
+    new_msg(input.value);
+    
+    sendMessage(input.value, room(user, from));
+
+    input.value = null;
+
     // fetch(`${URL}/send_msg`, {
     //     method: "POST",
     //     headers: {

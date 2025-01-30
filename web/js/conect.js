@@ -1,5 +1,5 @@
-import { URL } from "../js/env.js";
-
+import { URL } from "./env.js";
+import {userId} from "./utils.js"
 export var socket = io.connect(URL);
 console.log("conectando...")
 
@@ -15,5 +15,3 @@ export function join(room,name='sender'){
 export function leave(room,name='sender'){
 	socket.emit("leave", {room:room, name:name})
 }
-
-export let userId = localStorage.getItem("HiveSender")

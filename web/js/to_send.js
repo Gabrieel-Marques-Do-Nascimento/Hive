@@ -1,24 +1,16 @@
 import { URL } from "./env.js";
 import { new_msg } from "./script.js";
-import { socket, join, leave } from "./conect.js";
+import { join, leave } from "./conect.js";
+import {userId, room, fromId} from "./utils.js"
 
-function room(user_id, from_id) {
-    if (parseInt(user_id) <= parseInt(from_id)) {
-    	console.log("id: "+toString(user_id) + toString(from_id))
-    	return toString("id: "+user_id) + toString(from_id);
-    } else {
-    	console.log(toString(from_id) + toString(user_id))
-        return toString(from_id) + toString(user_id);
-    }
-}
-let user = localStorage.getItem("hiveid");
-    let from = localStorage.getItem("HiveSender");
-join(room(user, from))
+
+const socket = io.connect(URL)
+join(room(userId, fromId))
 function sendMessage(message, room) {
     if (message.trim() === "") {
         return;
     }
-    socket.emit("channel", { room: room, message: message, id: user, "d-id":from, });
+    socket.emit("channel", { room: room, message: message, id: userId, "d-id":fromId, });
     console.log(message)
 }
 
@@ -28,7 +20,7 @@ let token = localStorage.getItem("1463token-as-savekjg");
 send_button.addEventListener("click", () => {
     new_msg(input.value);
     
-    sendMessage(input.value, room(user, from));
+    sendMessage(input.value, room(userId, fromId));
 
     input.value = null;
 

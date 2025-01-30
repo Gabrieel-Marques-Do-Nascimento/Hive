@@ -9,7 +9,7 @@ from flask_cors import CORS
 import logging
 
 
-socketIo = SocketIO()
+socketIo = SocketIO(cors_allowed_origins="*")
 
 
 def create_app():

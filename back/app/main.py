@@ -12,7 +12,7 @@ from Rotas import create_app, socketIo
 
 app = create_app()
 # CORS(app, origins=["http://127.0.0.1:8081"])
-CORS(app)
+CORS(app, supports_credentials=True)
 db.init_app(app)
 # -------------------------------------------------------------
 # -------------------------------------------------------------

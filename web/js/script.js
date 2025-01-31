@@ -1,3 +1,5 @@
+import { fromId, userId } from "./utils.js";
+
 /**
  * carrega dados salvos no navegador
  * @param {*} name nome do dado salvo localmente
@@ -35,7 +37,6 @@ export function new_msg(message) {
     msgs_container.appendChild(clone);
 }
 
-console.log("hello");
 if (load("1463token-as-savekjg", "string")) {
     console.log("token já existe");
 
@@ -56,20 +57,22 @@ if (load("1463token-as-savekjg", "string")) {
     let messages = JSON.parse(localStorage.getItem("messages"));
     if (messages) {
         for (let i = 0; i < messages.length; i++) {
+            console.log(messages[i]);
             const clone = msgs.cloneNode(true);
             let message = messages[i];
 
-            let userId = load("HiveSender");
-            console.log(message["pessoa"], "  ", message["enviado"]);
-            if (message["pessoa"] == message["enviado"]) {
+            console.log(message);
+            if (parseInt(message["pessoa"]) == parseInt(message["enviado"]) ) {
                 clone.innerHTML = messages[i]["message"];
                 clone.id = "sender-msg";
                 msgs_container.appendChild(clone);
             }
             if (
-                JSON.parse(message["enviado"]) == 1 &&
-                message["pessoa"] == userId
-            ) {
+                parseInt(message["enviado"])  == userId &&
+                parseInt(message["pessoa"])  == fromId
+            ) 
+            
+            {
                 clone.innerHTML = messages[i]["message"];
                 clone.id = "user-msg";
                 msgs_container.appendChild(clone);

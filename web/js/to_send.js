@@ -1,7 +1,7 @@
 import { URL } from "./env.js";
 import { new_msg } from "./script.js";
 import { join, leave } from "./conect.js";
-import {userId, room, fromId} from "./utils.js"
+import {userId, room, fromId, messages} from "./utils.js"
 
 
 const socket = io.connect(URL)
@@ -12,6 +12,7 @@ function sendMessage(message, room) {
     }
     socket.emit("channel", { room: room, message: message, id: userId, "d-id":fromId, });
     console.log(message)
+
 }
 
 const input = document.getElementById("msg-input");
@@ -21,7 +22,15 @@ send_button.addEventListener("click", () => {
     new_msg(input.value);
     
     sendMessage(input.value, room(userId, fromId));
-
+    let new_msg_dict = {
+        enviado: userId,
+        message: input.value,
+        pessoa: fromId, online: null,
+        userid: userId
+    }
+    messages.push(new_msg_dict)
+    localStorage.setItem("messages", JSON.stringify(messages))
+    console.log(new_msg_dict)
     input.value = null;
 
     // fetch(`${URL}/send_msg`, {

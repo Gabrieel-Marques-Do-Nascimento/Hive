@@ -87,7 +87,7 @@ def mymesgs(token):
         msgs = []
         for mensage in user.messages:
             msgs.append({"message": mensage.message, "pessoa": mensage.pessoaId,
-                        "enviado": mensage.senderId, "online": None})
+                        "enviado": mensage.senderId, "online": None, "userid": user.id})
         return msgs
     except AttributeError as e:
         app.logger.error(e)

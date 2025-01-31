@@ -1,5 +1,5 @@
 import { URL } from "../js/env.js";
-import { request_messages, userId } from "./utils.js";
+import { request_messages, userId, newUser } from "./utils.js";
 
 const lista = document.createElement("ul");
 const item = document.createElement("li");
@@ -47,35 +47,47 @@ if (token) {
   let userlist = [];
 
   if (users) {
-    for (let i = 0; i < users.length; i++) {
-      let user = users[i];
-      let userid = users[i]["pessoa"];
-      console.log(user["enviado"],userId);
-      if (user["enviado"] != userId) {
-        console.log("user.inicio", user);
-        if (!idlist.includes(userid)) {
-          console.log("user list: ", idlist.toString());
-          idlist.push(userid);
-          userlist.push(user);
-
-          let clone = item.cloneNode(true);
-          // user = users[i];
-          clone.addEventListener("click", () => {
-            localStorage.setItem("HiveSender", String(user["enviado"]));
-
-            window.location.href = `templates/profile.html`;
-          });
-          clone.children[0].children[0].innerHTML = "Hive"; // AVATAR
-          //
-          clone.children[0].children[1].children[0].innerHTML = "Hive user";
-          clone.children[0].children[1].children[2].innerHTML = "preview";
-          console.log('user.fim',user);
-          clone.children[1].innerHTML = "08:00";
-          lista.appendChild(clone);
+    users.forEach((user) => {
+      if (!idlist.includes(parseInt(user["pessoa"]))) {
+        idlist.push(parseInt(user["pessoa"]));
+        if (parseInt(user["pessoa"]) != userId) {
+          const clone =newUser(parseInt(user["pessoa"]))
+          clone? lista.appendChild(clone) : null;
         }
-        console.log("ids: ", JSON.stringify(idlist));
       }
-    }
+      
+       
+    });
+  console.log(idlist.toString());
+    // for (let i = 0; i < users.length; i++) {
+    //   let user = users[i];
+    //   let userid = users[i]["pessoa"];
+    //   console.log(user["enviado"],userId);
+    //   if (user["enviado"] != userId) {
+    //     console.log("user.inicio", user);
+    //     if (!idlist.includes(userid)) {
+    //       console.log("user list: ", idlist.toString());
+    //       idlist.push(userid);
+    //       userlist.push(user);
+
+    //       let clone = item.cloneNode(true);
+    //       // user = users[i];
+    //       clone.addEventListener("click", () => {
+    //         localStorage.setItem("HiveSender", String(user["enviado"]));
+
+    //         window.location.href = `templates/profile.html`;
+    //       });
+    //       clone.children[0].children[0].innerHTML = "Hive"; // AVATAR
+    //       //
+    //       clone.children[0].children[1].children[0].innerHTML = "Hive user";
+    //       clone.children[0].children[1].children[2].innerHTML = "preview";
+    //       console.log('user.fim',user);
+    //       clone.children[1].innerHTML = "08:00";
+    //       lista.appendChild(clone);
+    //     }
+    //     console.log("ids: ", JSON.stringify(idlist));
+    //   }
+    // }
   }
   document.querySelector(".container").appendChild(lista);
 } else {

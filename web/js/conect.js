@@ -15,3 +15,4 @@ export function join(room,name='sender'){
 export function leave(room,name='sender'){
 	socket.emit("leave", {room:room, name:name})
 }
+

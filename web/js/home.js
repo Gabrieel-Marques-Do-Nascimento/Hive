@@ -40,25 +40,23 @@ if (token) {
   request_messages();
 
   let users = localStorage.getItem("messages");
-  
-  users= JSON.parse(users);
+
+  users = JSON.parse(users);
   console.log(users);
   let idlist = [];
   let userlist = [];
 
   if (users) {
-    users.forEach((user) => {
+    users.forEach(user => {
       if (!idlist.includes(parseInt(user["pessoa"]))) {
         idlist.push(parseInt(user["pessoa"]));
         if (parseInt(user["pessoa"]) != userId) {
-          const clone =newUser(parseInt(user["pessoa"]))
-          clone? lista.appendChild(clone) : null;
+          const clone = newUser(parseInt(user["pessoa"]));
+          clone ? lista.appendChild(clone) : null;
         }
       }
-      
-       
     });
-  console.log(idlist.toString());
+    console.log(idlist.toString());
     // for (let i = 0; i < users.length; i++) {
     //   let user = users[i];
     //   let userid = users[i]["pessoa"];
@@ -98,8 +96,22 @@ const add = document.getElementById("add");
 add.addEventListener("click", () => {
   const new_contact = document.getElementById("new-contact");
   new_contact.style.display = "block";
-  new_contact.addEventListener("submit", (e) => {
+  new_contact.addEventListener("submit", e => {
     e.preventDefault();
     const user = document.getElementById("name");
+    socket.emit("new-contact", { id: parseInt(user.value) });
   });
+});
+
+socket.on("new-contact", function (data) {
+  if (data["pessoa"]) {
+    // Definindo uma chave para o armazenamento, por exemplo o ID da pessoa
+    const pessoa = data["pessoa"];
+    const chave = `contato_${pessoa}`;
+    let messages = JSON.parse(localStorage.getItem("messages"));
+    messages.push(data);
+    localStorage.setItem("messages",JSON.stringify(messages));
+  } else {
+    alert("idetificador invalido");
+  }
 });

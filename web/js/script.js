@@ -1,4 +1,4 @@
-import { fromId, userId } from "./utils.js";
+import { fromId, userId, create_msg_element } from "./utils.js";
 
 /**
  * carrega dados salvos no navegador
@@ -62,20 +62,27 @@ if (load("1463token-as-savekjg", "string")) {
             let message = messages[i];
 
             console.log(message);
-            if (parseInt(message["pessoa"]) == parseInt(message["enviado"]) ) {
-                clone.innerHTML = messages[i]["message"];
-                clone.id = "sender-msg";
-                msgs_container.appendChild(clone);
+            if (parseInt(message["pessoa"]) == parseInt(message["enviado"])) {
+                create_msg_element(
+                    msgs_container,
+                    messages[i]["message"],
+                    "sender-msg"
+                );
+                // clone.innerHTML = messages[i]["message"];
+                // clone.id = "sender-msg";
+                // msgs_container.appendChild(clone);
             }
             if (
-                parseInt(message["enviado"])  == userId &&
-                parseInt(message["pessoa"])  == fromId
-            ) 
-            
-            {
-                clone.innerHTML = messages[i]["message"];
-                clone.id = "user-msg";
-                msgs_container.appendChild(clone);
+                parseInt(message["enviado"]) == userId &&
+                parseInt(message["pessoa"]) == fromId
+            ) {
+                create_msg_element(
+                    msgs_container,
+                    messages[i]["message"],
+                    "user-msg"
+                ); // clone.innerHTML = messages[i]["message"];
+                // clone.id = "user-msg";
+                // msgs_container.appendChild(clone);
             }
         }
     }

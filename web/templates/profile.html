@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HIVE MSG</title>
+<head>
+	<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HIVE MSG</title>
 
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../css/claude.css"
-    />
+<link
+rel="stylesheet"
+type="text/css"
+href="../css/claude.css"
+/>
 
-  </head>
-  <body>
-    <header>
-      <button>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffff"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
-      </button>
-      <h1>sender: <span id="sendername"></span></h1>
-      <h2>user: <span id="username"></span></h2>
-    </header>
-    <main>
-      <section id="msgs">
-        
-      </section>
-      <div id="msg">
-        <input type="text" name="msg" id="msg-input"/>
-        <button id="send">enviar</button>
-      </div>
-    </main>
-    <footer>
-      <p>
-        direitos reservados a
-        <a
-          href="https://gabrieelmarques.com.br"
-          target="_blank"
-          rel="noopener noreferrer"
-          >gabrieel marques</a
-        >
-      </p>
-    </footer>
-		<script src="../js/socket.io.js"></script>
-		<script type="module" src="../js/conect.js"></script>
-      <!-- Armazena o dado em um atributo data-* -->
-      <div id="data-container" data-sensitive="{{ sensitive_data }}" style="display: none;"></div>
-    <script type="module" src="../js/utils.js"></script>
-    <script type="module" src="../js/script.js"></script>
-    <script type="module" src="../js/to_send.js"></script>
-    <script type="module" src="../js/env.js"></script>
+</head>
+<body>
+<header>
+<button id="exit">
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffff"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" /></svg>
+</button>
+<h1>sender: <span id="sendername"></span></h1>
+<h2>user: <span id="username"></span></h2>
+</header>
+<main>
+<section id="msgs">
 
-  </body>
+</section>
+<div id="msg">
+<input type="text" name="msg" id="msg-input" />
+<button id="send">enviar</button>
+</div>
+</main>
+<footer>
+<p>
+direitos reservados a
+<a
+href="https://gabrieelmarques.com.br"
+target="_blank"
+rel="noopener noreferrer"
+>gabrieel marques</a
+>
+</p>
+</footer>
+<script>
+const exit = document.getElementById("exit")
+exit.addEventListener("click", ()=> {
+window.location.href = "/"
+})
+</script>
+<script src="../js/socket.io.js"></script>
+<script type="module" src="../js/conect.js"></script>
+<!-- Armazena o dado em um atributo data-* -->
+<div id="data-container" data-sensitive="{{ sensitive_data }}" style="display: none;"></div>
+<script type="module" src="../js/utils.js"></script>
+<script type="module" src="../js/script.js"></script>
+<script type="module" src="../js/to_send.js"></script>
+<script type="module" src="../js/env.js"></script>
+
+</body>
 </html>

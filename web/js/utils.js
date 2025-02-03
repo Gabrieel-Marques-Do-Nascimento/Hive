@@ -1,4 +1,5 @@
 import { URL } from "./env.js";
+import {profile} from './profile.js'
 
 const socket = io.connect(URL);
 export let token = localStorage.getItem("1463token-as-savekjg");
@@ -90,7 +91,7 @@ export function newUser(
     clone.addEventListener("click", () => {
         localStorage.setItem("HiveSender", String(pessoaN));
 
-        window.location.href = `templates/profile.html`;
+       profile()
     });
     clone.children[0].children[0].textContent = avatarI; // AVATAR
     //

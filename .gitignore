@@ -4,4 +4,4 @@ names.txt
 back/app/instance/users.db
 *.pyc
 /.vscode
-*.db
+

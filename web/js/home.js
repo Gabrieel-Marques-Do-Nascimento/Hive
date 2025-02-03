@@ -1,6 +1,8 @@
 import { URL } from "../js/env.js";
 import { request_messages, userId, newUser } from "./utils.js";
-
+// import { join } from "./conect.js";
+const label_name = document.getElementById("label-name");
+const new_contact = document.getElementById("new-contact");
 const lista = document.createElement("ul");
 const item = document.createElement("li");
 const user_info = document.createElement("div");
@@ -8,7 +10,7 @@ const user_info = document.createElement("div");
 const avatar = document.createElement("div");
 
 const username = document.createElement("span");
-// username.setAttribute("translate", "yes");
+
 const br = document.createElement("br");
 const preview = document.createElement("span");
 
@@ -33,59 +35,74 @@ item.appendChild(user_info);
 item.appendChild(time);
 item.appendChild(noview);
 
+function label_name_status(
+  text = "hello world",
+  color = "red",
+  timeout = 2000,
+  exit = true
+) {
+  label_name.textContent = text;
+  label_name.style.color = color;
+  setTimeout(() => {
+    label_name.textContent = "Nome ou id:";
+    label_name.style.color = "black";
+  }, timeout);
+  if (exit) {
+    setTimeout(() => {
+      new_contact.style.display = "none";
+    }, 2100);
+  }
+}
+
+let contacts = JSON.parse(localStorage.getItem("contact`s"));
+
+function create_user_label(users) {
+  let idlist = [];
+  let userlist = [];
+  lista.innerHTML = "";
+  users.forEach((user) => {
+    if (!idlist.includes(parseInt(user["pessoa"]))) {
+      idlist.push(parseInt(user["pessoa"]));
+      if (parseInt(user["pessoa"]) != userId) {
+        const clone = newUser(parseInt(user["pessoa"]));
+        clone ? lista.appendChild(clone) : null;
+      }
+    }
+  });
+  users.forEach((user) => {
+    if (
+      !idlist.includes(parseInt(user["enviado"])) &&
+      user["enviado"] != null
+    ) {
+      idlist.push(parseInt(user["enviado"]));
+      if (parseInt(user["enviado"]) != userId) {
+        const clone = newUser(parseInt(user["enviado"]));
+        clone ? lista.appendChild(clone) : null;
+      }
+    }
+  });
+  localStorage.setItem("contact`s", JSON.stringify(idlist));
+  console.log(idlist.toString());
+}
+
 let socket = io.connect("//" + document.domain + ":" + 5000);
+
+socket.on("connect", () => {
+  console.log("conectado com id:", userId);
+  socket.emit("registrar_usuario", { id: userId });
+});
 
 let token = localStorage.getItem("1463token-as-savekjg");
 if (token) {
-  request_messages();
+  request_messages(create_user_label);
 
   let users = localStorage.getItem("messages");
 
   users = JSON.parse(users);
   console.log(users);
-  let idlist = [];
-  let userlist = [];
 
   if (users) {
-    users.forEach(user => {
-      if (!idlist.includes(parseInt(user["pessoa"]))) {
-        idlist.push(parseInt(user["pessoa"]));
-        if (parseInt(user["pessoa"]) != userId) {
-          const clone = newUser(parseInt(user["pessoa"]));
-          clone ? lista.appendChild(clone) : null;
-        }
-      }
-    });
-    console.log(idlist.toString());
-    // for (let i = 0; i < users.length; i++) {
-    //   let user = users[i];
-    //   let userid = users[i]["pessoa"];
-    //   console.log(user["enviado"],userId);
-    //   if (user["enviado"] != userId) {
-    //     console.log("user.inicio", user);
-    //     if (!idlist.includes(userid)) {
-    //       console.log("user list: ", idlist.toString());
-    //       idlist.push(userid);
-    //       userlist.push(user);
-
-    //       let clone = item.cloneNode(true);
-    //       // user = users[i];
-    //       clone.addEventListener("click", () => {
-    //         localStorage.setItem("HiveSender", String(user["enviado"]));
-
-    //         window.location.href = `templates/profile.html`;
-    //       });
-    //       clone.children[0].children[0].innerHTML = "Hive"; // AVATAR
-    //       //
-    //       clone.children[0].children[1].children[0].innerHTML = "Hive user";
-    //       clone.children[0].children[1].children[2].innerHTML = "preview";
-    //       console.log('user.fim',user);
-    //       clone.children[1].innerHTML = "08:00";
-    //       lista.appendChild(clone);
-    //     }
-    //     console.log("ids: ", JSON.stringify(idlist));
-    //   }
-    // }
+    create_user_label(users);
   }
   document.querySelector(".container").appendChild(lista);
 } else {
@@ -94,24 +111,55 @@ if (token) {
 
 const add = document.getElementById("add");
 add.addEventListener("click", () => {
-  const new_contact = document.getElementById("new-contact");
   new_contact.style.display = "block";
-  new_contact.addEventListener("submit", e => {
+  new_contact.addEventListener("submit", (e) => {
     e.preventDefault();
+
     const user = document.getElementById("name");
+    let contacts = JSON.parse(localStorage.getItem("contact`s"));
+    if (contacts.includes(parseInt(user.value))) {
+      label_name_status("usuario ja adicionado", "red", 2000, false);
+
+      //alert("usuario ja adicionado");
+
+      return;
+    }
     socket.emit("new-contact", { id: parseInt(user.value) });
+    user.value = "";
   });
 });
-
+document.getElementById("exit").addEventListener("click", () => {
+  new_contact.style.display = "none";
+});
 socket.on("new-contact", function (data) {
-  if (data["pessoa"]) {
+  console.log(data);
+  if (data["pessoa"] && parseInt(data["pessoa"]) != userId) {
     // Definindo uma chave para o armazenamento, por exemplo o ID da pessoa
     const pessoa = data["pessoa"];
     const chave = `contato_${pessoa}`;
+
     let messages = JSON.parse(localStorage.getItem("messages"));
     messages.push(data);
-    localStorage.setItem("messages",JSON.stringify(messages));
-  } else {
-    alert("idetificador invalido");
+    localStorage.setItem("messages", JSON.stringify(messages));
+    create_user_label(messages);
+    label_name_status("SUcesso!!", "green");
+    return;
   }
+  label_name_status("usuario invalido", "red", 2000, false);
+});
+socket.on("error", (data) => {
+  console.log(data);
+  label_name_status("usuario invalido: " + data.message, "red", 2000, false);
+});
+
+// socket.on(`channel`, function (data) {
+//   console.log(data);
+//   let messages = JSON.parse(localStorage.getItem("messages"));
+//   messages.push(data);
+//   localStorage.setItem("messages", JSON.stringify(messages));
+//   create_user_label(messages);
+// });
+
+socket.on("message_privada", function (data) {
+  console.log(data);
 });

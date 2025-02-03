@@ -7,6 +7,7 @@ console.log("conectando...")
 ** conecta a um cannal específico tipo a conversa de um amigo e tal
 */
 export function join(room,name='sender'){
+	console.log("conectando ao canal",room)
 	socket.emit("join",{room:room, name:name})
 }
 /*

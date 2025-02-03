@@ -49,7 +49,7 @@ curl -X POST http://localhost:5000/create \
     new_user = Users(username=username, password=hash_password, email=email)
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({'message': 'Usuário criado com sucesso!','token': token_update.creat(new_user.id),"id":new_user.id, 'token_name': '1463token-as-savekjg', 'status': 'ok'})
+    return jsonify({'message': 'Usuário criado com sucesso!','token': token_update.creat(new_user.id),"id":new_user.id, 'token_name': '1463token-as-savekjg', 'status': 'ok', "username": username})
 
 
 @users_blueprint.route('/login', methods=['POST'])
@@ -71,7 +71,7 @@ def login():
     else:
         user = Users.query.filter_by(username=username).first()
     if user and check_password_hash(user.password, password):
-        return jsonify({'message': 'Login bem-sucedido!', 'token': token_update.creat(user.id),"id":user.id, 'token_name': '1463token-as-savekjg', 'status': 'ok'})
+        return jsonify({'message': 'Login bem-sucedido!', 'token': token_update.creat(user.id),"id":user.id, 'token_name': '1463token-as-savekjg', 'status': 'ok', "username": username})
     return jsonify({'message': 'Credenciais inválidas!', 'status': 'error'})
 
 

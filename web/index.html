@@ -1,159 +1,218 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hive Mensagens</title>
-<style>
-body {
-font-family: Arial, sans-serif;
-margin: 0;
-padding: 0;
-background-color: #f5f5f5;
-}
-header {
-background-color: #24292e;
-color: white;
-padding: 10px 20px;
-text-align: center;
-font-size: 24px;
-font-weight: bold;
-}
-.container {
-max-width: 800px;
-margin: 20px auto;
-padding: 10px;
-background: white;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-border-radius: 8px;
-}
-ul {
-list-style-type: none;
-padding: 0;
-margin: 0;
-}
-li {
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 15px 10px;
-border-bottom: 1px solid #e0e0e0;
-}
-li:last-child {
-border-bottom: none;
-}
-li:hover {
-background-color: #f9f9f9;
-}
-.user-info {
-display: flex;
-align-items: center;
-}
-.avatar {
-width: 50px;
-height: 50px;
-border-radius: 50%;
-background-color: #d1d1d1;
-margin-right: 10px;
-}
-.username {
-font-weight: bold;
-font-size: 16px;
-color: #333;
-text-transform: capitalize;
-}
-.message-preview {
-color: #666;
-font-size: 14px;
-}
-.time {
-font-size: 12px;
-color: #999;
-}
-#add {
-position: fixed;
-bottom: 20px;
-right: 20px;
-border-radius: 50%;
-width: 50px;
-height: 50px;
-border: 1px solid #8f8f8f;
-background-color: #44ff44;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hive Mensagens</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      #home header {
+        background-color: #24292e;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      #home .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 10px;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      #home ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      #home li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 10px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      #home li:last-child {
+        border-bottom: none;
+      }
+      #home li:hover {
+        background-color: #f9f9f9;
+      }
+      #home .user-info {
+        display: flex;
+        align-items: center;
+      }
+      #home .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #d1d1d1;
+        margin-right: 10px;
+      }
+      #home .username {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        text-transform: capitalize;
+      }
+      #home .message-preview {
+        color: #666;
+        font-size: 14px;
+      }
+      #home .time {
+        font-size: 12px;
+        color: #999;
+      }
+      #home #add {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        border: 1px solid #8f8f8f;
+        background-color: #44ff44;
+      }
+      #home .noview {
+        position: relative;
+        height: 15px;
+        background: rgba(100 100 100 100);
+        border: 1px solid black;
+        background-color: #44ff44;
+        height: 30px;
+        width: 30px;
+        left: 0;
+        border-radius: 50%;
+      }
+      #home #new-contact {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 35px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+      #home #new-contact label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      #home #new-contact input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+      #home #new-contact button {
+        width: 100%;
+        padding: 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      #new-contact button:hover {
+        background-color: #45a049;
+      }
+      #new-contact #exit {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #f44336;
+        color: white;
+        border: solid 1px black;
+        padding: 5px;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 40px;
+        width: 40px;
+      }
+      #home #new-contact #exit:hover {
+        background-color: #d32f2f;
+      }
+    </style>
+  </head>
+  <body>
+<main id="home">
+  <header translate="no">Hive Mensagens</header>
+  <div class="container"></div>
+  <button id="add">+</button>
+  <div id="popup">
+    <form id="new-contact">
+      <button id="exit">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M18.3 5.7c-.4-.4-1-.4-1.4 0L12 10.6 7.1 5.7c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4L10.6 12l-4.9 4.9c-.4.4-.4 1 0 1.4.2.2.4.3.7.3.3 0 .5-.1.7-.3L12 13.4l4.9 4.9c.2.2.4.3.7.3.3 0 .5-.1.7-.3.4-.4.4-1 0-1.4L13.4 12l4.9-4.9c.4-.4.4-1 0-1.4z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <label id="label-name" for="name">Name or id:</label>
+      <input type="text" id="name" name="name" required />
+      <button type="submit">Add</button>
+    </form>
+  </div>
+
+  <script type="module" src="/js/conect.js"></script>
+  <script src="/js/socket.io.js"></script>
+  <script src="/js/env.js" type="module"></script>
+  <script type="module" src="js/home.js"></script>
+  <script type="module" src="/js/utils.js"></script>
+</main>
 
 
-}
-.noview {
 
-position: relative;
-height: 15px;
-background: rgba(100 100 100 100);
-border: 1px solid black;
-background-color: #44ff44;
-height: 30px;
-width: 30px;
-left: 0;
-border-radius: 50%;
-}
-#new-contact {
-display: none;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background-color: white;
-padding: 35px;
-border-radius: 8px;
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-z-index: 1000;
+<main id="profile" style="display:none">
 
-}
-#new-contact label {
-display: block;
-margin-bottom: 10px;
-}
-#new-contact input {
-width: 100%;
-padding: 10px;
-margin-bottom: 15px;
-border: 1px solid #ddd;
-border-radius: 8px;
-font-size: 16px;
-}
-#new-contact button {
-width: 100%;
-padding: 15px;
-background-color: #4caf50;
-color: white;
-border: none;
-border-radius: 8px;
-font-size: 16px;
-cursor: pointer;
-transition: background-color 0.3s ease;
-}
-#new-contact button:hover {
-background-color: #45a049;
-}
-</style>
-</head>
-<body>
-
-<header translate="no">
-Hive Mensagens
-</header>
-<div class="container"></div>
-<button id="add">+</button>
-<div id="popup">
-<form id="new-contact">
-<label for="name">Name or id:</label>
-<input type="text" id="name" name="name" required>
-<button type="submit">Add</button>
-</form>
-</div>
-
-<script type="module" src="/js/conect.js"></script>
-<script src="/js/socket.io.js"></script>
-<script src="/js/env.js" type="module"></script>
-<script type="module" src="js/home.js"></script>
-<script type="module" src="/js/utils.js"></script>
-</body>
+  <header>
+    <button id="exit">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffff"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" /></svg>
+    </button>
+    <h1>sender: <span id="sendername"></span></h1>
+    <h2>user: <span id="username"></span></h2>
+    </header>
+    <main>
+    <section id="msgs">
+    
+    </section>
+    <div id="msg">
+    <input type="text" name="msg" id="msg-input" />
+    <button id="send" translate="no">enviar</button>
+    </div>
+    </main>
+    <footer>
+    <p>
+    direitos reservados a
+    <a
+    href="https://gabrieelmarques.com.br"
+    target="_blank"
+    rel="noopener noreferrer"
+    >gabrieel marques</a
+    >
+    </p>
+    </footer>
+    <script>
+    const exit = document.getElementById("exit")
+    exit.addEventListener("click", ()=> {
+    window.location.href = "/"
+    })
+</script>
+    
+</main>
+  </body>
 </html>

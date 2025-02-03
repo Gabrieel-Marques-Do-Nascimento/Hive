@@ -1,7 +1,13 @@
-import { URL } from "./env.js";
+import { URL } from "../js/env.js";
 import { new_msg } from "./script.js";
-import { leave } from "./conect.js";
-import { userId, room, fromId, messages, create_msg_element } from "./utils.js";
+import { leave } from "../js/conect.js";
+import {
+  userId,
+  room,
+  fromId,
+  messages,
+  create_msg_element,
+} from "../js/utils.js";
 const msgs_container = document.getElementById("msgs");
 const socket = io.connect(URL);
 export function join(room, name = "sender") {
@@ -16,7 +22,7 @@ function sendMessage(message, room) {
     room: room,
     message: message,
     id: userId,
-    "d-id": fromId
+    "d-id": fromId,
   });
   console.log(message);
 }
@@ -33,7 +39,7 @@ send_button.addEventListener("click", () => {
     message: input.value,
     pessoa: fromId,
     online: null,
-    userid: userId
+    userid: userId,
   };
   messages.push(new_msg_dict);
   localStorage.setItem("messages", JSON.stringify(messages));
@@ -69,10 +75,10 @@ socket.on("channel", function (data) {
   console.log(data);
   if (data.id != userId) {
     create_msg_element(msgs_container, data["message"], "sender-msg");
+    messages.push(data);
+    localStorage.setItem("messages", JSON.stringify(messages));
   }
 });
 socket.on("join", function (data) {
   console.log(data);
 });
-
-

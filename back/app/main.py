@@ -58,7 +58,7 @@ def send_msg(token):
     msg_db = Messages(user=user, pessoaId=dest_id, message=msg, senderId=id)
     d_msg_db = Messages(
         user=dest_user, message=msg,
-        pessoaId=id, senderId=id
+        pessoaId=dest_id, senderId=id
     )
     db.session.add(msg_db)
     db.session.add(d_msg_db)

@@ -7,7 +7,7 @@ export let fromId = parseInt(localStorage.getItem("HiveSender"));
 console.log("from", fromId, "userid", userId);
 export let messages = JSON.parse(localStorage.getItem("messages"));
 
-export function request_messages() {
+export function request_messages(create_user_label=null) {
     if (!localStorage.getItem("messages")) {
         fetch(`${URL}/my_msgs`, {
             method: "POST",
@@ -27,6 +27,9 @@ export function request_messages() {
             })
             .then(data => {
                 localStorage.setItem("messages", JSON.stringify(data));
+                if (create_user_label) {
+                    create_user_label(data);
+                }
             })
             .catch(error => {
                 console.error("Erro ao realizar a requisição:", error);

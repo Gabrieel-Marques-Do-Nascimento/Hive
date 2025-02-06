@@ -1,10 +1,22 @@
 /* Profile Page Styling */
+#profile {
+    display: flex;
+    flex-direction: column;
+    height: 90dvh;
+}
+#profile * {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding:0;
+
+}
 #profile header {
     background-color: #4a4a4a;
     color: white;
     padding: 15px;
     display: flex;
     align-items: center;
+    border-radius: 10px 10px 0 0;
 }
 
 #profile header button {
@@ -25,22 +37,30 @@
     color: #b0b0b0;
 }
 
-#profile main {
+#profile #profile-main {
     display: flex;
     flex-direction: column;
-    height: calc(100% - 100px);
+    height: calc(100% - 60px);
+   
 }
 
-#msgs {
-    flex-grow: 1;
+#profile #msgs {
+    flex: 1; /* Ocupa todo o espaço disponível */
     overflow-y: auto;
     padding: 15px;
+    margin: 0; /* Removendo margens para ocupar 100% do espaço */
+    background-color: #ffffff;
+    min-height: 0; /* Evita problemas com flexbox em alguns navegadores */
 }
 
-#msg {
+
+#profile  #profile-main #msg {
     display: flex;
     padding: 15px;
+    
+    position: sticky;
     background-color: #f0f2f5;
+ 
 }
 
 #msg-input {
@@ -59,7 +79,7 @@
     cursor: pointer;
 }
 
-#profile footer {
+/* #profile footer {
     background-color: #f0f2f5;
     text-align: center;
     padding: 10px;
@@ -70,4 +90,4 @@
 #profile footer a {
     color: #25D366;
     text-decoration: none;
-}
+} */

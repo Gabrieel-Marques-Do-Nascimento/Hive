@@ -1,0 +1,33 @@
+#: kivy 2.0.1
+
+<ScreenManagement>:
+    HomeScreen:
+    Messages:
+
+<View@ScrollView>:
+	spacing: dp(20)
+	padding: 20 
+	#size_hint: (1,0.89)  
+	pos_hint: {"top": 0.99, "center_x": 0.5}
+	Buttons:	
+		cols: 3  
+		padding: 20
+		size_hint_y: None  
+		height: self.minimum_height  
+		pos_hint: {"top": 0.96, "center_x": 0.5}  
+
+
+
+
+<HomeScreen@Screen>:
+	name: "home"
+	
+	MDLabel:
+		text: "teste"
+		theme_text_color: "Primary"
+		halign: "center"
+		
+		MDFloatLayout:
+			view:
+				
+		

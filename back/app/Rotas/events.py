@@ -59,6 +59,7 @@ def socket_register(socketio: SocketIO):
         mensagem = data["mensagem"]
         if destinatario_id in ususarios_conectados:
             destinatario_sid = ususarios_conectados[destinatario_id]
+            socket_logger.info("message-enviada:", mensagem)
             emit("message_privada", {"mensagem": mensagem}, to=destinatario_sid)
         else:
             emit("error", {"message": "Destinatário não encontrado"})

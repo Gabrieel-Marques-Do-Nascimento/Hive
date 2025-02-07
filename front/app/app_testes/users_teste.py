@@ -88,3 +88,11 @@ users10 = [
         "userid": "010"
     }
 ]
+
+user_messages = [
+		{ 'text': "exemple", 'time': "exemple"}
+]
+
+sender_messages = [
+			{ 'text': "exemple", 'time': "exemple"}
+]

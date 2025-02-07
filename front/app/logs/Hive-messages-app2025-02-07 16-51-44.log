@@ -1,0 +1,5 @@
+2025-02-07 16:51:44 ==> [LOG 1] Tempo desde o último log: 0.000s | Tempo total: 0.000s | Mensagem: (-_-)
+2025-02-07 16:51:44 ==> [LOG 2] Tempo desde o último log: 0.006s | Tempo total: 0.006s | Mensagem: HiveApp-build
+2025-02-07 16:51:45 ==> [LOG 3] Tempo desde o último log: 0.178s | Tempo total: 0.184s | Mensagem: HomeScreen
+2025-02-07 16:51:45 ==> [LOG 4] Tempo desde o último log: 0.103s | Tempo total: 0.287s | Mensagem: Messages
+2025-02-07 16:51:48 ==> [LOG 5] Tempo desde o último log: 3.261s | Tempo total: 3.548s | Mensagem: __main__

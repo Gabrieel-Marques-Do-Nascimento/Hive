@@ -1,0 +1,8 @@
+2025-02-07 16:40:59 ==> [LOG 1] Tempo desde o último log: 0.000s | Tempo total: 0.000s | Mensagem: (-_-)
+2025-02-07 16:40:59 ==> [LOG 2] Tempo desde o último log: 0.006s | Tempo total: 0.006s | Mensagem: HiveApp-build
+2025-02-07 16:40:59 ==> [LOG 3] Tempo desde o último log: 0.004s | Tempo total: 0.009s | Mensagem: HiveApp-start_socket
+2025-02-07 16:40:59 ==> [LOG 4] Tempo desde o último log: 0.164s | Tempo total: 0.173s | Mensagem: HomeScreen
+2025-02-07 16:40:59 ==> [LOG 5] Tempo desde o último log: 0.000s | Tempo total: 0.174s | Mensagem: HomeScreen-on_kv_post
+2025-02-07 16:40:59 ==> [LOG 6] Tempo desde o último log: 0.080s | Tempo total: 0.254s | Mensagem: Messages
+2025-02-07 16:41:00 ==> [LOG 7] Tempo desde o último log: 0.731s | Tempo total: 0.985s | Mensagem: __main__
+2025-02-07 16:41:00 ==> [LOG 8] Tempo desde o último log: 0.000s | Tempo total: 0.985s | Mensagem: the and

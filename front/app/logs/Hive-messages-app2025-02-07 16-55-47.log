@@ -1,0 +1,7 @@
+2025-02-07 16:55:47 ==> [LOG 1] Tempo desde o último log: 0.000s | Tempo total: 0.000s | Mensagem: (-_-)
+2025-02-07 16:55:47 ==> [LOG 2] Tempo desde o último log: 0.006s | Tempo total: 0.006s | Mensagem: HiveApp-build
+2025-02-07 16:55:47 ==> [LOG 3] Tempo desde o último log: 0.157s | Tempo total: 0.163s | Mensagem: HomeScreen
+2025-02-07 16:55:47 ==> [LOG 4] Tempo desde o último log: 0.001s | Tempo total: 0.163s | Mensagem: HomeScreen-create_contacts
+2025-02-07 16:55:47 ==> [LOG 5] Tempo desde o último log: 0.025s | Tempo total: 0.189s | Mensagem: HomeScreen-load_contacts
+2025-02-07 16:55:47 ==> [LOG 6] Tempo desde o último log: 0.100s | Tempo total: 0.288s | Mensagem: Messages
+2025-02-07 16:55:48 ==> [LOG 7] Tempo desde o último log: 1.076s | Tempo total: 1.364s | Mensagem: __main__

@@ -1,3 +1,5 @@
+/* add a class .profile-page to the body element to js*/
+
 .profile-page {
     display: flex;
     flex-direction: row;

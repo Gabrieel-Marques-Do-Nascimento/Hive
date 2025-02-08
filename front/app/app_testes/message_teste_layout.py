@@ -43,11 +43,12 @@ KV = '''
                 on_release: root.send_message()
 '''
 
+
 class ChatScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.messages = []
-        
+
     def send_message(self):
         message_text = self.ids.message_input.text.strip()
         if message_text:
@@ -62,9 +63,10 @@ class ChatScreen(MDScreen):
                 'time': current_time
             })
             self.ids.message_input.text = ""
-            
+
             # Rola para a última mensagem
             self.ids.scroll_view.scroll_to(message_item)
+
 
 class ChatApp(MDApp):
     def build(self):
@@ -72,6 +74,7 @@ class ChatApp(MDApp):
         self.theme_cls.theme_style = "Light"
         Builder.load_string(KV)
         return ChatScreen()
+
 
 if __name__ == '__main__':
     ChatApp().run()

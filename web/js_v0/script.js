@@ -32,7 +32,7 @@ export function new_msg(message) {
   const msgs_container = document.getElementById("msgs");
   const msgs = document.createElement("p");
   const clone = msgs.cloneNode(true);
-  clone.innerHTML = message;
+  clone.textContent = message;
   clone.id = "user-msg";
   msgs_container.appendChild(clone);
 }

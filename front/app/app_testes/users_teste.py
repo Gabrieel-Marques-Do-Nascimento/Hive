@@ -1,10 +1,10 @@
 users1 = [{"name": "Gabriel marques do nascimento",
-            "enviado": "1",
-            "message": "noView",
-            "pessoa": "2",
-            "online": "8:00",
-            "userid":  ""
-        }]
+           "enviado": "1",
+           "message": "noView",
+           "pessoa": "2",
+           "online": "8:00",
+           "userid":  ""
+           }]
 
 users10 = [
     {
@@ -90,9 +90,9 @@ users10 = [
 ]
 
 user_messages = [
-		{ 'text': "exemple", 'time': "exemple"}
+    {'text': "exemple", 'time': "exemple"}
 ]
 
 sender_messages = [
-			{ 'text': "exemple", 'time': "exemple"}
+    {'text': "exemple", 'time': "exemple"}
 ]

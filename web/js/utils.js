@@ -110,3 +110,15 @@ export function create_msg_element(pai, text, cloneId) {
     clone.id = cloneId;
     pai.appendChild(clone);
 }
+
+
+export function new_msg(message) {
+    if (message.trim()) {
+        const msgs_container = document.getElementById("msgs");
+        const msgs = document.createElement("p");
+        const clone = msgs.cloneNode(true);
+        clone.textContent = message;
+        clone.id = "user-msg";
+        msgs_container.appendChild(clone);
+    }
+  }

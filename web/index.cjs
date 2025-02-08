@@ -3,6 +3,38 @@ const http = require("http"); // Para criar o servidor HTTP
 const fs = require("fs"); // Para ler arquivos do sistema de arquivos
 const path = require("path"); // Para manipulação de caminhos de arquivos
 
+const os = require('os');
+
+
+
+
+/**
+ * Gets the local IPv4 address of the machine
+ * Iterates through network interfaces to find the first non-internal IPv4 address
+ * @returns {string} The local IPv4 address or 'IP não encontrado' if not found
+ */
+function getLocalIP() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return 'IP não encontrado';
+}
+const localIP = getLocalIP();
+
+
+
+
+
+
+
+
+
+
 // retorna o tipo de arquivo com base na extencao
 function getContentType(extname) {
     switch (extname) {
@@ -56,5 +88,9 @@ const PORT = 8081; // Definindo a porta do servidor
 // Iniciando o servidor para ouvir na porta configurada e no IP especificado
 server.listen(PORT, "0.0.0.0", () => {
     // Exibindo no console que o servidor está rodando
-    console.log(`Servidor rodando em http://<${mercearia}>:${PORT}`);
+    
+
+console.log(`Servidor rodando em http://${localIP}:${PORT}`)
 });
+
+

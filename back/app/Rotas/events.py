@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_socketio import emit, SocketIO, join_room, leave_room
 from datetime import datetime
-from Database.usuarios import Users, Messages, db
+from Database.usuarios import Users, Messages, Contacts, db
 
 socket_bp = Blueprint("socket_pb", __name__)
 
@@ -13,13 +13,11 @@ socket_logger.info("SocketIO initialized")
 ususarios_conectados = {}
 
 
-
 def socket_register(socketio: SocketIO):
 
     @socketio.on("connect")
     def connect():
         socket_logger.info("Cliente conectado")
-
 
     @socketio.on("channel")
     def channel(data: dict):
@@ -44,34 +42,41 @@ def socket_register(socketio: SocketIO):
             "online": None,
             "userid":  data.get("id")
         }, to=data["room"], broadcast=True)
- 
-
 
     @socketio.on("registrar_usuario")
     def registrar_usuario(data):
         id = data["id"]
         ususarios_conectados[id] = request.sid
-        socket_logger.info(f"Usuario {id} conectado com o socket {request.sid}")
+        socket_logger.info(
+            f"Usuario {id} conectado com o socket {request.sid}")
 
     @socketio.on("send_message")
     def send_message(data):
-        destinatario_id = data["destinatario_id"]
+        destinatario_id = int(data["destinatario_id"])
         mensagem = data["mensagem"]
+        print(data)
         if destinatario_id in ususarios_conectados:
             destinatario_sid = ususarios_conectados[destinatario_id]
-            socket_logger.info("message-enviada:", mensagem)
-            emit("message_privada", {"mensagem": mensagem}, to=destinatario_sid)
+            socket_logger.info("message-enviada:" + mensagem)
+            emit("message_privada", {
+                 "mensagem": mensagem}, to=destinatario_sid)
         else:
             emit("error", {"message": "Destinatário não encontrado"})
 
     @socketio.on('new-contact')
     def new_contact(data):
         try:
-            user = Users.query.filter_by(id=data["id"]).first()
-            if user:
-                socket_logger.info(f"User {user.id} found")
-                emit(f"new-contact", {"message": "", "pessoa": user.id,
-                     "enviado": None, "online": None}, broadcast=True)
+            print(data)
+            constact = Users.query.filter_by(id=data["id"]).first()
+            if constact and constact.id != data["userId"]:
+                newConatact = Contacts(userId=data["userId"], contactId=constact.id,
+                                       custom_name=data["custom_name"])
+                db.session.add(newConatact)
+                db.session.commit()
+                socket_logger.info(f"User {constact.id} found")
+                emit(f"new-contact", {"message": None, "pessoa": constact.id,
+                     "enviado": None, "online": None, "name": data["custom_name"]}, broadcast=True)
+
             else:
                 emit(
                     "error", {"message": "usuario nao encontrado"}, broadcast=True)

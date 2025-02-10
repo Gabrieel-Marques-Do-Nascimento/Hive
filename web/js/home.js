@@ -1,11 +1,11 @@
-import { URL } from "../js/env.js";
+
 import { request_messages, userId, newUser } from "./utils.js";
-// import { join } from "./conect.js";
+import { socket } from "./conect.js";
 const label_name = document.getElementById("label-name");
 const new_contact = document.getElementById("new-contact");
 const lista = document.createElement("ul");
 const item = document.createElement("li");
-const user_info = document.createElement("div");
+const user_info = document.createElement("div"); 
 
 const avatar = document.createElement("div");
 
@@ -85,7 +85,7 @@ function create_user_label(users) {
   console.log(idlist.toString());
 }
 
-let socket = io.connect("//" + document.domain + ":" + 5000);
+
 
 socket.on("connect", () => {
   console.log("conectado com id:", userId);
@@ -116,6 +116,7 @@ add.addEventListener("click", () => {
     e.preventDefault();
 
     const user = document.getElementById("name");
+    const $cunstoname =document.getElementById("cunstoname");
     let contacts = JSON.parse(localStorage.getItem("contact`s"));
     if (contacts.includes(parseInt(user.value))) {
       label_name_status("usuario ja adicionado", "red", 2000, false);
@@ -124,7 +125,7 @@ add.addEventListener("click", () => {
 
       return;
     }
-    socket.emit("new-contact", { id: parseInt(user.value) });
+    socket.emit("new-contact", { id: parseInt(user.value), userId: userId,custom_name: $cunstoname.value });
     user.value = "";
   });
 });

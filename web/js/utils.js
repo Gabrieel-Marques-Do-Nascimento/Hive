@@ -1,7 +1,6 @@
 import { URL } from "./env.js";
-import {profile} from './profile.js'
 
-const socket = io.connect(URL);
+
 export let token = localStorage.getItem("1463token-as-savekjg");
 export let userId = parseInt(localStorage.getItem("hiveid"));
 export let fromId = parseInt(localStorage.getItem("HiveSender"));
@@ -112,13 +111,25 @@ export function create_msg_element(pai, text, cloneId) {
 }
 
 
-export function new_msg(message) {
+export function new_msg(message, type="user-msg") {
     if (message.trim()) {
         const msgs_container = document.getElementById("msgs");
         const msgs = document.createElement("p");
         const clone = msgs.cloneNode(true);
         clone.textContent = message;
-        clone.id = "user-msg";
+        clone.id = type;
         msgs_container.appendChild(clone);
     }
+  }
+
+  export function profile() {
+    const $profile_elemt = document.getElementById("profile");
+    const $home_elemet = document.getElementById("home");
+    $profile_elemt.classList.add("active");
+    $profile_elemt.style.display = "block";
+    $home_elemet.classList.add("active");
+    document.body.classList.add("profile-page");
+  
+    const $usernameSpan = document.getElementById("username");
+    const $sendernameSpan = document.getElementById("sendername");
   }

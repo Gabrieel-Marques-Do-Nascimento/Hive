@@ -32,7 +32,7 @@
       <div id="popup">
         <form id="new-contact">
           <button id="exit">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
               <path
                 d="M18.3 5.7c-.4-.4-1-.4-1.4 0L12 10.6 7.1 5.7c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4L10.6 12l-4.9 4.9c-.4.4-.4 1 0 1.4.2.2.4.3.7.3.3 0 .5-.1.7-.3L12 13.4l4.9 4.9c.2.2.4.3.7.3.3 0 .5-.1.7-.3.4-.4.4-1 0-1.4L13.4 12l4.9-4.9c.4-.4.4-1 0-1.4z"
                 fill="currentColor"
@@ -41,15 +41,13 @@
           </button>
           <label id="label-name" for="name">Name or id:</label>
           <input type="text" id="name" name="name" required />
-          <button type="submit">Add</button>
+          <label for="cunstoname">custom name</label>
+          <input type="text" id="cunstoname" name="cunstoname" required />
+          <button type="submit" id="submit">Add</button>
         </form>
       </div>
 
-      <script type="module" src="/js/conect.js"></script>
-      <script src="/js/socket.io.js"></script>
-      <script src="/js/env.js" type="module"></script>
-      <script type="module" src="js/home.js"></script>
-      <script type="module" src="/js/utils.js"></script>
+
     </main>
 
     <main id="profile" style="display: none">
@@ -73,7 +71,7 @@
       <main id="profile-main">
         <section id="msgs"></section>
         <div id="msg">
-          <input type="text" name="msg" id="msg-input" />
+          <input type="text" name="msg" id="msg-input" maxlength="200" />
           <button id="send" translate="no">enviar</button>
         </div>
       </main>
@@ -91,7 +89,13 @@
     </p> 
     </footer> -->
     <script>
-      document.body.classList.add("profile-page");
-    </script>
+      // document.body.classList.add("profile-page");
+    </script>          
+    <script src="/js/socket.io.js"></script>
+          <script type="module" src="/js/conect.js"></script>
+    <script type="module" src="js/profile.js"></script>
+          <script src="/js/env.js" type="module"></script>
+          <script type="module" src="js/home.js"></script>
+          <script type="module" src="/js/utils.js"></script>
   </body>
 </html>

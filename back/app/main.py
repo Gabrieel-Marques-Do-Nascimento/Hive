@@ -6,7 +6,7 @@ from auth import token_verify
 
 
 # local
-from Database import Users, Messages, db, data_str
+from Database import Users, Messages, Contacts, db, data_str
 from Rotas import create_app, socketIo
 
 
@@ -85,17 +85,21 @@ def mymesgs(token):
         id = resp["id"]
         user = Users.query.filter_by(id=id).first()
         msgs = []
+        contacts = []
         for mensage in user.messages:
             msgs.append({"message": mensage.message, "pessoa": mensage.pessoaId,
                         "enviado": mensage.senderId, "online": None, "userid": user.id})
-        
-        return msgs
+        for contact in Contacts.query.filter_by(userId=id).all():
+            contacts.append(
+                {"contact": contact.id, "name": contact.custom_name, 'created': contact.created_at})
+
+        return jsonify([msgs, contacts])
     except AttributeError as e:
         app.logger.error(e)
-        return []
+        return ['erro']
     except Exception as e:
         app.logger.error(e)
-        return []
+        return ['erro']
 
 #    db_msg = Messages.query.filter_by(userId=id)
 #    msg_all = db_msg.all()

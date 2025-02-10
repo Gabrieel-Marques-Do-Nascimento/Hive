@@ -1,11 +1,10 @@
-
 import { request_messages, userId, newUser } from "./utils.js";
 import { socket } from "./conect.js";
 const label_name = document.getElementById("label-name");
 const new_contact = document.getElementById("new-contact");
 const lista = document.createElement("ul");
 const item = document.createElement("li");
-const user_info = document.createElement("div"); 
+const user_info = document.createElement("div");
 
 const avatar = document.createElement("div");
 
@@ -56,36 +55,41 @@ function label_name_status(
 
 let contacts = JSON.parse(localStorage.getItem("contact`s"));
 
-function create_user_label(users) {
+function create_user_label(users, contacts) {
+  console.log(users);
   let idlist = [];
   let userlist = [];
   lista.innerHTML = "";
-  users.forEach((user) => {
-    if (!idlist.includes(parseInt(user["pessoa"]))) {
-      idlist.push(parseInt(user["pessoa"]));
-      if (parseInt(user["pessoa"]) != userId) {
-        const clone = newUser(parseInt(user["pessoa"]));
-        clone ? lista.appendChild(clone) : null;
+  if (users.length > 0) {
+    users[0].forEach((user) => {
+      if (!idlist.includes(parseInt(user["pessoa"]))) {
+        idlist.push(parseInt(user["pessoa"]));
+        if (parseInt(user["pessoa"]) != userId) {
+          const clone = newUser(user);
+          clone ? lista.appendChild(clone) : null;
+        }
       }
-    }
-  });
-  users.forEach((user) => {
-    if (
-      !idlist.includes(parseInt(user["enviado"])) &&
-      user["enviado"] != null
-    ) {
-      idlist.push(parseInt(user["enviado"]));
-      if (parseInt(user["enviado"]) != userId) {
-        const clone = newUser(parseInt(user["enviado"]));
-        clone ? lista.appendChild(clone) : null;
+    });
+    users.forEach((user) => {
+      if (
+        !idlist.includes(parseInt(user["enviado"])) &&
+        user["enviado"] != null
+      ) {
+        idlist.push(parseInt(user["enviado"]));
+        if (parseInt(user["enviado"]) != userId) {
+          const clone = newUser(user);
+          clone ? lista.appendChild(clone) : null;
+        }
       }
-    }
+    });
+  }
+  contacts.forEach((contact) => {
+    const clone = newUser(contact);
+    clone ? lista.appendChild(clone) : null;
   });
   localStorage.setItem("contact`s", JSON.stringify(idlist));
   console.log(idlist.toString());
 }
-
-
 
 socket.on("connect", () => {
   console.log("conectado com id:", userId);
@@ -97,12 +101,12 @@ if (token) {
   request_messages(create_user_label);
 
   let users = localStorage.getItem("messages");
-
+let contacts = localStorage.getItem("contact-list");
   users = JSON.parse(users);
   console.log(users);
 
   if (users) {
-    create_user_label(users);
+    create_user_label(users, JSON.parse(contacts));
   }
   document.querySelector(".container").appendChild(lista);
 } else {
@@ -115,8 +119,8 @@ add.addEventListener("click", () => {
   new_contact.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const user = document.getElementById("name");
-    const $cunstoname =document.getElementById("cunstoname");
+    const user = document.getElementById("username");
+    const $cunstoname = document.getElementById("cunstoname");
     let contacts = JSON.parse(localStorage.getItem("contact`s"));
     if (contacts.includes(parseInt(user.value))) {
       label_name_status("usuario ja adicionado", "red", 2000, false);
@@ -125,7 +129,11 @@ add.addEventListener("click", () => {
 
       return;
     }
-    socket.emit("new-contact", { id: parseInt(user.value), userId: userId,custom_name: $cunstoname.value });
+    socket.emit("new-contact", {
+      id: parseInt(user.value),
+      userId: userId,
+      custom_name: $cunstoname.value,
+    });
     user.value = "";
   });
 });
@@ -139,10 +147,10 @@ socket.on("new-contact", function (data) {
     const pessoa = data["pessoa"];
     const chave = `contato_${pessoa}`;
 
-    let messages = JSON.parse(localStorage.getItem("messages"));
-    messages.push(data);
-    localStorage.setItem("messages", JSON.stringify(messages));
-    create_user_label(messages);
+    let contact_list = JSON.parse(localStorage.getItem("contact-list"));
+    contact_list .push(data);
+    localStorage.setItem("contact-list", JSON.stringify(contact_list ));
+    create_user_label( [],contact_list );
     label_name_status("SUcesso!!", "green");
     return;
   }

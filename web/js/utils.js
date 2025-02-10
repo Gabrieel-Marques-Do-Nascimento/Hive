@@ -26,9 +26,12 @@ export function request_messages(create_user_label=null) {
                 return resp.json(); // Retorna a Promise contendo os dados
             })
             .then(data => {
-                localStorage.setItem("messages", JSON.stringify(data));
+                console.log(data)
+                localStorage.setItem("messages", JSON.stringify(data[0]));
+                localStorage.setItem("contact-list", JSON.stringify(data[1]));
+
                 if (create_user_label) {
-                    create_user_label(data);
+                    create_user_label(data[0],data[1]);
                 }
             })
             .catch(error => {
@@ -48,12 +51,13 @@ export function room(user_id, from_id) {
 }
 
 export function newUser(
-    pessoaN,
-    hiveUserid = "Hive user",
-    avatarI = "Hive",
-    previewT = "preview",
-    hors = "08:00"
+   user
 ) {
+    let pessoaN =  parseInt(user["pessoa"])?  parseInt(user["pessoa"]) :  parseInt(user["contact"]);
+    let hiveUserid = user['name']? user['name']: "Hive user"
+    let avatarI = "Hive"
+    let previewT = "preview"
+    let hors = "08:00"
     const lista = document.createElement("ul");
     const item = document.createElement("li");
     const user_info = document.createElement("div");

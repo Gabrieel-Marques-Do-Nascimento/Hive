@@ -86,12 +86,14 @@ KV = """
 			icon: "git"
 		ScrollView:
 			id: scroll_view2
+			
 			MDList:
 				id: chat_list
 				padding: 10
 				spacing: 5
         BoxLayout:
             orientation: "horizontal"
+            size_hint_y: 0.08
             adaptive_height: True
             spacing: 5
             padding: 5

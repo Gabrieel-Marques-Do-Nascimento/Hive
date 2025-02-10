@@ -1,86 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
-    <link rel="stylesheet" href="css/active.css" />
-    <link rel="stylesheet" href="css/profile.css" />
-    <title>Hive Mensagens</title>
-    <style></style>
-  </head>
-  <body>
-    <main id="home">
-      <header translate="no">
-        <h2>Hive Mensagens</h2>
-        <button id="Downloads" style="height: 30px; width: 30px; top: 10px; left: 60%; border: 1px solid  rgba(255, 255, 255, 0.612);" title="Download do app para android">
-          <svg style="left:-8; position: relative;" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 20 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Haste da seta -->
-            <line x1="12" y1="3" x2="12" y2="14" />
-            
-            <!-- Cabeça da seta apontando para baixo -->
-            <polyline points="9 11 12 14 15 11" />
-            
-            <!-- Linha inferior representando o destino do download -->
-            <line x1="4" y1="18" x2="20" y2="18" stroke="#000" />
-          </svg>
-          
-        </button>
-      </header>
-      <div class="container"></div>
-      <button id="add" ><?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-        <svg width="30px"  height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 1H6V6L1 6V10H6V15H10V10H15V6L10 6V1Z" fill="#fff"/>
-        </svg></button>
-      <div id="popup">
-        <form id="new-contact">
-          <button id="exit">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
-              <path
-                d="M18.3 5.7c-.4-.4-1-.4-1.4 0L12 10.6 7.1 5.7c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4L10.6 12l-4.9 4.9c-.4.4-.4 1 0 1.4.2.2.4.3.7.3.3 0 .5-.1.7-.3L12 13.4l4.9 4.9c.2.2.4.3.7.3.3 0 .5-.1.7-.3.4-.4.4-1 0-1.4L13.4 12l4.9-4.9c.4-.4.4-1 0-1.4z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-          <label id="label-name" for="username">Name or id:</label>
-          <input type="text" id="username" name="username" required />
-          <label for="cunstoname">custom name</label>
-          <input type="text" id="cunstoname" name="cunstoname" required />
-          <button type="submit" id="submit">Add</button>
-        </form>
-      </div>
+<head>
+	<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+<link rel="stylesheet" href="css/active.css" />
+<link rel="stylesheet" href="css/profile.css" />
+<title>Hive Mensagens</title>
+<style>
+</style>
+</head>
+<body>
+<main id="home">
+<header translate="no">
+<h2>Hive Mensagens</h2>
+<button id="Downloads" style="height: 30px; width: 30px; top: 10px; left: 60%; border: 1px solid  rgba(255, 255, 255, 0.612);" title="Download do app para android">
+<svg style="left:-8; position: relative;" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 20 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<!-- Haste da seta -->
+<line x1="12" y1="3" x2="12" y2="14" />
+
+<!-- Cabeça da seta apontando para baixo -->
+<polyline points="9 11 12 14 15 11" />
+
+<!-- Linha inferior representando o destino do download -->
+<line x1="4" y1="18" x2="20" y2="18" stroke="#000" />
+</svg>
+
+</button>
+</header>
+<div class="container"></div>
+<button id="add"><?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 1H6V6L1 6V10H6V15H10V10H15V6L10 6V1Z" fill="#fff" />
+</svg></button>
+<div id="popup">
+<form id="new-contact">
+<button id="exit">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<path
+d="M18.3 5.7c-.4-.4-1-.4-1.4 0L12 10.6 7.1 5.7c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4L10.6 12l-4.9 4.9c-.4.4-.4 1 0 1.4.2.2.4.3.7.3.3 0 .5-.1.7-.3L12 13.4l4.9 4.9c.2.2.4.3.7.3.3 0 .5-.1.7-.3.4-.4.4-1 0-1.4L13.4 12l4.9-4.9c.4-.4.4-1 0-1.4z"
+fill="currentColor"
+/>
+</svg>
+</button>
+<label id="label-name" for="username">Name or id:</label>
+<input type="text" id="username" name="username" required />
+<label for="cunstoname">custom name</label>
+<input type="text" id="cunstoname" name="cunstoname" required />
+<button type="submit" id="submit">Add</button>
+</form>
+</div>
 
 
-    </main>
+</main>
 
-    <main id="profile" style="display: none">
-      <header>
-        <button id="exitButton">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#ffff"
-          >
-            <path
-              d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
-            />
-          </svg>
-        </button>
-        <h1>sender: <span id="sendername"></span></h1>
-        <h2>user: <span id="username"></span></h2>
-      </header>
-      <main id="profile-main">
-        <section id="msgs"></section>
-        <div id="msg">
-          <input type="text" name="msg" id="msg-input" maxlength="200" />
-          <button id="send" translate="no">enviar</button>
-        </div>
-      </main>
+<main id="profile" style="display: none">
+<header>
+<button id="exitButton">
+<svg
+xmlns="http://www.w3.org/2000/svg"
+height="24px"
+viewBox="0 -960 960 960"
+width="24px"
+fill="#ffff"
+>
+<path
+d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+/>
+</svg>
+</button>
+<div id="photo">
+face
+</div>
+<div id="name">
+Contact name
+</div>
+<div id="menu">•••</div>
+</header>
+<main id="profile-main">
+<section id="msgs"></section>
+<div id="msg">
+<input type="text" name="msg" id="msg-input" maxlength="200" />
+<button id="send" translate="no">enviar</button>
+</div>
+</main>
 
-    </main>
-          <!-- <footer>
+</main>
+<main id="info">
+
+
+</main>
+
+<!-- <footer>
     <p>
     direitos reservados a
     <a
@@ -89,16 +100,16 @@
     rel="noopener noreferrer"
     >gabrieel marques</a
     >
-    </p> 
+    </p>
     </footer> -->
-    <script>
-      // document.body.classList.add("profile-page");
-    </script>          
-    <script src="/js/socket.io.js"></script>
-          <script type="module" src="/js/conect.js"></script>
-    <script type="module" src="js/profile.js"></script>
-          <script src="/js/env.js" type="module"></script>
-          <script type="module" src="js/home.js"></script>
-          <script type="module" src="/js/utils.js"></script>
-  </body>
+<script>
+// document.body.classList.add("profile-page");
+</script>
+<script src="/js/socket.io.js"></script>
+<script type="module" src="/js/conect.js"></script>
+<script type="module" src="js/profile.js"></script>
+<script src="/js/env.js" type="module"></script>
+<script type="module" src="js/home.js"></script>
+<script type="module" src="/js/utils.js"></script>
+</body>
 </html>

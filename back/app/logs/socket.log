@@ -4017,3 +4017,182 @@
 2025-02-10 12:53:19,817 - socket_logger - INFO - Usuario 2 conectado com o socket i3v-E3jODNmPqTuSAAAS
 2025-02-10 12:53:24,828 - socket_logger - INFO - message-enviada:Oi
 2025-02-10 12:53:31,218 - socket_logger - INFO - message-enviada:hello
+2025-02-10 16:46:48,045 - socket_logger - INFO - SocketIO initialized
+2025-02-10 16:46:50,184 - socket_logger - INFO - SocketIO initialized
+2025-02-10 16:48:12,490 - socket_logger - INFO - SocketIO initialized
+2025-02-10 16:48:13,961 - socket_logger - INFO - SocketIO initialized
+2025-02-10 16:50:30,259 - socket_logger - INFO - SocketIO initialized
+2025-02-10 16:50:31,826 - socket_logger - INFO - SocketIO initialized
+2025-02-10 17:09:40,382 - socket_logger - INFO - SocketIO initialized
+2025-02-10 17:09:42,370 - socket_logger - INFO - SocketIO initialized
+2025-02-10 17:09:58,940 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:09:58,962 - socket_logger - INFO - Usuario 1 conectado com o socket m-_vsPuiEZEI6sXoAAAB
+2025-02-10 17:10:01,125 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:10:01,126 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:10:01,250 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:10:01,261 - socket_logger - INFO - Usuario 1 conectado com o socket k5KeFU4EcAbK04HYAAAD
+2025-02-10 17:10:40,367 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:10:40,368 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:10:40,508 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:10:40,524 - socket_logger - INFO - Usuario 1 conectado com o socket dlWlEAEf9FsR7L1lAAAF
+2025-02-10 17:11:10,433 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:11:10,489 - socket_logger - INFO - Usuario 1 conectado com o socket a5b82Ih32Gu0PscUAAAI
+2025-02-10 17:11:58,911 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:16:59,931 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:16:59,941 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:20:19,776 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:20:19,800 - socket_logger - INFO - Usuario 1 conectado com o socket rPKApxMKELOX4N9nAAAK
+2025-02-10 17:20:20,082 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:20:20,093 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:20:20,322 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:20:20,344 - socket_logger - INFO - Usuario 1 conectado com o socket hrK1A9ybVnYPbHLFAAAM
+2025-02-10 17:20:38,491 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:20:38,492 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:20:38,705 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:20:38,735 - socket_logger - INFO - Usuario 1 conectado com o socket I-z6qyr22_PbpUgLAAAO
+2025-02-10 17:20:51,387 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:20:51,388 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:20:51,548 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:20:51,587 - socket_logger - INFO - Usuario 1 conectado com o socket ncIBjBUF-x1s6Bd4AAAQ
+2025-02-10 17:21:03,116 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:21:03,116 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:21:03,261 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:21:03,302 - socket_logger - INFO - Usuario 1 conectado com o socket WfeiuwDEvbXKC9JHAAAS
+2025-02-10 17:21:04,755 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:21:04,755 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:21:04,903 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:21:04,941 - socket_logger - INFO - Usuario 1 conectado com o socket 8nR9HLrHIOfLk4Y0AAAU
+2025-02-10 17:21:20,969 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:21:20,970 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:21:21,107 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:21:21,150 - socket_logger - INFO - Usuario 1 conectado com o socket hgjq6Vg4ShbR_GSYAAAW
+2025-02-10 17:21:32,465 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:21:32,466 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:21:32,602 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:21:32,645 - socket_logger - INFO - Usuario 1 conectado com o socket gXrSddTlFqClNZXVAAAY
+2025-02-10 17:22:35,530 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:22:35,557 - socket_logger - INFO - Usuario 1 conectado com o socket Z_2VZYY4Jd7CezPHAAAa
+2025-02-10 17:22:36,340 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:22:36,341 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:22:36,486 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:22:36,498 - socket_logger - INFO - Usuario 1 conectado com o socket HoF3KtTUL6JJpMj1AAAc
+2025-02-10 17:22:47,422 - socket_logger - INFO - User 2 found
+2025-02-10 17:22:55,355 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:22:55,516 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:22:55,560 - socket_logger - INFO - Usuario 1 conectado com o socket Iqz5DM8CuQawshARAAAe
+2025-02-10 17:28:01,609 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:31:19,017 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:31:19,027 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:31:19,230 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:31:19,247 - socket_logger - INFO - Usuario 1 conectado com o socket 66Gik7eM5cILDsINAAAg
+2025-02-10 17:32:00,319 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:32:00,320 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:32:00,480 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:32:00,529 - socket_logger - INFO - Usuario 1 conectado com o socket 1mnQCXQpFHa0mQf7AAAi
+2025-02-10 17:35:21,032 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:35:21,033 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:35:21,178 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:35:21,234 - socket_logger - INFO - Usuario 1 conectado com o socket H_Bx8j3uoAu9k_d9AAAk
+2025-02-10 17:36:00,175 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:36:00,175 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:36:00,334 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:36:00,382 - socket_logger - INFO - Usuario 1 conectado com o socket GHtwGm_VIcjWBBy_AAAm
+2025-02-10 17:36:27,810 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:36:27,811 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:36:27,990 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:36:28,020 - socket_logger - INFO - Usuario 1 conectado com o socket glYC-eC8uyyAb0lPAAAo
+2025-02-10 17:40:29,668 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:40:29,670 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:40:56,978 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:40:57,026 - socket_logger - INFO - Usuario 1 conectado com o socket W2Om3gTzTy1h9mhfAAAq
+2025-02-10 17:41:15,787 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:41:15,788 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:41:15,938 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:41:15,985 - socket_logger - INFO - Usuario 1 conectado com o socket t8IT-B77kv5cZ0MwAAAs
+2025-02-10 17:45:31,443 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:45:31,447 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:47:59,060 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:47:59,147 - socket_logger - INFO - Usuario 1 conectado com o socket 0fOzDbZ5zj-HOulEAAAv
+2025-02-10 17:48:29,367 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:48:29,368 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:48:29,578 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:48:29,619 - socket_logger - INFO - Usuario 1 conectado com o socket CTY9kiw8XXl8l4JjAAAx
+2025-02-10 17:48:49,883 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:48:49,884 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:48:50,029 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:48:50,070 - socket_logger - INFO - Usuario 1 conectado com o socket 9A_3NxC6X-mbFyMMAAAz
+2025-02-10 17:49:02,115 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:49:02,116 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:49:02,292 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:49:02,329 - socket_logger - INFO - Usuario 1 conectado com o socket 0FzEW1Q8T6BTKCJwAAA1
+2025-02-10 17:49:22,010 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:49:22,011 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:49:22,185 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:49:22,223 - socket_logger - INFO - Usuario 1 conectado com o socket mu7OnaFzYvkR4vPfAAA3
+2025-02-10 17:50:04,561 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:50:04,561 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:50:04,717 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:50:04,772 - socket_logger - INFO - Usuario 1 conectado com o socket Pvr4USmj22Dd9bfQAAA5
+2025-02-10 17:50:46,094 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:50:46,095 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:50:46,289 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:50:46,347 - socket_logger - INFO - Usuario 1 conectado com o socket nPiM0z6uNqI162K-AAA7
+2025-02-10 17:51:14,374 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:51:14,375 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 17:51:14,622 - socket_logger - INFO - Cliente conectado
+2025-02-10 17:51:14,679 - socket_logger - INFO - Usuario 1 conectado com o socket slnA3l3nDOJBS5aMAAA9
+2025-02-10 17:54:29,141 - socket_logger - INFO - Cliente desconectado
+2025-02-10 17:54:29,150 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:00:41,285 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:00:41,348 - socket_logger - INFO - Usuario 1 conectado com o socket SkzNZ6H5wlXGbJM6AAA_
+2025-02-10 18:00:51,809 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:00:51,809 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:04:17,073 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:04:17,143 - socket_logger - INFO - Usuario 1 conectado com o socket 8R7DiBoYZ25obLdxAABB
+2025-02-10 18:04:46,788 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:04:46,789 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:04:46,978 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:04:47,042 - socket_logger - INFO - Usuario 1 conectado com o socket e2C8KpROCXFWXi-EAABD
+2025-02-10 18:04:49,545 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:04:49,546 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:04:49,681 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:04:49,700 - socket_logger - INFO - Usuario 1 conectado com o socket Dcq6PTpDvmgvawxaAABF
+2025-02-10 18:05:23,696 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:05:23,696 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:05:23,876 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:05:23,928 - socket_logger - INFO - Usuario 1 conectado com o socket _pSs7SQe03b-GQ7XAABH
+2025-02-10 18:05:47,567 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:05:47,568 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:05:47,701 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:05:47,730 - socket_logger - INFO - Usuario 1 conectado com o socket _L91Hsu26fSYX053AABJ
+2025-02-10 18:06:20,013 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:06:20,013 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:06:20,160 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:06:20,200 - socket_logger - INFO - Usuario 1 conectado com o socket l3uFw71n72r-gOyGAABL
+2025-02-10 18:12:44,281 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:12:44,282 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:25:23,150 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:25:23,231 - socket_logger - INFO - Usuario 1 conectado com o socket PDf0jBmK_ua-Tqw4AABO
+2025-02-10 18:26:40,962 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:26:40,967 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:26:41,136 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:26:41,238 - socket_logger - INFO - Usuario 1 conectado com o socket ZNsW8IAAbXQdwl2WAABQ
+2025-02-10 18:26:43,508 - socket_logger - INFO - message-enviada:
+2025-02-10 18:26:50,721 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:26:50,722 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:26:50,887 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:26:50,906 - socket_logger - INFO - Usuario 1 conectado com o socket JPANfwjMBaW-hzVIAABS
+2025-02-10 18:27:47,840 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:27:47,841 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:27:47,993 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:27:48,017 - socket_logger - INFO - Usuario 1 conectado com o socket xHu1SnqSVaWnp9I2AABU
+2025-02-10 18:29:49,059 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:29:49,060 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:29:49,210 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:29:49,249 - socket_logger - INFO - Usuario 1 conectado com o socket wNFA1SSXHowAyhdDAABW
+2025-02-10 18:30:02,062 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:30:02,063 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-10 18:30:02,182 - socket_logger - INFO - Cliente conectado
+2025-02-10 18:30:02,208 - socket_logger - INFO - Usuario 1 conectado com o socket V2rEngv9Y5eIngldAABY
+2025-02-10 18:33:01,449 - socket_logger - INFO - Cliente desconectado
+2025-02-10 18:33:01,451 - socket_logger - INFO - Usuario 1 desconectado

@@ -137,14 +137,13 @@ body {
 }
 
 #home #new-contact #exit {
-    position: relative;
-    left: 80%;
-    border: none;
+  position: relative;
+  left: 80%;
+  border: none;
   width: 60px;
   align-self: center;
   background-color: red;
   border-radius: 50%;
-  
 }
 #exit svg {
   width: 50px;
@@ -152,6 +151,11 @@ body {
   color: rgb(255, 255, 255);
 }
 
+@media screen and (max-width: 768px) {
+  #home header {
+    max-height: 80px;
+  }
+}
 @keyframes noview_aniamtion {
   0% {
     background-color: #44ff44;

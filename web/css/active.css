@@ -49,7 +49,7 @@
   }
   .profile-page #profile {
     width: 100%;
-    height: 98dvh;
+    min-height: 95dvh;
   }
   .profile-page #home #add {
     left: 40%;

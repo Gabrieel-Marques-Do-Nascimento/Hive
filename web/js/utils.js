@@ -93,7 +93,7 @@ export function newUser(
 
     clone.addEventListener("click", () => {
         localStorage.setItem("HiveSender", String(pessoaN));
-
+        document.getElementById('div-custom-name').textContent = hiveUserid
        profile()
     });
     clone.children[0].children[0].textContent = avatarI; // AVATAR
@@ -130,7 +130,7 @@ export function new_msg(message, type="user-msg") {
     const $profile_elemt = document.getElementById("profile");
     const $home_elemet = document.getElementById("home");
     $profile_elemt.classList.add("active");
-    $profile_elemt.style.display = "block";
+    $profile_elemt.style.display = "flex";
     $home_elemet.classList.add("active");
     document.body.classList.add("profile-page");
   

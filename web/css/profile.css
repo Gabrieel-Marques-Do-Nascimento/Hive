@@ -1,12 +1,15 @@
+
 /* Profile Page Styling */
 #profile {
   display: flex;
   flex-direction: column;
   height: 0dvh;
-  transition: all 0.5s ease-out;
+  
 }
 .profile-page > #profile{
   height: 90dvh;
+  transition: all 0.5s linear;
+
   
 }
 #profile * {
@@ -58,10 +61,17 @@ div#menu {
   margin-left: auto;
   text-align: center;
 }
-div#serch {
-
+button#serch {
+  border-radius: 50%;
   margin-left: auto;
   text-align: center;
+  padding: 5px;
+}
+button#serch:hover {
+  background-color: #8d8888;
+}
+button#serch svg {
+  width: 20px;
 }
 /* 
 #profile header h1 {
@@ -175,3 +185,6 @@ div#serch {
     height: 40px;
   }
 }
+
+
+

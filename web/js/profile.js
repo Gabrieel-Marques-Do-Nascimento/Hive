@@ -7,7 +7,9 @@ const $send = document.getElementById("send");
 const $input_msg = document.getElementById("msg-input");  
 const $profile_elemt = document.getElementById("profile");
 
-
+document.getElementById('serch').addEventListener('click', ()=> {
+  document.getElementById('serch-container').style.display = 'block'
+})
 $exit.addEventListener("click", () => {
   // window.location.href = "/"
   console.log("clicked");

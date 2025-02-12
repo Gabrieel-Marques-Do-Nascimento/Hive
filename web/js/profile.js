@@ -26,7 +26,8 @@ $exit.addEventListener("click", () => {
   document.body.classList.remove("profile-page");
 });
 
-$send.addEventListener("click", () => {
+$send.addEventListener("click", event => {
+  event.preventDefault();
   new_msg($input_msg.value);
 
   socket.emit("send_message", {
@@ -34,6 +35,7 @@ $send.addEventListener("click", () => {
     mensagem: $input_msg.value
   });
   $input_msg.value = null;
+  $input_msg.focus()
 });
 
 socket.on("message_privada", function (data) {

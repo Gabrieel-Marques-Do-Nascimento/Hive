@@ -63,7 +63,7 @@ def login():
      -d '{"email": "Gabriel",  "password": "20211613"}'
     """
     data = request.get_json()
-
+    print(data)
     username = data.get('email')
     password = data.get('password')
     if '@' in username:

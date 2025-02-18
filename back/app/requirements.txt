@@ -4,4 +4,3 @@ flask-socketio
 pyjwt
 flask_cors
 python-dotenv
-kivy==2.2.1

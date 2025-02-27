@@ -74,8 +74,8 @@ def socket_register(socketio: SocketIO):
                 db.session.add(newConatact)
                 db.session.commit()
                 socket_logger.info(f"User {constact.id} found")
-                emit(f"new-contact", {"message": None, "pessoa": constact.id,
-                     "enviado": None, "online": None, "name": data["custom_name"]}, broadcast=True)
+                emit(f"new-contact", {"pessoa": constact.id,
+                     "name": data["custom_name"]}, broadcast=True)
 
             else:
                 emit(

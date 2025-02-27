@@ -28,7 +28,15 @@ $exit.addEventListener("click", () => {
 
 $send.addEventListener("click", event => {
   event.preventDefault();
-  save_msg($input_msg.value);
+
+
+//   save_msg(  {
+//     "message": $input_msg.value,
+//     "pessoa": 2,
+//     "enviado": null,
+//     "online": null,
+//     "name": "Camila "
+// });
   new_msg($input_msg.value);
 
   socket.emit("send_message", {

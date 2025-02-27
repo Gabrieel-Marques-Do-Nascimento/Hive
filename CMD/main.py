@@ -4,9 +4,13 @@ import requests
 import sys
 import subprocess
 import platform
+from threading import Thread 
+from time import  sleep
+from rich import  print
+from rich.console import  Console
 
 
-token = {}
+token: dict = {}
 
 
 """
@@ -21,18 +25,19 @@ exemplo de login:
 class Hive(Client):
     def __init__(self, url="http://127.0.0.1:5000", *args, **Kwargs):
         super().__init__(*args, **Kwargs)
-        self.url = url
+        self.url: str= url
         self.logguer = self._setup_logger()
-        self.TextInput = "  HIVE>> "
-        self.channel = None
-        self.command_txt = ''
+        self.TextInput: str = "  HIVE>> "
+        self.channel: str | None= None
+        self.command_txt: str = ''
+        self.server_login: str = ""
 
     def _setup_logger(self) -> logging.Logger:
         """Configure logging for the client."""
-        logger = logging.getLogger('  HIVE>> ')
+        logger: logging.Logger = logging.getLogger('  HIVE>> ')
         if not logger.handlers:
-            handler = logging.StreamHandler()
-        formatter = logging.Formatter(
+            handler : logging.StreamHandler= logging.StreamHandler()
+        formatter: logging.Formatter = logging.Formatter(
             '%(asctime)s - %(levelname)s - %(message)s')
         handler.setFormatter(formatter)
         logger.addHandler(handler)
@@ -43,9 +48,9 @@ class Hive(Client):
         """Execute commands based on user input."""
         match data:
             case "help":
-                self.logguer.info("""
+                Console.print("""
                 `help`: mostra essa mensagem
-                  pv=id : conectar com amigo
+                  chl=id : conectar com amigo
                 `send:`: envia mensagem
                 `resvd:`: mostra uma message recebida
                 `login:`: faz login no servidor
@@ -62,11 +67,11 @@ class Hive(Client):
             #     freendId = data.split("=")[1]
             #     return 'exit', f"conectando com {freendId}..."
             case _:
-                if data.startswith('pv='):
+                if data.startswith('chl='):
                     print(data.split("="))
-                    freendId = data.split("=")[1]
-                    self.channel = freendId
-                    self.command_txt = f"pv={freendId}"
+                    freendId: str = data.split("=")[1]
+                    self.channel: str= freendId
+                    self.command_txt = f"channell[ {freendId} ]"
                     return f"conectando com {freendId}..."
                 return '', "comando não encontrado"
         return data, ""
@@ -76,14 +81,16 @@ class Hive(Client):
 
     def login(self):
         """Login to the Hive server."""
-        user = self.hive_input(f"user: ")
-        password = self.hive_input(f"password: ")
+        
+        user: str = self.hive_input(f"user: ")
+        password:str = self.hive_input(f"password: ")
         if not user or not password:
             user = "Gabriel"
             password = "20211613"
-        reponce = requests.post(f"{self.url}/login",
+        reponce: requests.models.Response = requests.post(f"{self.url}/login",
                                 json={"email": user, "password": password})
-        httptoken = reponce.json().get("token")
+        self.server_login: dict= reponce.json()
+        httptoken: str = reponce.json().get("token")
         if httptoken:
             token['token'] = httptoken
             token['username'] = reponce.json().get('username')
@@ -106,7 +113,7 @@ class Hive(Client):
         self.connect(self.url)
         self.emit('registrar_usuario', {"id": 1})
         self.logguer.info("conectado")
-        self.logguer.info(self.login().json())
+        #self.logguer.info(self.login().json())
         self.events()
         # self.wait()
 
@@ -114,12 +121,13 @@ class Hive(Client):
         while True:
             try:
                 if not token:
+                    sleep(1)
                     self.login()
                     continue
-                cmd = self.hive_input(self.command_txt + ': ' if self.channel else '')
+                cmd: str  = self.hive_input(self.command_txt + ': ' if self.channel else '')
                 if not self.channel or cmd == "exit":
                     self.logger.info(cmd)
-                    result = self.commands(cmd)
+                    result: str | None | list = self.commands(cmd)
                     continue
                 if self.channel:
                     self.emit("send_message", {"mensagem": cmd, 'destinatario_id': self.channel})
@@ -130,7 +138,11 @@ class Hive(Client):
                 self.logguer.error(f"erro: {err}")
 
 
+
+
 if __name__ == "__main__":
-    hive = Hive()
-    hive.hive_connec()
+    hive: Hive = Hive()
+    def events():
+    	hive.hive_connec()
+    Thread(target=events).start()
     hive.hive_repl()

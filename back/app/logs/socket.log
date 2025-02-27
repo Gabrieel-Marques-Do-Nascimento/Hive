@@ -4808,3 +4808,13 @@
 2025-02-26 18:39:43,447 - socket_logger - INFO - Cliente conectado
 2025-02-26 18:42:12,712 - socket_logger - INFO - Cliente desconectado
 2025-02-26 18:42:13,356 - socket_logger - INFO - Cliente conectado
+2025-02-27 11:53:20,672 - socket_logger - INFO - SocketIO initialized
+2025-02-27 11:53:22,627 - socket_logger - INFO - SocketIO initialized
+2025-02-27 12:09:04,079 - socket_logger - INFO - Cliente conectado
+2025-02-27 12:09:04,112 - socket_logger - INFO - Usuario 1 conectado com o socket D_KPdJ0gMrPpfWq7AAAB
+2025-02-27 12:11:31,689 - socket_logger - INFO - Cliente desconectado
+2025-02-27 12:11:31,690 - socket_logger - INFO - Usuario 1 desconectado
+2025-02-27 12:11:35,178 - socket_logger - INFO - Cliente conectado
+2025-02-27 12:11:35,227 - socket_logger - INFO - Usuario 1 conectado com o socket 0KjUK0aR86LXuK1pAAAD
+2025-02-27 12:16:58,668 - socket_logger - INFO - Cliente desconectado
+2025-02-27 12:16:58,669 - socket_logger - INFO - Usuario 1 desconectado

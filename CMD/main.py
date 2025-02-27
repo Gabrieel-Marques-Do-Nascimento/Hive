@@ -3,11 +3,10 @@ import logging
 import requests
 import sys
 import subprocess
-import  platform
+import platform
 
 
 token = {}
-
 
 
 """
@@ -25,6 +24,8 @@ class Hive(Client):
         self.url = url
         self.logguer = self._setup_logger()
         self.TextInput = "  HIVE>> "
+        self.channel = None
+        self.command_txt = ''
 
     def _setup_logger(self) -> logging.Logger:
         """Configure logging for the client."""
@@ -40,8 +41,9 @@ class Hive(Client):
 
     def commands(self, data: str):
         """Execute commands based on user input."""
-        if data == "help":
-            self.logguer.info("""
+        match data:
+            case "help":
+                self.logguer.info("""
                 `help`: mostra essa mensagem
                   pv=id : conectar com amigo
                 `send:`: envia mensagem
@@ -49,9 +51,25 @@ class Hive(Client):
                 `login:`: faz login no servidor
                 `exit`: sai do programa
                 """)
-        if data == "exit":
-            sys.exit(0)
-        #if data.split
+            case "exit":
+                if self.channel:
+                    self.channel = None
+                    self.command_txt = ''
+                    return 'saindo do canal'
+                self.logguer.info("saindo...")
+                sys.exit(0)
+            # case pv:
+            #     freendId = data.split("=")[1]
+            #     return 'exit', f"conectando com {freendId}..."
+            case _:
+                if data.startswith('pv='):
+                    print(data.split("="))
+                    freendId = data.split("=")[1]
+                    self.channel = freendId
+                    self.command_txt = f"pv={freendId}"
+                    return f"conectando com {freendId}..."
+                return '', "comando não encontrado"
+        return data, ""
 
     def hive_input(self, data: str) -> str:
         return str(input(self.TextInput+data))
@@ -61,8 +79,8 @@ class Hive(Client):
         user = self.hive_input(f"user: ")
         password = self.hive_input(f"password: ")
         if not user or not password:
-        	user= "Gabriel"
-        	password="20211613"
+            user = "Gabriel"
+            password = "20211613"
         reponce = requests.post(f"{self.url}/login",
                                 json={"email": user, "password": password})
         httptoken = reponce.json().get("token")
@@ -71,10 +89,9 @@ class Hive(Client):
             token['username'] = reponce.json().get('username')
             token['id'] = reponce.json().get('id')
             if platform.system() == "windows":
-            	subprocess.run(['setx', "TOKEN", httptoken])
+                subprocess.run(['setx', "TOKEN", httptoken])
             if platform.system() == "linux":
-            	pass
-            
+                pass
 
         return reponce
 
@@ -99,10 +116,15 @@ class Hive(Client):
                 if not token:
                     self.login()
                     continue
-                cmd = str(input("  HIVE>>"))
-                result = self.commands(cmd)
-                if result == "exit":
-                	break
+                cmd = self.hive_input(self.command_txt + ': ' if self.channel else '')
+                if not self.channel or cmd == "exit":
+                    self.logger.info(cmd)
+                    result = self.commands(cmd)
+                    continue
+                if self.channel:
+                    self.emit("send_message", {"mensagem": cmd, 'destinatario_id': self.channel})
+                    continue
+
 
             except Exception as err:
                 self.logguer.error(f"erro: {err}")

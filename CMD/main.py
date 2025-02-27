@@ -3,9 +3,20 @@ import logging
 import requests
 import sys
 import subprocess
+import  platform
 
 
 token = {}
+
+
+
+"""
+exemplo de login:
+
+{'id': 1, 'message': 'Login bem-sucedido!', 'status': 'ok', 'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDI0Njg3ODYsInVpZCI6MX0.X98ymRJsSMFczgqwvdnEHZnsH9U5fWV06MzAaLjph20', 'token_name': '1463token-as-savekjg', 'username': 'Gabriel'}
+
+
+"""
 
 
 class Hive(Client):
@@ -32,6 +43,7 @@ class Hive(Client):
         if data == "help":
             self.logguer.info("""
                 `help`: mostra essa mensagem
+                  pv=id : conectar com amigo
                 `send:`: envia mensagem
                 `resvd:`: mostra uma message recebida
                 `login:`: faz login no servidor
@@ -39,6 +51,7 @@ class Hive(Client):
                 """)
         if data == "exit":
             sys.exit(0)
+        #if data.split
 
     def hive_input(self, data: str) -> str:
         return str(input(self.TextInput+data))
@@ -47,6 +60,9 @@ class Hive(Client):
         """Login to the Hive server."""
         user = self.hive_input(f"user: ")
         password = self.hive_input(f"password: ")
+        if not user or not password:
+        	user= "Gabriel"
+        	password="20211613"
         reponce = requests.post(f"{self.url}/login",
                                 json={"email": user, "password": password})
         httptoken = reponce.json().get("token")
@@ -54,7 +70,11 @@ class Hive(Client):
             token['token'] = httptoken
             token['username'] = reponce.json().get('username')
             token['id'] = reponce.json().get('id')
-            subprocess.run(['setx', "TOKEN", httptoken])
+            if platform.system() == "windows":
+            	subprocess.run(['setx', "TOKEN", httptoken])
+            if platform.system() == "linux":
+            	pass
+            
 
         return reponce
 
@@ -80,7 +100,9 @@ class Hive(Client):
                     self.login()
                     continue
                 cmd = str(input("  HIVE>>"))
-                self.commands(cmd)
+                result = self.commands(cmd)
+                if result == "exit":
+                	break
 
             except Exception as err:
                 self.logguer.error(f"erro: {err}")

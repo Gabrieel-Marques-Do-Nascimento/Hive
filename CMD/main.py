@@ -77,7 +77,8 @@ class Hive(Client):
                     print(data.split("="))
                     freendId: str = data.split("=")[1]
                     self.channel: str = freendId
-                    self.command_txt = f"channel[ {freendId} ]"
+                    self.style['color'] = "blue"
+                    self.command_txt = f"channel[{freendId}]"
                     return f"conectando com {freendId}..."
                 return '', "comando não encontrado"
         return data, ""
@@ -85,14 +86,14 @@ class Hive(Client):
     def hive_input(self, data: str) -> str:
         """Handle user input and execute commands."""
         style = self.style
-        print(f"[{style['style']} {style['color']}]{self.TextInput}[/{style['style']} {style['color']}][u]{data}[/u]", end="")
-        return str(input())
+        print(f"[bold {style['color']}]{self.TextInput}[/bold {style['color']}][i bold]{data}[/i bold]", end="")
+        return str(input(" "))
 
     def login(self):
         """Login to the Hive server."""
 
-        user: str = self.hive_input(f"user: ")
-        password: str = self.hive_input(f"password: ")
+        user: str = self.hive_input(f"user:")
+        password: str = self.hive_input(f"password:")
         if not user or not password:
             user = "Gabriel"
             password = "20211613"
@@ -110,7 +111,7 @@ class Hive(Client):
                 subprocess.run(['setx', "TOKEN", httptoken])
             if platform.system() == "linux":
                 pass
-        #self.style['color'] = "green"
+        self.style['color'] = "green"
         return reponce
 
     def events(self):
@@ -141,7 +142,7 @@ class Hive(Client):
                     self.login()
                     continue
                 cmd: str = self.hive_input(
-                    self.command_txt + ': ' if self.channel else '')
+                    self.command_txt + ':' if self.channel else '')
                 if not self.channel or cmd == "exit":
                     self.logger.info(cmd)
                     result: str | None | list = self.commands(cmd)

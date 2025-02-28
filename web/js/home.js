@@ -1,4 +1,4 @@
-import { request_messages, userId, newUser } from "./utils.js";
+import { request_messages, userId, newUser, contact_exist, save_msg } from "./utils.js";
 import { socket } from "./conect.js";
 const label_name = document.getElementById("label-name");
 const new_contact = document.getElementById("new-contact");
@@ -59,36 +59,38 @@ function create_user_label(users, contacts) {
   console.log(users);
   let idlist = [];
   let userlist = [];
-  lista.innerHTML = "";
-  if (users.length > 0) {
-    users[0].forEach(user => {
-      if (!idlist.includes(parseInt(user["pessoa"]))) {
-        idlist.push(parseInt(user["pessoa"]));
-        if (parseInt(user["pessoa"]) != userId) {
-          const clone = newUser(user);
-          clone ? lista.appendChild(clone) : null;
-        }
-      }
-    });
-    users.forEach(user => {
-      if (
-        !idlist.includes(parseInt(user["enviado"])) &&
-        user["enviado"] != null
-      ) {
-        idlist.push(parseInt(user["enviado"]));
-        if (parseInt(user["enviado"]) != userId) {
-          const clone = newUser(user);
-          clone ? lista.appendChild(clone) : null;
-        }
-      }
-    });
-  }
+  // lista.innerHTML = "";
+  // if (users.length > 0) {
+  //   users[0].forEach(user => {
+  //     if (!idlist.includes(parseInt(user["pessoa"]))) {
+  //       idlist.push(parseInt(user["pessoa"]));
+  //       if (parseInt(user["pessoa"]) != userId) {
+  //         const clone = newUser(user);
+  //         clone ? lista.appendChild(clone) : null;
+  //       }
+  //     }
+  //   });
+  //   users.forEach(user => {
+  //     if (
+  //       !idlist.includes(parseInt(user["enviado"])) &&
+  //       user["enviado"] != null
+  //     ) {
+  //       idlist.push(parseInt(user["enviado"]));
+  //       if (parseInt(user["enviado"]) != userId) {
+  //         const clone = newUser(user);
+  //         clone ? lista.appendChild(clone) : null;
+  //       }
+  //     }
+  //   });
+  // }
   contacts.forEach(contact => {
     const clone = newUser(contact);
+    // clone.addEventListener('click', ()=> {
+
+    // })
     clone ? lista.appendChild(clone) : null;
   });
-  localStorage.setItem("contact`s", JSON.stringify(idlist));
-  console.log(idlist.toString());
+
 }
 
 socket.on("connect", () => {
@@ -170,5 +172,7 @@ socket.on("error", data => {
 // });
 
 socket.on("message_privada", function (data) {
+  contact_exist(data.mensagem, data.id);
+  save_msg(data);
   console.log(data);
 });

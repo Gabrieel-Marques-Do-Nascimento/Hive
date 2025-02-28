@@ -1,13 +1,19 @@
 import { URL } from "./env.js";
 
+
+export const myTag = "hiveid"
+export const senderTag = "HiveSender"
+export const messageTag ="messages"
+const contact_listTag ='contact-list'
+
 export let token = localStorage.getItem("1463token-as-savekjg");
-export let userId = parseInt(localStorage.getItem("hiveid"));
-export let fromId = parseInt(localStorage.getItem("HiveSender"));
+export let userId = parseInt(localStorage.getItem(myTag));
+export let fromId = parseInt(localStorage.getItem(senderTag));
 console.log("from", fromId, "userid", userId);
-export let messages = JSON.parse(localStorage.getItem("messages"));
+export let messages = JSON.parse(localStorage.getItem(messageTag));
 
 export function request_messages(create_user_label = null) {
-  if (!localStorage.getItem("messages")) {
+  if (!localStorage.getItem(messageTag)) {
     fetch(`${URL}/my_msgs`, {
       method: "POST",
       headers: {
@@ -26,7 +32,7 @@ export function request_messages(create_user_label = null) {
       })
       .then(data => {
         console.log(data);
-        localStorage.setItem("messages", JSON.stringify(data[0]));
+        localStorage.setItem(messageTag, JSON.stringify(data[0]));
         localStorage.setItem("contact-list", JSON.stringify(data[1]));
 
         if (create_user_label) {
@@ -91,9 +97,16 @@ export function newUser(user) {
   let clone = item.cloneNode(true);
 
   clone.addEventListener("click", () => {
-    localStorage.setItem("HiveSender", String(pessoaN));
+    localStorage.setItem(senderTag, String(pessoaN));
     document.getElementById("div-custom-name").textContent = hiveUserid;
     profile();
+    const $messages_list = document.getElementById("msgs");
+    // $messages_list.removeChild
+    messages.forEach(msg => {
+      if (msg.id == pessoaN) {
+        new_msg( msg.message,  "sender-msg");
+      }
+    });
   });
   clone.children[0].children[0].textContent = avatarI; // AVATAR
   //
@@ -128,12 +141,12 @@ export function new_msg(message, type = "user-msg") {
 }
 
 export function save_msg(message) {
-  let __messages = JSON.parse(localStorage.getItem("messages"));
+  let __messages = JSON.parse(localStorage.getItem(messageTag));
   if (!__messages.length > 0) {
     __messages = [];
   }
   __messages.push(message);
-  localStorage.setItem("messages", JSON.stringify(__messages));
+  localStorage.setItem(messageTag, JSON.stringify(__messages));
 }
 
 export function profile() {
@@ -146,4 +159,28 @@ export function profile() {
 
   const $usernameSpan = document.getElementById("username");
   const $sendernameSpan = document.getElementById("sendername");
+}
+
+
+
+export function contact_exist(message, id) {
+  let contact_exist_in = false;
+  let __messages = JSON.parse(localStorage.getItem(messageTag));
+  if (!__messages.length > 0) {
+    __messages = [];
+  }
+  __messages.push();
+  localStorage.setItem(messageTag, JSON.stringify(__messages));
+let constacts = JSON.parse(localStorage.getItem(contact_listTag));
+constacts.forEach(contact => {
+  if(contact.contact == id){
+    contact_exist_in = true;
+    console.log(contact)
+  }
+});
+if (!contact_exist_in){
+  constacts.push({contact: id, name: `contact id: ${id}`});
+  localStorage.setItem(contact_listTag, JSON.stringify(constacts));
+  location.reload();
+}
 }

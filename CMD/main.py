@@ -147,7 +147,7 @@ class Hive(Client):
                     self.logger.info(cmd)
                     result: str | None | list = self.commands(cmd)
                     continue
-                if self.channel:
+                if self.channel and len(cmd.strip()) > 0:
                     self.emit("send_message", {
                               "mensagem": cmd, 'destinatario_id': self.channel, "id": self.userId})
                     continue

@@ -33,7 +33,7 @@ class Hive(Client):
         self.channel: str | None = None
         self.command_txt: str = ''
         self.server_login: str = ""
-        self.userId: int = 1
+        self.userId: int| None = None
         self.style: dict = {'color': "red", 'style': "bold", 'color2': None, 'style': None}
 
     def _setup_logger(self) -> logging.Logger:
@@ -94,13 +94,16 @@ class Hive(Client):
 
         user: str = self.hive_input(f"user:")
         password: str = self.hive_input(f"password:")
-        if not user or not password:
+        if not user:
             user = "Gabriel"
+            
+        if not password:
             password = "20211613"
         reponce: requests.models.Response = requests.post(f"{self.url}/login",
                                                           json={"email": user, "password": password})
         self.server_login: dict = reponce.json()
         self.userId = self.server_login["id"]
+        print(self.server_login["id"])
         self.emit('registrar_usuario', {"id": self.userId})
         httptoken: str = reponce.json().get("token")
         if httptoken:
@@ -116,15 +119,20 @@ class Hive(Client):
 
     def events(self):
         """Register event handlers."""
-
+        @self.event
+        def connect():
+        	if self.userId:
+        		self.emit('registrar_usuario', {"id": self.userId})
+		      
+		      
         @self.on("message_privada")
         def message(data):
-            print(self.server_login)
-            print(f"channel[{data['id']}]:{data['mensagem']}")
+            # print(self.server_login)
+            print(f"\nchannel[{data['id']}]:{data['mensagem']}")
             if not self.channel:
                 print(
                     f"caso deseje responder use o command `chl={data['id']}`")
-            print(f"\n{self.TextInput}", end="")
+            print(f"\n{self.TextInput+ self.command_txt}", end="")
 
     def hive_connec(self):
         """Connect to the Hive server and register event handlers."""

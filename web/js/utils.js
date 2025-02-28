@@ -1,10 +1,9 @@
 import { URL } from "./env.js";
 
-
-export const myTag = "hiveid"
-export const senderTag = "HiveSender"
-export const messageTag ="messages"
-const contact_listTag ='contact-list'
+export const myTag = "hiveid";
+export const senderTag = "HiveSender";
+export const messageTag = "messages";
+const contact_listTag = "contact-list";
 
 export let token = localStorage.getItem("1463token-as-savekjg");
 export let userId = parseInt(localStorage.getItem(myTag));
@@ -104,8 +103,9 @@ export function newUser(user) {
     // $messages_list.removeChild
     messages.forEach(msg => {
       if (msg.id == pessoaN) {
-        new_msg( msg.message,  "sender-msg");
-      }
+      	if (msg){
+        new_msg(msg.message, "sender-msg");
+      }}
     });
   });
   clone.children[0].children[0].textContent = avatarI; // AVATAR
@@ -127,6 +127,9 @@ export function create_msg_element(pai, text, cloneId) {
 }
 
 export function new_msg(message, type = "user-msg") {
+	if (!message){
+		return
+	}
   if (message.trim()) {
     const msgs_container = document.getElementById("msgs");
     const msgs = document.createElement("p");
@@ -135,7 +138,6 @@ export function new_msg(message, type = "user-msg") {
     clone.id = type;
     msgs_container.appendChild(clone);
     if (type == "user-msg") {
-      
     }
   }
 }
@@ -161,8 +163,6 @@ export function profile() {
   const $sendernameSpan = document.getElementById("sendername");
 }
 
-
-
 export function contact_exist(message, id) {
   let contact_exist_in = false;
   let __messages = JSON.parse(localStorage.getItem(messageTag));
@@ -171,16 +171,16 @@ export function contact_exist(message, id) {
   }
   __messages.push();
   localStorage.setItem(messageTag, JSON.stringify(__messages));
-let constacts = JSON.parse(localStorage.getItem(contact_listTag));
-constacts.forEach(contact => {
-  if(contact.contact == id){
-    contact_exist_in = true;
-    console.log(contact)
+  let constacts = JSON.parse(localStorage.getItem(contact_listTag));
+  constacts.forEach(contact => {
+    if (contact.contact == id) {
+      contact_exist_in = true;
+      console.log(contact);
+    }
+  });
+  if (!contact_exist_in) {
+    constacts.push({ contact: id, name: `contact id: ${id}` });
+    localStorage.setItem(contact_listTag, JSON.stringify(constacts));
+    location.reload();
   }
-});
-if (!contact_exist_in){
-  constacts.push({contact: id, name: `contact id: ${id}`});
-  localStorage.setItem(contact_listTag, JSON.stringify(constacts));
-  location.reload();
-}
 }

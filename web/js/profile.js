@@ -1,6 +1,6 @@
-import { new_msg, save_msg, messageTag, senderTag,myTag } from "./utils.js";
+import { new_msg, save_msg } from "./utils.js";
 import { socket } from "./conect.js";
-console.log(typeof JSON.parse(localStorage.getItem(messageTag)));
+console.log(typeof JSON.parse(localStorage.getItem("messages")));
 const $exit = document.getElementById("exitButton");
 const $msg_container = document.getElementById("msgs");
 const $send = document.getElementById("send");
@@ -36,12 +36,15 @@ $send.addEventListener("click", event => {
   //     "online": null,
   //     "name": "Camila "
   // });
+  //save_msg({message});
   new_msg($input_msg.value);
-
+  const destinatario = localStorage.getItem("HiveSender");
+  const id = localStorage.getItem("hiveid");
+  save_msg({ mensagem: $input_msg.value, id: id, destinatario: destinatario });
   socket.emit("send_message", {
-    destinatario_id: localStorage.getItem(senderTag),
+    destinatario_id: destinatario,
     mensagem: $input_msg.value,
-    id: localStorage.getItem(myTag)
+    id: id
   });
   $input_msg.value = null;
   $input_msg.focus();
@@ -49,10 +52,8 @@ $send.addEventListener("click", event => {
 
 socket.on("message_privada", function (data) {
   console.log(data);
-  if (data.id == parseInt(localStorage.getItem(senderTag))){
-    new_msg(data.mensagem, "sender-msg");
-  }
-  // save_msg(data.mensagem);
+  new_msg(data.mensagem, "sender-msg");
+  //save_msg(data.mensagem);
 });
 
 // $input_msg.addEventListener('focus', () => {

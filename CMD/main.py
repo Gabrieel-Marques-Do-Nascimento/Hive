@@ -34,6 +34,7 @@ class Hive(Client):
         self.command_txt: str = ''
         self.server_login: str = ""
         self.userId: int = 1
+        self.style: dict = {'color': "red", 'style': "bold", 'color2': None, 'style': None}
 
     def _setup_logger(self) -> logging.Logger:
         """Configure logging for the client."""
@@ -82,7 +83,9 @@ class Hive(Client):
         return data, ""
 
     def hive_input(self, data: str) -> str:
-        print(f"[bold red]{self.TextInput+data}[/bold red]", end="")
+        """Handle user input and execute commands."""
+        style = self.style
+        print(f"[{style['style']} {style['color']}]{self.TextInput}[/{style['style']} {style['color']}][u]{data}[/u]", end="")
         return str(input())
 
     def login(self):
@@ -107,7 +110,7 @@ class Hive(Client):
                 subprocess.run(['setx', "TOKEN", httptoken])
             if platform.system() == "linux":
                 pass
-
+        #self.style['color'] = "green"
         return reponce
 
     def events(self):

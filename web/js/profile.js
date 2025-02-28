@@ -29,19 +29,19 @@ $exit.addEventListener("click", () => {
 $send.addEventListener("click", event => {
   event.preventDefault();
 
-
-//   save_msg(  {
-//     "message": $input_msg.value,
-//     "pessoa": 2,
-//     "enviado": null,
-//     "online": null,
-//     "name": "Camila "
-// });
+  //   save_msg(  {
+  //     "message": $input_msg.value,
+  //     "pessoa": 2,
+  //     "enviado": null,
+  //     "online": null,
+  //     "name": "Camila "
+  // });
   new_msg($input_msg.value);
 
   socket.emit("send_message", {
     destinatario_id: localStorage.getItem("HiveSender"),
-    mensagem: $input_msg.value
+    mensagem: $input_msg.value,
+    id: localStorage.getItem("hiveid")
   });
   $input_msg.value = null;
   $input_msg.focus();

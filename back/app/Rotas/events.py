@@ -59,7 +59,7 @@ def socket_register(socketio: SocketIO):
             destinatario_sid = ususarios_conectados[destinatario_id]
             socket_logger.info("message-enviada:" + mensagem)
             emit("message_privada", {
-                 "mensagem": mensagem}, to=destinatario_sid)
+                 "mensagem": mensagem, "id":data["id"]}, to=destinatario_sid)
         else:
             emit("error", {"message": "Destinatário não encontrado"})
 
@@ -74,7 +74,7 @@ def socket_register(socketio: SocketIO):
                 db.session.add(newConatact)
                 db.session.commit()
                 socket_logger.info(f"User {constact.id} found")
-                emit(f"new-contact", {"pessoa": constact.id,
+                emit(f"new-contact", {"contact": constact.id,
                      "name": data["custom_name"]}, broadcast=True)
 
             else:

@@ -61,7 +61,7 @@ function create_user_label(users, contacts) {
   let userlist = [];
   lista.innerHTML = "";
   if (users.length > 0) {
-    users[0].forEach((user) => {
+    users[0].forEach(user => {
       if (!idlist.includes(parseInt(user["pessoa"]))) {
         idlist.push(parseInt(user["pessoa"]));
         if (parseInt(user["pessoa"]) != userId) {
@@ -70,7 +70,7 @@ function create_user_label(users, contacts) {
         }
       }
     });
-    users.forEach((user) => {
+    users.forEach(user => {
       if (
         !idlist.includes(parseInt(user["enviado"])) &&
         user["enviado"] != null
@@ -83,7 +83,7 @@ function create_user_label(users, contacts) {
       }
     });
   }
-  contacts.forEach((contact) => {
+  contacts.forEach(contact => {
     const clone = newUser(contact);
     clone ? lista.appendChild(clone) : null;
   });
@@ -101,7 +101,7 @@ if (token) {
   request_messages(create_user_label);
 
   let users = localStorage.getItem("messages");
-let contacts = localStorage.getItem("contact-list");
+  let contacts = localStorage.getItem("contact-list");
   users = JSON.parse(users);
   console.log(users);
 
@@ -116,7 +116,7 @@ let contacts = localStorage.getItem("contact-list");
 const add = document.getElementById("add");
 add.addEventListener("click", () => {
   new_contact.style.display = "block";
-  new_contact.addEventListener("submit", (e) => {
+  new_contact.addEventListener("submit", e => {
     e.preventDefault();
 
     const user = document.getElementById("username");
@@ -132,7 +132,7 @@ add.addEventListener("click", () => {
     socket.emit("new-contact", {
       id: parseInt(user.value),
       userId: userId,
-      custom_name: $cunstoname.value,
+      custom_name: $cunstoname.value
     });
     user.value = "";
   });
@@ -142,21 +142,21 @@ document.getElementById("exit").addEventListener("click", () => {
 });
 socket.on("new-contact", function (data) {
   console.log(data);
-  if (data["pessoa"] && parseInt(data["pessoa"]) != userId) {
+  if (data["contact"] && parseInt(data["contact"]) != userId) {
     // Definindo uma chave para o armazenamento, por exemplo o ID da pessoa
     const pessoa = data["pessoa"];
     const chave = `contato_${pessoa}`;
 
     let contact_list = JSON.parse(localStorage.getItem("contact-list"));
-    contact_list .push(data);
-    localStorage.setItem("contact-list", JSON.stringify(contact_list ));
-    create_user_label( [],contact_list );
+    contact_list.push(data);
+    localStorage.setItem("contact-list", JSON.stringify(contact_list));
+    create_user_label([], contact_list);
     label_name_status("SUcesso!!", "green");
     return;
   }
   label_name_status("usuario invalido", "red", 2000, false);
 });
-socket.on("error", (data) => {
+socket.on("error", data => {
   console.log(data);
   label_name_status("usuario invalido: " + data.message, "red", 2000, false);
 });

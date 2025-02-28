@@ -10,6 +10,8 @@ from rich import  print
 from rich.console import  Console
 
 
+console = Console
+
 token: dict = {}
 
 
@@ -31,6 +33,7 @@ class Hive(Client):
         self.channel: str | None= None
         self.command_txt: str = ''
         self.server_login: str = ""
+        self.userId: int= 1
 
     def _setup_logger(self) -> logging.Logger:
         """Configure logging for the client."""
@@ -48,10 +51,12 @@ class Hive(Client):
         """Execute commands based on user input."""
         match data:
             case "help":
-                Console.print("""
+                print("""
                 `help`: mostra essa mensagem
                   chl=id : conectar com amigo
                 `send:`: envia mensagem
+                `contacts`: exibe uma lista de contatos
+                `add`: adiciona um novo contato
                 `resvd:`: mostra uma message recebida
                 `login:`: faz login no servidor
                 `exit`: sai do programa
@@ -67,17 +72,18 @@ class Hive(Client):
             #     freendId = data.split("=")[1]
             #     return 'exit', f"conectando com {freendId}..."
             case _:
-                if data.startswith('chl='):
+                if data.startswith('chl=') and not data.endswith(str(self.userId)):
                     print(data.split("="))
                     freendId: str = data.split("=")[1]
                     self.channel: str= freendId
-                    self.command_txt = f"channell[ {freendId} ]"
+                    self.command_txt = f"channel[ {freendId} ]"
                     return f"conectando com {freendId}..."
                 return '', "comando não encontrado"
         return data, ""
 
     def hive_input(self, data: str) -> str:
-        return str(input(self.TextInput+data))
+        print(f"[bold red]{self.TextInput+data}[/bold red]", end="")
+        return str(input())
 
     def login(self):
         """Login to the Hive server."""
@@ -90,6 +96,8 @@ class Hive(Client):
         reponce: requests.models.Response = requests.post(f"{self.url}/login",
                                 json={"email": user, "password": password})
         self.server_login: dict= reponce.json()
+        self.userId = self.server_login["id"]
+        self.emit('registrar_usuario', {"id": self.userId})
         httptoken: str = reponce.json().get("token")
         if httptoken:
             token['token'] = httptoken
@@ -104,17 +112,22 @@ class Hive(Client):
 
     def events(self):
         """Register event handlers."""
+        
         @self.on("message_privada")
         def message(data):
-            self.logguer(data)
+            print(self.server_login)
+            print(f"channel[{data['id']}]:{data['mensagem']}")
+            if not self.channel:
+            	print(f"caso deseje responder use o command `chl={data['id']}`")
+            print(f"\n{self.TextInput}",end="")
+            	
 
     def hive_connec(self):
         """Connect to the Hive server and register event handlers."""
         self.connect(self.url)
-        self.emit('registrar_usuario', {"id": 1})
         self.logguer.info("conectado")
         #self.logguer.info(self.login().json())
-        self.events()
+        Thread(target=self.events).start()
         # self.wait()
 
     def hive_repl(self):
@@ -130,7 +143,7 @@ class Hive(Client):
                     result: str | None | list = self.commands(cmd)
                     continue
                 if self.channel:
-                    self.emit("send_message", {"mensagem": cmd, 'destinatario_id': self.channel})
+                    self.emit("send_message", {"mensagem": cmd, 'destinatario_id': self.channel, "id": self.userId})
                     continue
 
 

@@ -1,4 +1,11 @@
-import { request_messages, userId, newUser, contact_exist, save_msg } from "./utils.js";
+import {
+  request_messages,
+  userId,
+  newUser,
+  contact_exist,
+  save_msg,
+  contact_listTag
+} from "./utils.js";
 import { socket } from "./conect.js";
 const label_name = document.getElementById("label-name");
 const new_contact = document.getElementById("new-contact");
@@ -53,7 +60,7 @@ function label_name_status(
   }
 }
 
-let contacts = JSON.parse(localStorage.getItem("contact`s"));
+let contacts = JSON.parse(localStorage.getItem(contact_listTag));
 
 function create_user_label(users, contacts) {
   console.log(users);
@@ -83,14 +90,13 @@ function create_user_label(users, contacts) {
   //     }
   //   });
   // }
+  lista.innerHTML = "";
   contacts.forEach(contact => {
+    console.log(contact);
     const clone = newUser(contact);
-    // clone.addEventListener('click', ()=> {
-
-    // })
+   
     clone ? lista.appendChild(clone) : null;
   });
-
 }
 
 socket.on("connect", () => {
@@ -118,13 +124,17 @@ if (token) {
 const add = document.getElementById("add");
 add.addEventListener("click", () => {
   new_contact.style.display = "block";
-  new_contact.addEventListener("submit", e => {
+  new_contact.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const user = document.getElementById("username");
     const $cunstoname = document.getElementById("cunstoname");
-    let contacts = JSON.parse(localStorage.getItem("contact`s"));
-    if (contacts.includes(parseInt(user.value))) {
+    let contacts = JSON.parse(localStorage.getItem(contact_listTag));
+    let includes = false;
+    contacts.forEach((contact) => {
+      includes = contact.id == parseInt(user.value);
+    });
+    if (includes) {
       label_name_status("usuario ja adicionado", "red", 2000, false);
 
       //alert("usuario ja adicionado");
@@ -134,7 +144,7 @@ add.addEventListener("click", () => {
     socket.emit("new-contact", {
       id: parseInt(user.value),
       userId: userId,
-      custom_name: $cunstoname.value
+      custom_name: $cunstoname.value,
     });
     user.value = "";
   });
@@ -149,7 +159,7 @@ socket.on("new-contact", function (data) {
     const pessoa = data["pessoa"];
     const chave = `contato_${pessoa}`;
 
-    let contact_list = JSON.parse(localStorage.getItem("contact-list"));
+    let contact_list = JSON.parse(localStorage.getItem(contact_listTag));
     contact_list.push(data);
     localStorage.setItem("contact-list", JSON.stringify(contact_list));
     create_user_label([], contact_list);
@@ -158,7 +168,7 @@ socket.on("new-contact", function (data) {
   }
   label_name_status("usuario invalido", "red", 2000, false);
 });
-socket.on("error", data => {
+socket.on("error", (data) => {
   console.log(data);
   label_name_status("usuario invalido: " + data.message, "red", 2000, false);
 });

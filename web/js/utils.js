@@ -3,7 +3,7 @@ import { URL } from "./env.js";
 export const myTag = "hiveid";
 export const senderTag = "HiveSender";
 export const messageTag = "messages";
-const contact_listTag = "contact-list";
+export const contact_listTag = "contact-list";
 
 export let token = localStorage.getItem("1463token-as-savekjg");
 export let userId = parseInt(localStorage.getItem(myTag));
@@ -96,16 +96,21 @@ export function newUser(user) {
   let clone = item.cloneNode(true);
 
   clone.addEventListener("click", () => {
+    let messages = JSON.parse(localStorage.getItem(messageTag));
     localStorage.setItem(senderTag, String(pessoaN));
     document.getElementById("div-custom-name").textContent = hiveUserid;
     profile();
     const $messages_list = document.getElementById("msgs");
-    // $messages_list.removeChild
+    $messages_list.innerHTML = "";
     messages.forEach(msg => {
+      	if (msg){      
       if (msg.id == pessoaN) {
-      	if (msg){
-        new_msg(msg.message, "sender-msg");
-      }}
+
+        new_msg(msg.mensagem, "sender-msg");
+      }
+    else if (msg.destinatario == pessoaN) {
+        new_msg(msg.mensagem);
+    }}
     });
   });
   clone.children[0].children[0].textContent = avatarI; // AVATAR

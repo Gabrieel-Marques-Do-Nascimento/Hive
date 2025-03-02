@@ -106,7 +106,11 @@ class Hive(Client):
 
     def login(self):
         """Login to the Hive server."""
-
+        link = self.hive_input(f"href:")
+        if link.startswith("http"):
+            self.url = link
+        else:
+            pass
         user: str = self.hive_input(f"user:")
         password: str = self.hive_input(f"password:")
         if not user:

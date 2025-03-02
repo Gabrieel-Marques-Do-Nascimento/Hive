@@ -8,7 +8,7 @@ from threading import Thread
 from time import sleep
 from rich import print
 from rich.console import Console
-
+import  requests
 
 console = Console
 
@@ -29,6 +29,7 @@ class Hive(Client):
         super().__init__(*args, **Kwargs)
         self.url: str = url
         self.logguer = self._setup_logger()
+        self.data: list | dict | None = None
         self.TextInput: str = "  HIVE>> "
         self.channel: str | None = None
         self.command_txt: str = ''
@@ -72,6 +73,12 @@ class Hive(Client):
             # case pv:
             #     freendId = data.split("=")[1]
             #     return 'exit', f"conectando com {freendId}..."
+            case "contacts":
+            	print(self.data)
+            case "add":
+            	pass
+            case "login":
+            	pass
             case _:
                 if data.startswith('chl=') and not data.endswith(str(self.userId)):
                     print(data.split("="))
@@ -82,6 +89,14 @@ class Hive(Client):
                     return f"conectando com {freendId}..."
                 return '', "comando não encontrado"
         return data, ""
+      
+    def load_messages(self):
+        self.data = requests.post(f"{self.url}/my_msgs", headers={"Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization" :f"Bearer {self.server_login['token']}",
+        "uid" :self.userId}).json
+
+
 
     def hive_input(self, data: str) -> str:
         """Handle user input and execute commands."""
@@ -119,10 +134,13 @@ class Hive(Client):
 
     def events(self):
         """Register event handlers."""
+        
         @self.event
         def connect():
         	if self.userId:
         		self.emit('registrar_usuario', {"id": self.userId})
+        		self.load_messages()
+        		
 		      
 		      
         @self.on("message_privada")

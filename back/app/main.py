@@ -90,7 +90,7 @@ def mymesgs(token):
 	        for mensage in user.messages:
 	            if mensage:
 	            		msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
-	                        "to": mensage.to, "online": None, "id": user.id})
+	                        "to": mensage.to, "id": user.id})
         if not  user or not user.messages:
         	msgs = []
         if user and user.contacts:

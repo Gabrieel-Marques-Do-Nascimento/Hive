@@ -87,3 +87,5 @@
 2025-03-03 15:55:52,370 - socket_logger - INFO - Usuario 1 conectado com o socket 6UIBMgOUTx3w1YAVAAAD
 2025-03-03 15:56:40,864 - socket_logger - INFO - Cliente desconectado
 2025-03-03 15:56:40,867 - socket_logger - INFO - Usuario 2desconectado
+2025-03-03 16:20:26,644 - socket_logger - INFO - SocketIO initialized
+2025-03-03 16:20:26,954 - socket_logger - INFO - Usuario 1 conectado com o socket SnO8EeW2BlMvZ4RcAAAB

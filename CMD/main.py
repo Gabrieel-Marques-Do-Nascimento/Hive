@@ -121,12 +121,13 @@ class Hive(Client):
 
     def on_messages(self, id: int):
         """Handle incoming messages."""
+        #print(self.messages)
         for message in self.messages:
-            if message['pessoa'] == id:
+            if message['other_Id'] == id:
                 print(
                     f"[bold {self.style['color']}]{self.TextInput}[/bold {self.style['color']}][i bold]{self.command_txt}[/i bold]", end="")
                 print(
-                    f"  [{'[bold green]VOCE[/bold green]' if message['enviado'] == self.userId else 'ID: '+str(message['enviado'])}]: {message['message']}")
+                    f"  [{'[bold green]VOCE[/bold green]' if message['to'] != self.userId else 'ID: '+str(message['other_Id'])}]: {message['message']}")
 
     def hive_input(self, data: str) -> str:
         """Handle user input and execute commands."""

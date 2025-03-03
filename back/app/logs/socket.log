@@ -89,3 +89,27 @@
 2025-03-03 15:56:40,867 - socket_logger - INFO - Usuario 2desconectado
 2025-03-03 16:20:26,644 - socket_logger - INFO - SocketIO initialized
 2025-03-03 16:20:26,954 - socket_logger - INFO - Usuario 1 conectado com o socket SnO8EeW2BlMvZ4RcAAAB
+2025-03-03 17:15:00,053 - socket_logger - INFO - Cliente desconectado
+2025-03-03 17:15:00,062 - socket_logger - INFO - Usuario 1desconectado
+2025-03-03 17:15:00,730 - socket_logger - INFO - Usuario 1 conectado com o socket TzfHruXQ7DkEfqp5AAAD
+2025-03-03 17:43:12,606 - socket_logger - INFO - Usuario 2 conectado com o socket pGXOplwDWG8p-P9BAAAF
+2025-03-03 17:43:32,061 - socket_logger - INFO - Usuario 1 conectado com o socket TzfHruXQ7DkEfqp5AAAD
+2025-03-03 17:44:11,607 - socket_logger - INFO - Cliente desconectado
+2025-03-03 17:44:11,608 - socket_logger - INFO - Usuario 2desconectado
+2025-03-03 17:46:46,696 - socket_logger - INFO - Cliente desconectado
+2025-03-03 17:46:46,697 - socket_logger - INFO - Usuario 1desconectado
+2025-03-03 17:46:59,663 - socket_logger - INFO - Usuario 1 conectado com o socket xw7juxVglLcneI6HAAAH
+2025-03-03 17:48:38,804 - socket_logger - INFO - Cliente desconectado
+2025-03-03 17:48:38,804 - socket_logger - INFO - Usuario 1desconectado
+2025-03-03 17:48:44,271 - socket_logger - INFO - Usuario 1 conectado com o socket XjlT-C7_-rHOxqRfAAAJ
+2025-03-03 17:49:49,826 - socket_logger - INFO - Cliente desconectado
+2025-03-03 17:49:49,826 - socket_logger - INFO - Usuario 1desconectado
+2025-03-03 17:49:56,725 - socket_logger - INFO - Usuario 1 conectado com o socket IWNLUEJDGNGn5FHYAAAL
+2025-03-03 17:50:15,780 - socket_logger - INFO - Saving message: {'message': 'oi', 'to': '2', 'id': 1}
+2025-03-03 17:50:20,555 - socket_logger - INFO - Usuario 2 conectado com o socket YN_4qV78rFWWmDmnAAAN
+2025-03-03 17:50:31,465 - socket_logger - INFO - Cliente desconectado
+2025-03-03 17:50:31,467 - socket_logger - INFO - Usuario 2desconectado
+2025-03-03 17:50:32,176 - socket_logger - INFO - Usuario 2 conectado com o socket E-bKVEjLkYKCNQL3AAAP
+2025-03-03 17:50:40,257 - socket_logger - INFO - Cliente desconectado
+2025-03-03 17:50:40,257 - socket_logger - INFO - Usuario 1desconectado
+2025-03-03 17:50:45,949 - socket_logger - INFO - Usuario 1 conectado com o socket 5oeiY4lKYDtYK2YmAAAR

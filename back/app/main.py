@@ -6,14 +6,11 @@ from auth import token_verify
 
 
 # local
-from Database import Users, Messages, Contacts, db, data_str
-from Rotas import create_app, socketIo
+from Database import Users, Messages, Contacts, data_str
+from Rotas import create_app, socketIo, app, db
 
 
-app = create_app()
-# CORS(app, origins=["http://127.0.0.1:8081"])
-CORS(app, supports_credentials=True)
-db.init_app(app)
+
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 with app.app_context():
@@ -55,10 +52,10 @@ def send_msg(token):
     user = Users.query.filter_by(id=id).first()
     dest_user = Users.query.filter_by(id=dest_id).first()
     user.online = datetime.utcnow()
-    msg_db = Messages(user=user, pessoaId=dest_id, message=msg, senderId=id)
+    msg_db = Messages(user=user, other_Id=dest_id, message=msg, to=dest_id)
     d_msg_db = Messages(
         user=dest_user, message=msg,
-        pessoaId=dest_id, senderId=id
+        to=dest_id, other_Id=id
     )
     db.session.add(msg_db)
     db.session.add(d_msg_db)
@@ -87,11 +84,11 @@ def mymesgs(token):
         msgs = []
         contacts = []
         for mensage in user.messages:
-            msgs.append({"message": mensage.message, "pessoa": mensage.pessoaId,
-                        "enviado": mensage.senderId, "online": None, "userid": user.id})
-        for contact in Contacts.query.filter_by(userId=id).all():
+            msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
+                        "to": mensage.to, "online": None, "user_id": user.id})
+        for contact in Contacts.query.filter_by(user_Id=id).all():
             contacts.append(
-                {"contact": contact.id, "name": contact.custom_name, 'created': contact.created_at})
+                {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at})
 
         return jsonify([msgs, contacts])
     except AttributeError as e:

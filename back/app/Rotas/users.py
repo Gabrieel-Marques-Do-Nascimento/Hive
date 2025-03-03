@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 import os
 from auth.JWT_C import token_update
-from Database.usuarios import Users, Messages, db
+from Database.cliente import Users, Messages, db
 
 
 users_blueprint = Blueprint('users', __name__)

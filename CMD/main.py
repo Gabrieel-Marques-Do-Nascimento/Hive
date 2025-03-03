@@ -8,7 +8,7 @@ from threading import Thread
 from time import sleep
 from rich import print
 from rich.console import Console
-import  requests
+import requests
 
 console = Console
 
@@ -29,13 +29,16 @@ class Hive(Client):
         super().__init__(*args, **Kwargs)
         self.url: str = url
         self.logguer = self._setup_logger()
-        self.data: list | dict | None = None
+        self.contacts: list | dict | None = None
+        self.messages: list | dict | None = None
         self.TextInput: str = "  HIVE>> "
         self.channel: str | None = None
         self.command_txt: str = ''
-        self.server_login: str = ""
-        self.userId: int| None = None
-        self.style: dict = {'color': "red", 'style': "bold", 'color2': None, 'style': None}
+        self.server_login: dict = {}
+        self.userId: int | None = None
+        self.style: dict = {'color': "red",
+                            'style': "bold", 'color2': None, 'style': None}
+        self.user_name: str = ''
 
     def _setup_logger(self) -> logging.Logger:
         """Configure logging for the client."""
@@ -49,6 +52,13 @@ class Hive(Client):
         logger.setLevel(logging.INFO)
         return logger
 
+    def logout(self):
+        """Logout from the server."""
+        self.contacts: list | dict | None = None
+        self.messages: list | dict | None = None
+        self.channel: str | None = None
+        self.userId: int | None = None
+
     def commands(self, data: str):
         """Execute commands based on user input."""
         match data:
@@ -61,6 +71,7 @@ class Hive(Client):
                 `add`: adiciona um novo contato
                 `resvd:`: mostra uma message recebida
                 `login:`: faz login no servidor
+                `logout:`: deslogar do servidor
                 `exit`: sai do programa
                 """)
             case "exit":
@@ -74,34 +85,54 @@ class Hive(Client):
             #     freendId = data.split("=")[1]
             #     return 'exit', f"conectando com {freendId}..."
             case "contacts":
-            	print(self.data)
+                if self.contacts is None:
+                    self.load_messages()
+                print(self.contacts)
             case "add":
-            	pass
-            case "login":
-            	pass
+                pass
+            case "login" | "logout":
+                self.logout()
+                self.style['color'] = "red"
+                self.login()
             case _:
                 if data.startswith('chl=') and not data.endswith(str(self.userId)):
                     print(data.split("="))
                     freendId: str = data.split("=")[1]
                     self.channel: str = freendId
                     self.style['color'] = "blue"
+
                     self.command_txt = f"channel[{freendId}]"
+                    self.on_messages(int(freendId))
                     return f"conectando com {freendId}..."
                 return '', "comando não encontrado"
         return data, ""
-      
+
     def load_messages(self):
-        self.data = requests.post(f"{self.url}/my_msgs", headers={"Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization" :f"Bearer {self.server_login['token']}",
-        "uid" :self.userId}).json
+        headers = {"Accept": "application/json",
+                   "Content-Type": "application/json",
+                   "Authorization": f"Bearer {self.server_login['token']}",
+                   "uid": str(self.userId)}
+        json_data = {"id": self.userId}
+        responce = requests.post(
+            self.url+"/my_msgs", json=json_data,  headers=headers, timeout=4).json()
+        self.messages = responce[0]
+        self.contacts = responce[1]
+        print('dados obitidos..')
 
-
+    def on_messages(self, id: int):
+        """Handle incoming messages."""
+        for message in self.messages:
+            if message['pessoa'] == id:
+                print(
+                    f"[bold {self.style['color']}]{self.TextInput}[/bold {self.style['color']}][i bold]{self.command_txt}[/i bold]", end="")
+                print(
+                    f"  [{'[bold green]VOCE[/bold green]' if message['enviado'] == self.userId else 'ID: '+str(message['enviado'])}]: {message['message']}")
 
     def hive_input(self, data: str) -> str:
         """Handle user input and execute commands."""
         style = self.style
-        print(f"[bold {style['color']}]{self.TextInput}[/bold {style['color']}][i bold]{data}[/i bold]", end="")
+        print(
+            f"[bold {style['color']}]{self.TextInput}[/bold {style['color']}][i bold]{data}[/i bold]", end="")
         return str(input(" "))
 
     def login(self):
@@ -112,18 +143,21 @@ class Hive(Client):
         else:
             pass
         user: str = self.hive_input(f"user:")
+        
         password: str = self.hive_input(f"password:")
         if not user:
             user = "Gabriel"
-            
+
         if not password:
             password = "20211613"
+        self.user_name = user
         reponce: requests.models.Response = requests.post(f"{self.url}/login",
                                                           json={"email": user, "password": password})
         self.server_login: dict = reponce.json()
         self.userId = self.server_login["id"]
         print(self.server_login["id"])
         self.emit('registrar_usuario', {"id": self.userId})
+        self.load_messages()
         httptoken: str = reponce.json().get("token")
         if httptoken:
             token['token'] = httptoken
@@ -138,15 +172,13 @@ class Hive(Client):
 
     def events(self):
         """Register event handlers."""
-        
+
         @self.event
         def connect():
-        	if self.userId:
-        		self.emit('registrar_usuario', {"id": self.userId})
-        		self.load_messages()
-        		
-		      
-		      
+            if self.userId:
+
+                self.emit('registrar_usuario', {"id": self.userId})
+
         @self.on("message_privada")
         def message(data):
             # print(self.server_login)

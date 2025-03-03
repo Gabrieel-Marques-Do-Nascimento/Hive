@@ -57,12 +57,24 @@ class Contacts(db.Model):
     custom_name = db.Column(db.String(50), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+class MessagesV2(db.Model):
+    __tablename__ = "messagesV2"
 
+    id = db.Column(db.Integer, primary_key=True)
+    user_Id = db.Column(db.Integer, db.ForeignKey("users.id"),
+                       nullable=False)
+    destinatario_id = db.Column(db.Integer, nullable=True)
+    pessoa_Id = db.Column(db.Integer)
+    message = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<Mensagem {self.id}>'
 if __name__ == "__main__":
     pass
-# # Criar um novo usuário
+# Criar um novo usuário
 # novo_usuario = Users(username="Joao", password="senha123", email="joao@email.com")
-#
+
 # # Criar uma mensagem associada ao usuário
 # mensagem = Messages(user=novo_usuario, message="Olá, mundo!")
 #

@@ -1,3 +1,5 @@
+
+# aplicativo 
 meu_app/
 ├── main.py
 ├── meu_app.kv

@@ -79,9 +79,8 @@ class Messages(db.Model):
     Attributes:
         id (int): Primary key for the message
         userId (int): Foreign key reference to Users table
-        senderId (int): ID of the sender
-        pessoa (str): Name of the person
-        pessoaId (int): ID of the person
+        to (int): ID of the sender
+        other_Id (int): ID of the person
         message (str): Content of the message
         created_at (datetime): Message creation timestamp
         user (relationship): Relationship to Users table

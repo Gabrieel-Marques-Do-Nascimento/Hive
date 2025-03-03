@@ -76,26 +76,35 @@ def mymesgs(token):
      -d '{ "id": 1 }'
     """
     try:
-        resp = request.get_json()
-        app.logger.info(resp)
-        id = resp["id"]
+        resp = request.get_json()  
+        id = resp.get("id")  # Evita KeyError se "id" não existir
+        if id is None:
+        	return jsonify({"error": "ID não fornecido"}), 400
         user = Users.query.filter_by(id=id).first()
+        if not user:
+        	return jsonify({"error": "Usuário não encontrado"}), 404
+        app.logger.info(resp)
         msgs = []
         contacts = []
-        for mensage in user.messages:
-            msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
-                        "to": mensage.to, "online": None, "id": user.id})
-        for contact in user.contacts:
-            if contact:
-                contacts.append(
-                    {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at})
+        if user and user.messages:
+	        for mensage in user.messages:
+	            if mensage:
+	            		msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
+	                        "to": mensage.to, "online": None, "id": user.id})
+        if not  user or not user.messages:
+        	msgs = []
+        if user and user.contacts:
+	        for contact in user.contacts:
+	            if contact:
+	                contacts.append(
+	                    {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at})
         return jsonify([msgs, contacts])
     except AttributeError as e:
         app.logger.error(e)
         return ['erro']
     except Exception as e:
         app.logger.error(e)
-        return ['erro']
+        return jsonify([], []) #['erro']
 
 #    db_msg = Messages.query.filter_by(userId=id)
 #    msg_all = db_msg.all()

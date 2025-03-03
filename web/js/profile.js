@@ -43,7 +43,7 @@ $send.addEventListener("click", event => {
   save_msg({ message: $input_msg.value, id: id, to: destinatario });
   socket.emit("send_message", {
     to: destinatario,
-    mensagem: $input_msg.value,
+    message: $input_msg.value,
     id: id
   });
   $input_msg.value = null;

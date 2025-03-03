@@ -211,7 +211,7 @@ class Hive(Client):
                     continue
                 if self.channel and len(cmd.strip()) > 0:
                     self.emit("send_message", {
-                              "mensagem": cmd, 'destinatario_id': self.channel, "id": self.userId})
+                              "message": cmd, 'to': self.channel, "id": self.userId})
                     continue
 
             except Exception as err:

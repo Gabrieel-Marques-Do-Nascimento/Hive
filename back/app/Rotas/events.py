@@ -105,9 +105,10 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     def new_contact(data):
         try:
             print(data)
+            user = Users.query.filter_by(id=data["userId"]).first()
             constact = Users.query.filter_by(id=data["id"]).first()
             if constact and constact.id != data["userId"]:
-                newConatact = Contacts(user_Id=data["userId"], contact_Id=constact.id,
+                newConatact = Contacts(user_Id=user.id, contact_Id=constact.id,
                                        custom_name=data["custom_name"])
                 db.session.add(newConatact)
                 db.session.commit()

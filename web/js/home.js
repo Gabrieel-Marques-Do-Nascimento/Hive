@@ -65,8 +65,9 @@ let contacts = JSON.parse(localStorage.getItem(contact_listTag));
 
 function create_user_label(users, contacts) {
   console.log(users);
-let vr = false
+
 users.forEach((message)=> {
+  let vr = false
   if (!contacts){ 
     contacts = []
    }
@@ -77,11 +78,13 @@ users.forEach((message)=> {
     })
 
   if (!vr){
-    contacts.push(JSON.stringify([{"contact":message.other_Id ,"name":`contact id: ${message.other_Id }`}]))
-    localStorage.setItem(contact_listTag, contacts)
+    console.log(contacts)
+    contacts.push({"contact":message.other_Id ,"name":`contact id: ${message.other_Id }`})
+    
   }
+  
 })
-
+localStorage.setItem(contact_listTag, JSON.stringify(contacts))
 
 
   lista.innerHTML = "";
@@ -181,7 +184,7 @@ socket.on("error", (data) => {
 // });
 
 socket.on("message_privada", function (data) {
-  contact_exist(data.mensagem, data.id);
+  contact_exist(data.message, data.id);
   save_msg(data);
   console.log(data);
 });

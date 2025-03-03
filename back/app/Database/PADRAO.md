@@ -1,7 +1,7 @@
 ## Padrão de Mensagens
 
 ### Cada mensagem deve seguir a estrutura abaixo, tanto no front quanto no backend:
-```
+```python
 {
   "id": "id do dono da tabela",
   "other_id": "id do outro usuário ou contato",

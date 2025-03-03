@@ -45,7 +45,7 @@ class Users(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f'<Mensagem {self.id}>'
+        return f'<Users {self.id}>'
 
 
 class Contacts(db.Model):
@@ -71,6 +71,9 @@ class Contacts(db.Model):
     # Relacionamento com Users
     user = db.relationship('Users', backref=db.backref('contacts', lazy=True))
 
+    def __repr__(self):
+        return f'<Contacts {self.id}>'
+
 
 class Messages(db.Model):
     """Database model class for Messages table.
@@ -79,7 +82,8 @@ class Messages(db.Model):
     Attributes:
         id (int): Primary key for the message
         userId (int): Foreign key reference to Users table
-        to (int): ID of the sender
+        to (int): ID of the sender
+
         other_Id (int): ID of the person
         message (str): Content of the message
         created_at (datetime): Message creation timestamp

@@ -31,18 +31,18 @@ $send.addEventListener("click", event => {
 
   //   save_msg(  {
   //     "message": $input_msg.value,
-  //     "pessoa": 2,
-  //     "enviado": null,
+  //     id: 1,
+  //     "other_Id": 2,
+  //     "to": null,
   //     "online": null,
-  //     "name": "Camila "
   // });
   //save_msg({message});
   new_msg($input_msg.value);
   const destinatario = localStorage.getItem("HiveSender");
   const id = localStorage.getItem("hiveid");
-  save_msg({ mensagem: $input_msg.value, id: id, destinatario: destinatario });
+  save_msg({ message: $input_msg.value, id: id, to: destinatario });
   socket.emit("send_message", {
-    destinatario_id: destinatario,
+    to: destinatario,
     mensagem: $input_msg.value,
     id: id
   });
@@ -52,7 +52,7 @@ $send.addEventListener("click", event => {
 
 socket.on("message_privada", function (data) {
   console.log(data);
-  new_msg(data.mensagem, "sender-msg");
+  new_msg(data.message, "sender-msg");
   //save_msg(data.mensagem);
 });
 

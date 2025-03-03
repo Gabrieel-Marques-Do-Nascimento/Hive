@@ -10,7 +10,6 @@ from Database import Users, Messages, Contacts, data_str
 from Rotas import create_app, socketIo, app, db
 
 
-
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 with app.app_context():
@@ -85,11 +84,11 @@ def mymesgs(token):
         contacts = []
         for mensage in user.messages:
             msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
-                        "to": mensage.to, "online": None, "user_id": user.id})
-        for contact in Contacts.query.filter_by(user_Id=id).all():
-            contacts.append(
-                {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at})
-
+                        "to": mensage.to, "online": None, "id": user.id})
+        for contact in user.contacts:
+            if contact:
+                contacts.append(
+                    {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at})
         return jsonify([msgs, contacts])
     except AttributeError as e:
         app.logger.error(e)

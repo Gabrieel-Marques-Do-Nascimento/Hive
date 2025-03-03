@@ -6,3 +6,4 @@ back/app/instance/users.db
 /.vscode
 /front/app/.kivy/*
 /app_testes/__pycache__/*
+back/app/logs/socket.log

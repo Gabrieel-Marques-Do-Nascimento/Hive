@@ -30,9 +30,9 @@ export function request_messages(create_user_label = null) {
         return resp.json(); // Retorna a Promise contendo os dados
       })
       .then(data => {
-        console.log(data);
+        console.log('reseived: ',data);
         localStorage.setItem(messageTag, JSON.stringify(data[0]));
-        localStorage.setItem("contact-list", JSON.stringify(data[1]));
+        localStorage.setItem(contact_listTag, JSON.stringify(data[1]));
 
         if (create_user_label) {
           create_user_label(data[0], data[1]);
@@ -55,8 +55,8 @@ export function room(user_id, from_id) {
 }
 
 export function newUser(user) {
-  let pessoaN = parseInt(user["pessoa"])
-    ? parseInt(user["pessoa"])
+  let pessoaN = parseInt(user["other_Id"])
+    ? parseInt(user["contact_Id"])
     : parseInt(user["contact"]);
   let hiveUserid = user["name"] ? user["name"] : "Hive user";
   let avatarI = "Hive";
@@ -104,12 +104,12 @@ export function newUser(user) {
     $messages_list.innerHTML = "";
     messages.forEach(msg => {
       	if (msg){      
-      if (msg.id == pessoaN) {
+      if (parseInt(msg.other_Id) == pessoaN && parseInt(msg.to) == userId) {
 
-        new_msg(msg.mensagem, "sender-msg");
+        new_msg(msg.message, "sender-msg");
       }
-    else if (msg.destinatario == pessoaN) {
-        new_msg(msg.mensagem);
+    else if (parseInt(msg.to) == pessoaN) {
+        new_msg(msg.message);
     }}
     });
   });
@@ -185,7 +185,7 @@ export function contact_exist(message, id) {
   });
   if (!contact_exist_in) {
     constacts.push({ contact: id, name: `contact id: ${id}` });
-    localStorage.setItem(contact_listTag, JSON.stringify(constacts));
+    localStorage.setItem(contact_listTag, constacts);
     location.reload();
   }
 }

@@ -1,4 +1,4 @@
-import { new_msg, save_msg } from "./utils.js";
+import { fromId, new_msg, save_msg, userId } from "./utils.js";
 import { socket } from "./conect.js";
 console.log(typeof JSON.parse(localStorage.getItem("messages")));
 const $exit = document.getElementById("exitButton");
@@ -38,13 +38,13 @@ $send.addEventListener("click", event => {
   // });
   //save_msg({message});
   new_msg($input_msg.value);
-  const destinatario = localStorage.getItem("HiveSender");
-  const id = localStorage.getItem("hiveid");
-  save_msg({ message: $input_msg.value, id: id, to: destinatario });
+  const destinatario = parseInt(localStorage.getItem("HiveSender"));
+  const id = parseInt(localStorage.getItem("hiveid"));
+  save_msg({ message: $input_msg.value, id: id, to: destinatario, other_Id: destinatario });
   socket.emit("send_message", {
     to: destinatario,
     message: $input_msg.value,
-    id: id
+    id:id
   });
   $input_msg.value = null;
   $input_msg.focus();
@@ -52,7 +52,10 @@ $send.addEventListener("click", event => {
 
 socket.on("message_privada", function (data) {
   console.log(data);
-  new_msg(data.message, "sender-msg");
+  if (parseInt(data.to )== parseInt(userId) && parseInt(data.id )== parseInt(localStorage.getItem("HiveSender"))) {
+    console.log(data);
+    new_msg(data.message, "sender-msg");
+  }
   //save_msg(data.mensagem);
 });
 

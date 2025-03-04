@@ -185,6 +185,12 @@ socket.on("error", (data) => {
 
 socket.on("message_privada", function (data) {
   contact_exist(data.message, data.id);
-  save_msg(data);
-  console.log(data);
+  let new_message = {
+    message: data.message,
+    to: data.to,
+    other_Id: data.id,
+    id: userId
+  };
+  save_msg(new_message);
+  console.log(new_message);
 });

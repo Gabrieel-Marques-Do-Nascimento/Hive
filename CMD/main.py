@@ -64,9 +64,9 @@ class Hive(Client):
         match data:
             case "help":
                 print("""
-                `help`: mostra essa mensagem
+                `help`: mostra essa message
                   chl=id : conectar com amigo
-                `send:`: envia mensagem
+                `send:`: envia message
                 `contacts`: exibe uma lista de contatos
                 `add`: adiciona um novo contato
                 `resvd:`: mostra uma message recebida
@@ -183,11 +183,12 @@ class Hive(Client):
         @self.on("message_privada")
         def message(data):
             # print(self.server_login)
-            print(f"\nchannel[{data['id']}]:{data['mensagem']}")
-            if not self.channel:
-                print(
-                    f"caso deseje responder use o command `chl={data['id']}`")
-            print(f"\n{self.TextInput+ self.command_txt}", end="")
+            if int(data['to']) == self.userId:
+                print(f"\nchannel[{data['id']}]:{data['message']}")
+                if not self.channel:
+                    print(
+                        f"caso deseje responder use o command `chl={data['id']}`")
+                print(f"\n{self.TextInput+ self.command_txt}", end="")
 
     def hive_connec(self):
         """Connect to the Hive server and register event handlers."""

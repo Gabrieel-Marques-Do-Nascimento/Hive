@@ -94,7 +94,7 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
             destinatario_sid = ususarios_conectados[destinatario_id]
             socket_logger.info("message-enviada:" + mensagem)
             emit("message_privada", {
-                "mensagem": mensagem, "id": data["id"], "destinatario": destinatario_id
+                "message": mensagem, "id": data["id"], "to": destinatario_id, "other_Id": destinatario_id
             }, to=destinatario_sid)
         else:
             emit("error", {

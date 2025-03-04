@@ -148,6 +148,7 @@ export function new_msg(message, type = "user-msg") {
 }
 
 export function save_msg(message) {
+
   let __messages = JSON.parse(localStorage.getItem(messageTag));
   if (!__messages.length > 0) {
     __messages = [];

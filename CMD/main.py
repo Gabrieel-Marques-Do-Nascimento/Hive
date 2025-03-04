@@ -208,6 +208,7 @@ class Hive(Client):
                     self.command_txt + ':' if self.channel else '')
                 if not self.channel or cmd == "exit":
                     self.logger.info(cmd)
+                    self.style["color"] = "green"
                     result: str | None | list = self.commands(cmd)
                     continue
                 if self.channel and len(cmd.strip()) > 0:

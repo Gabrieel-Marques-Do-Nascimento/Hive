@@ -1,5 +1,4 @@
 from .users import users_blueprint
-from .adm import adm
 from flask_socketio import  SocketIO
 from .events import socket_register, socket_bp
 
@@ -25,7 +24,6 @@ def create_app():
 		app.logger.setLevel(logging.INFO)
 		
 		app.register_blueprint(users_blueprint)
-		app.register_blueprint(adm)
 		app.register_blueprint(socket_bp)
 		
 		

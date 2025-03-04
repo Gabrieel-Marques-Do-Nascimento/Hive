@@ -10,7 +10,7 @@ socket_bp = Blueprint("socket_pb", __name__)
 from .utils import setup_logger  # noqa: E402
 
 socket_logger = setup_logger("socket_logger", log_file="socket.log")
-socket_logger.info("SocketIO initialized")
+# socket_logger.info("SocketIO initialized")
 
 ususarios_conectados = {}
 
@@ -53,29 +53,6 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     def connect():
         pass
 
-    @socketio.on("channel")
-    def channel(data: dict):
-        user = Users.query.filter_by(id=data["id"]).first()
-        user.online = datetime.utcnow()
-        d_user = Users.query.filter_by(id=data["d-id"]).first()
-
-        msg_db = Messages(user=user, message=data["message"], pessoaId=data.get(
-            "d-id"), senderId=data.get("id"))
-
-        dest_msg_db = Messages(user=d_user, pessoaId=data.get(
-            "d-id"), message=data.get("message"), senderId=data.get("id"))
-
-        db.session.add(dest_msg_db)
-        db.session.add(msg_db)
-        db.session.commit()
-
-        emit("channel", {
-            "enviado": data.get("id"),
-            "message": data.get("message"),
-            "pessoa": data.get("d-id"),
-            "online": None,
-            "userid": data.get("id")
-        }, to=data["room"], broadcast=True)
 
     @socketio.on("registrar_usuario")
     def registrar_usuario(data):

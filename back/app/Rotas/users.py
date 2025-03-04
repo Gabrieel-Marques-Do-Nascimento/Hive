@@ -75,22 +75,9 @@ def login():
     return jsonify({'message': 'Credenciais inválidas!', 'status': 'error'})
 
 
-#@users_blueprint.route('/login-page', methods=['GET'])
-#def login_page():
-#    """ login page"""
-#    return render_template('login.html')
-
-
 @users_blueprint.route("/teste")
 def info():
 	"""
 	curl -X GET http://localhost:5000/teste
 	"""
 	return jsonify({"users":[{"id":user.id, "name":user.username, "email":user.email, "online":user.online, "vew":user.view} for user in Users.query.all()]})
-	
-	
-	
-@users_blueprint.route("/contact/add")
-def add():
-	
-	return 

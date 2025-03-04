@@ -16,53 +16,6 @@ with app.app_context():
     db.create_all()
 
 
-# gerenciador de msg
-@app.route("/msg/<int:id>", methods=["POST"])
-@token_verify
-def gen(id):
-    resp = request.get_json()
-    app.logger.info(resp)
-    return jsonify({"respost": "received"})
-
-
-@app.route('/send_msg', methods=["POST"])
-@token_verify
-def send_msg(token):
-    """
-    camila: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk1NTU1NTUsInVpZCI6Mn0.Xd-9S0ar9WoThUGCS6fdjslc66htPMmFM06x_mZarQk
-
-        gabriel: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQ5MzcsInVpZCI6Mn0.ZaBYCkKbilMBdRbrLxiBLLhzObZqOKssIaGkO-PUZSg   
-
-    curl -X POST "http://localhost:5000/send_msg" \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk1NTU1NTUsInVpZCI6Mn0.Xd-9S0ar9WoThUGCS6fdjslc66htPMmFM06x_mZarQk" \
-     -H "uid: 2" \
-     -d '{
-           "id": 2,
-           "msg": "mensagem de teste",
-           "P-id": 1
-         }'
-
-    """
-    resp = request.get_json()
-    id = resp["id"]
-    msg = resp["msg"]
-    dest_id = resp["P-id"]
-    user = Users.query.filter_by(id=id).first()
-    dest_user = Users.query.filter_by(id=dest_id).first()
-    user.online = datetime.utcnow()
-    msg_db = Messages(user=user, other_Id=dest_id, message=msg, to=dest_id)
-    d_msg_db = Messages(
-        user=dest_user, message=msg,
-        to=dest_id, other_Id=id
-    )
-    db.session.add(msg_db)
-    db.session.add(d_msg_db)
-    db.session.commit()
-    app.logger.info(resp)
-    return jsonify({"respost": "received", "online": user.online})
-
-
 @app.route('/my_msgs', methods=['POST'])
 @token_verify
 def mymesgs(token):
@@ -76,61 +29,37 @@ def mymesgs(token):
      -d '{ "id": 1 }'
     """
     try:
-        resp = request.get_json()  
+        resp = request.get_json()
         id = resp.get("id")  # Evita KeyError se "id" não existir
         if id is None:
-        	return jsonify({"error": "ID não fornecido"}), 400
+            return jsonify({"error": "ID não fornecido"}), 400
         user = Users.query.filter_by(id=id).first()
         if not user:
-        	return jsonify({"error": "Usuário não encontrado"}), 404
+            return jsonify({"error": "Usuário não encontrado"}), 404
         app.logger.info(resp)
         msgs = []
         contacts = []
         if user and user.messages:
-	        for mensage in user.messages:
-	            if mensage:
-	            		msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
-	                        "to": mensage.to, "id": user.id})
-        if not  user or not user.messages:
-        	msgs = []
+            for mensage in user.messages:
+                if mensage:
+                    msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
+                                 "to": mensage.to, "id": user.id})
+        if not user or not user.messages:
+            msgs = []
         if user and user.contacts:
-	        for contact in user.contacts:
-	            if contact:
-	                contacts.append(
-	                    {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at})
+            for contact in user.contacts:
+                if contact:
+                    contacts.append(
+                        {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at})
         return jsonify([msgs, contacts])
     except AttributeError as e:
         app.logger.error(e)
         return ['erro']
     except Exception as e:
         app.logger.error(e)
-        return jsonify([], []) #['erro']
-
-#    db_msg = Messages.query.filter_by(userId=id)
-#    msg_all = db_msg.all()
-#    user.view = Messages.query.order_by(Messages.id.desc()).first().id if Messages.query.order_by(Messages.id.desc()).first() else -1
-#    db.session.commit()
-#    msgs = [{"message":msg.message, "pessoa":msg.pessoaId, "enviado":msg.senderId, "online": None} for msg in msg_all]
-#    return jsonify(msgs)
+        return jsonify([], [])  # ['erro']
 
 
-# @app.route("/")
-# def index():
-#    user_name = "Camila"
-#    sender_name = "Gabriel"
-#    return render_template("index.html", sender=sender_name, user=user_name,sensitive_data="er5543token554346")
-
-
-# @app.route("/home")
-# def home():
-#    users = [{"username":"gabriel","time":"15:00","preview":"hello world"},{"username":"camila","time":"15:00","preview":"hello world"},{"username":"joao","time":"15:00","preview":"hello world"}]
-#    return render_template("home.html", users= users, user="gau")
-
-
-# @app.route("/login")
-# def login():
-#    return render_template("login.html")
-# curl -X POST http://127.0.0.1:5000/msg/1 -H "Content-Type: application/json" -d '{"msg":"hello"}'
 if __name__ == "__main__":
     # app.run(debug=True)
     import os

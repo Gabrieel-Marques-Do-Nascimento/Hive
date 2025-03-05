@@ -7,7 +7,12 @@ import {
   contact_listTag,
   messageTag
 } from "./utils.js";
-import { class_background, $background, class_visible } from "./setting-profile.js";
+import {
+  class_background,
+  $background,
+  class_visible,
+  elemen_destaque
+} from "./setting-profile.js";
 import { socket } from "./conect.js";
 const label_name = document.getElementById("label-name");
 const new_contact = document.getElementById("new-contact");
@@ -67,38 +72,34 @@ let contacts = JSON.parse(localStorage.getItem(contact_listTag));
 function create_user_label(users, contacts) {
   console.log(users);
 
-users.forEach((message)=> {
-  let vr = false
-  if (!contacts){ 
-    contacts = []
-   }
-    contacts.forEach((contact) => {
-      if (message.other_Id == contact.contact){
-        vr = true
+  users.forEach(message => {
+    let vr = false;
+    if (!contacts) {
+      contacts = [];
+    }
+    contacts.forEach(contact => {
+      if (message.other_Id == contact.contact) {
+        vr = true;
       }
-    })
+    });
 
-  if (!vr){
-    console.log(contacts)
-    contacts.push({"contact":message.other_Id ,"name":`contact id: ${message.other_Id }`})
-    
-  }
-  
-})
-localStorage.setItem(contact_listTag, JSON.stringify(contacts))
-
+    if (!vr) {
+      console.log(contacts);
+      contacts.push({
+        contact: message.other_Id,
+        name: `contact id: ${message.other_Id}`
+      });
+    }
+  });
+  localStorage.setItem(contact_listTag, JSON.stringify(contacts));
 
   lista.innerHTML = "";
   contacts.forEach(contact => {
     console.log(contact);
     const clone = newUser(contact);
-   
+
     clone ? lista.appendChild(clone) : null;
   });
-
-
-
-
 }
 
 socket.on("connect", () => {
@@ -111,44 +112,41 @@ if (token) {
   request_messages(create_user_label);
 
   let users = localStorage.getItem(messageTag);
-  let contacts =  JSON.parse(localStorage.getItem(contact_listTag));
+  let contacts = JSON.parse(localStorage.getItem(contact_listTag));
   users = JSON.parse(users);
   console.log(users);
   console.log(contacts);
 
   if (users) {
-    create_user_label(users,contacts);
+    create_user_label(users, contacts);
   }
   document.querySelector(".container").appendChild(lista);
 } else {
   window.location.href = "templates/login.html";
 }
 
-
-function new_contact_status(){
+function new_contact_status() {
   if (new_contact.style.display == "none") {
     new_contact.style.display = "block";
-    new_contact.classList.add(class_visible)
-    $background.classList.add(class_background)
+    elemen_destaque(new_contact);
     return;
   }
-  $background.classList.remove(class_background)
-  new_contact.classList.remove(class_visible)
+
+  elemen_destaque(new_contact, false);
   new_contact.style.display = "none";
 }
-
 
 const add = document.getElementById("add");
 add.addEventListener("click", () => {
   new_contact_status();
-  new_contact.addEventListener("submit", (e) => {
+  new_contact.addEventListener("submit", e => {
     e.preventDefault();
 
     const user = document.getElementById("username");
     const $customname = document.getElementById("customname");
     let contacts = JSON.parse(localStorage.getItem(contact_listTag));
     let includes = false;
-    contacts.forEach((contact) => {
+    contacts.forEach(contact => {
       includes = contact.contact == parseInt(user.value);
     });
     if (includes) {
@@ -161,13 +159,13 @@ add.addEventListener("click", () => {
     socket.emit("new-contact", {
       id: parseInt(user.value),
       userId: userId,
-      custom_name: $customname.value,
+      custom_name: $customname.value
     });
     user.value = "";
   });
 });
 document.getElementById("exit").addEventListener("click", () => {
- new_contact_status();
+  new_contact_status();
 });
 socket.on("new-contact", function (data) {
   console.log(data);
@@ -185,7 +183,7 @@ socket.on("new-contact", function (data) {
   }
   label_name_status("usuario invalido", "red", 2000, false);
 });
-socket.on("error", (data) => {
+socket.on("error", data => {
   console.log(data);
   label_name_status("usuario invalido: " + data.message, "red", 2000, false);
 });

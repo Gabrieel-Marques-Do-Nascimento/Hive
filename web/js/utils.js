@@ -30,7 +30,7 @@ export function request_messages(create_user_label = null) {
         return resp.json(); // Retorna a Promise contendo os dados
       })
       .then(data => {
-        console.log('reseived: ',data);
+        console.log("reseived: ", data);
         localStorage.setItem(messageTag, JSON.stringify(data[0]));
         localStorage.setItem(contact_listTag, JSON.stringify(data[1]));
 
@@ -59,7 +59,7 @@ export function newUser(user) {
     ? parseInt(user["contact_Id"])
     : parseInt(user["contact"]);
   let hiveUserid = user["name"] ? user["name"] : "Hive user";
-  let avatarI = "Hive";
+  let avatarUrl = "Hive";
   let previewT = "preview";
   let hors = "08:00";
   const lista = document.createElement("ul");
@@ -67,7 +67,10 @@ export function newUser(user) {
   const user_info = document.createElement("div");
 
   const avatar = document.createElement("div");
-
+  const image = document.createElement("img");
+  image.classList.add("avatar");
+  image.src = "./images/profile-min.png";
+avatar.appendChild(image)
   const username = document.createElement("span");
   // username.setAttribute("translate", "yes");
   const br = document.createElement("br");
@@ -103,17 +106,16 @@ export function newUser(user) {
     const $messages_list = document.getElementById("msgs");
     $messages_list.innerHTML = "";
     messages.forEach(msg => {
-      	if (msg){      
-      if (parseInt(msg.other_Id) == pessoaN && parseInt(msg.to) == userId) {
-
-        new_msg(msg.message, "sender-msg");
+      if (msg) {
+        if (parseInt(msg.other_Id) == pessoaN && parseInt(msg.to) == userId) {
+          new_msg(msg.message, "sender-msg");
+        } else if (parseInt(msg.to) == pessoaN) {
+          new_msg(msg.message);
+        }
       }
-    else if (parseInt(msg.to) == pessoaN) {
-        new_msg(msg.message);
-    }}
     });
   });
-  clone.children[0].children[0].textContent = avatarI; // AVATAR
+  //clone.children[0].children[0].textContent = avatarUrl; // AVATAR
   //
   clone.children[0].children[1].children[0].textContent = hiveUserid;
   clone.children[0].children[1].children[2].textContent = previewT;
@@ -132,9 +134,9 @@ export function create_msg_element(pai, text, cloneId) {
 }
 
 export function new_msg(message, type = "user-msg") {
-	if (!message){
-		return
-	}
+  if (!message) {
+    return;
+  }
   if (message.trim()) {
     const msgs_container = document.getElementById("msgs");
     const msgs = document.createElement("p");
@@ -148,7 +150,6 @@ export function new_msg(message, type = "user-msg") {
 }
 
 export function save_msg(message) {
-
   let __messages = JSON.parse(localStorage.getItem(messageTag));
   if (!__messages.length > 0) {
     __messages = [];

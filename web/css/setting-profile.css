@@ -14,7 +14,7 @@ body {
     background-color: white; /* White background for a clean look */
     border-radius: 8px; /* Rounded corners for modern look */
     border-style: solid;
-    z-index: 2;
+
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   } 
    .container {

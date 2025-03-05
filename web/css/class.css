@@ -16,3 +16,12 @@
 .invisible {
     display: none;
 }
+.visible {
+  z-index: 990;
+}
+.background-invisible {
+  display: none;
+}
+.background-visible {
+  display: block;
+}

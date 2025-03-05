@@ -1,16 +1,22 @@
 import { $profile_elemt } from "./profile.js";
 
-
-
+export const $background = document.getElementById("background");
+export let class_background ='background-visible';
+$background.classList.add('background-invisible')
+export let class_visible = "visible";
 
 
 function show_setting_profile() {
   const $setting_profile = document.getElementById("my-setting-profile");
   if ($setting_profile.classList.contains('invisible')){
     $setting_profile.classList.remove('invisible')
+    $setting_profile.classList.add(class_visible)
+    $background.classList.add(class_background)
     return;
   }
   $setting_profile.classList.add('invisible')
+  $background.classList.remove(class_background)
+  $setting_profile.classList.remove(class_visible)
 }
 
 const $photo = document.getElementById("profile-button");
@@ -37,13 +43,16 @@ const $contact_photo = document.getElementById("photo");
 
 function show_setting_profile_contact() {
 const $setting_profile_contact = document.getElementById("setting-profile");
-console.log($setting_profile_contact.classList);
 
   if ($setting_profile_contact.classList.contains('invisible')){
     $setting_profile_contact.classList.remove('invisible')
+    $setting_profile_contact.classList.add(class_visible)
+    $background.classList.add('background-visible')
     return;
   }
+  $background.classList.remove('background-visible')
   $setting_profile_contact.classList.add('invisible')
+  $setting_profile_contact.classList.remove(class_visible)
 }
 
 

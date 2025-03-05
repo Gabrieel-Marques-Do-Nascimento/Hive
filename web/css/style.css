@@ -145,10 +145,15 @@ body {
   border-radius: 8px;
   font-size: 16px;
 }
+#home #new-contact input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
 #home #new-contact #submit {
   width: 100%;
   padding: 15px;
-  background-color: #4caf50;
+  background-color: #60b263;
   color: white;
   border: none;
   border-radius: 8px;
@@ -160,6 +165,10 @@ body {
   background-color: #45a049;
 }
 
+
+
+
+
 #home #new-contact #exit {
   position: relative;
   left: 80%;
@@ -168,7 +177,12 @@ body {
   align-self: center;
   background-color: red;
   border-radius: 50%;
+   cursor: pointer;
+   transition: color 0.3s ease;
+   color: #888;
 }
+
+
 #exit svg {
   width: 50px;
   height: auto; /* Mantém a proporção */

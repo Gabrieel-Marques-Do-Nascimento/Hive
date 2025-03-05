@@ -7,6 +7,7 @@ import {
   contact_listTag,
   messageTag
 } from "./utils.js";
+import { class_background, $background, class_visible } from "./setting-profile.js";
 import { socket } from "./conect.js";
 const label_name = document.getElementById("label-name");
 const new_contact = document.getElementById("new-contact");
@@ -123,14 +124,28 @@ if (token) {
   window.location.href = "templates/login.html";
 }
 
+
+function new_contact_status(){
+  if (new_contact.style.display == "none") {
+    new_contact.style.display = "block";
+    new_contact.classList.add(class_visible)
+    $background.classList.add(class_background)
+    return;
+  }
+  $background.classList.remove(class_background)
+  new_contact.classList.remove(class_visible)
+  new_contact.style.display = "none";
+}
+
+
 const add = document.getElementById("add");
 add.addEventListener("click", () => {
-  new_contact.style.display = "block";
+  new_contact_status();
   new_contact.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const user = document.getElementById("username");
-    const $cunstoname = document.getElementById("cunstoname");
+    const $customname = document.getElementById("customname");
     let contacts = JSON.parse(localStorage.getItem(contact_listTag));
     let includes = false;
     contacts.forEach((contact) => {
@@ -146,13 +161,13 @@ add.addEventListener("click", () => {
     socket.emit("new-contact", {
       id: parseInt(user.value),
       userId: userId,
-      custom_name: $cunstoname.value,
+      custom_name: $customname.value,
     });
     user.value = "";
   });
 });
 document.getElementById("exit").addEventListener("click", () => {
-  new_contact.style.display = "none";
+ new_contact_status();
 });
 socket.on("new-contact", function (data) {
   console.log(data);

@@ -71,7 +71,7 @@ def login():
     else:
         user = Users.query.filter_by(username=username).first()
     if user and check_password_hash(user.password, password):
-        return jsonify({'message': 'Login bem-sucedido!', 'token': token_update.creat(user.id),"id":user.id, 'token_name': '1463token-as-savekjg', 'status': 'ok', "username": username})
+        return jsonify({'message': 'Login bem-sucedido!', 'token': token_update.creat(user.id),"id":user.id, 'token_name': '1463token-as-savekjg', 'status': 'ok', "username": username, "bio": user.bio})
     return jsonify({'message': 'Credenciais inválidas!', 'status': 'error'})
 
 

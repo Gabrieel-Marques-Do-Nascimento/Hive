@@ -110,7 +110,7 @@
 			<a href="#">Criar conta</a>
 		</div>
 	</div>
-<script src="../js/env.js" type="module"></script>
+	<script src="../js/env.js" type="module"></script>
 	<script type="module">
 
 
@@ -132,10 +132,11 @@
 		})
 		.then(response => response.json())
 		.then(data => {
-		console.log("data",data);
+		console.log("data", data);
 		localStorage.setItem(data['token_name'], data['token']);
 		localStorage.setItem("hiveid", data["id"]);
 		localStorage.setItem("hiveusername", data["username"]);
+		localStorage.setItem("hovebio", data["bio"])
 		if (data['status'] === 'ok') {
 
 		window.location.href = '/';

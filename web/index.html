@@ -1,300 +1,309 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
-    <link rel="stylesheet" href="css/active.css" />
-    <link rel="stylesheet" href="css/profile.css" />
-    <link rel="stylesheet" href="css/class.css" />
-    <link rel="stylesheet" href="css/setting-profile.css" />
-    <link rel="shortcut icon" href="./images/hive-3.png" type="image/x-icon" />
-    <title>Hive Mensagens</title>
-    <style></style>
-  </head>
-  <body>
-    <div id="background"></div>
-    <style>
-      div#background {
-        
-        z-index: 10;
-        background: #0000008e;
-        width: 100%;
-        height: 100%;
-        position: fixed;
-      }
-    </style>
-    <main id="home">
-      <header translate="no">
-        <h2>Hive Mensagens</h2>
-        <button
-          id="Downloads"
-          style="
-            height: 30px;
-            width: 30px;
-            top: 10px;
-            left: 60%;
-            border: 1px solid rgba(255, 255, 255, 0.612);
-          "
-          title="Download do app para android"
-        >
-          <svg
-            style="left: -8; position: relative"
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            viewBox="0 0 20 24"
-            fill="none"
-            stroke="#000"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <!-- Haste da seta -->
-            <line x1="12" y1="3" x2="12" y2="14" />
+<head>
+	<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+<link rel="stylesheet" href="css/active.css" />
+<link rel="stylesheet" href="css/profile.css" />
+<link rel="stylesheet" href="css/class.css" />
+<link rel="stylesheet" href="css/setting-profile.css" />
+<link rel="shortcut icon" href="./images/hive-3.png" type="image/x-icon" />
+<title>Hive Mensagens</title>
+<style>
+</style>
+</head>
+<body>
+<div id="background"></div>
+<style>
+div#background {
 
-            <!-- Cabeça da seta apontando para baixo -->
-            <polyline points="9 11 12 14 15 11" />
+z-index: 10;
+background: #0000008e;
+width: 100%;
+height: 100%;
+position: fixed;
+}
+</style>
+<main id="home">
+<header translate="no">
+<h2>Hive Mensagens</h2>
+<button
+id="Downloads"
+style="
+height: 30px;
+width: 30px;
+top: 10px;
+left: 60%;
+border: 1px solid rgba(255, 255, 255, 0.612);
+"
+title="Download do app para android"
+>
+<svg
+style="left: -8; position: relative"
+xmlns="http://www.w3.org/2000/svg"
+width="28"
+height="28"
+viewBox="0 0 20 24"
+fill="none"
+stroke="#000"
+stroke-width="2.5"
+stroke-linecap="round"
+stroke-linejoin="round"
+>
+<!-- Haste da seta -->
+<line x1="12" y1="3" x2="12" y2="14" />
 
-            <!-- Linha inferior representando o destino do download -->
-            <line x1="4" y1="18" x2="20" y2="18" stroke="#000" />
-          </svg>
-        </button>
-        <div id="profile-button">
-          <img src="./images/profile-min.png" alt="" />
-        </div>
-      </header>
-      <div class="container"></div>
-      <button id="add">
-        <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-        <svg
-          width="30px"
-          height="30px"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M10 1H6V6L1 6V10H6V15H10V10H15V6L10 6V1Z" fill="#fff" />
-        </svg>
-      </button>
+<!-- Cabeça da seta apontando para baixo -->
+<polyline points="9 11 12 14 15 11" />
 
-      <div id="popup">
-        <form id="new-contact">
-          <button id="exit" type="button" aria-label="Close">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path
-                d="M18.3 5.7c-.4-.4-1-.4-1.4 0L12 10.6 7.1 5.7c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4L10.6 12l-4.9 4.9c-.4.4-.4 1 0 1.4.2.2.4.3.7.3.3 0 .5-.1.7-.3L12 13.4l4.9 4.9c.2.2.4.3.7.3.3 0 .5-.1.7-.3.4-.4.4-1 0-1.4L13.4 12l4.9-4.9c.4-.4.4-1 0-1.4z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-          <label for="username">Name or ID:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter name or ID"
-            required
-            maxlength="50"
-          />
+<!-- Linha inferior representando o destino do download -->
+<line x1="4" y1="18" x2="20" y2="18" stroke="#000" />
+</svg>
+</button>
+<div id="profile-button">
+<img src="./images/profile-min.png" alt="" />
+</div>
+</header>
+<div class="container"></div>
+<button id="add">
+<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg
+width="30px"
+height="30px"
+viewBox="0 0 16 16"
+fill="none"
+xmlns="http://www.w3.org/2000/svg"
+>
+<path d="M10 1H6V6L1 6V10H6V15H10V10H15V6L10 6V1Z" fill="#fff" />
+</svg>
+</button>
 
-          <label for="customname">Custom Name:</label>
-          <input
-            type="text"
-            id="customname"
-            name="customname"
-            placeholder="Enter custom name"
-            required
-            maxlength="50"
-          />
+<div id="popup">
+<form id="new-contact">
+<button id="exit" type="button" aria-label="Close">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<path
+d="M18.3 5.7c-.4-.4-1-.4-1.4 0L12 10.6 7.1 5.7c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4L10.6 12l-4.9 4.9c-.4.4-.4 1 0 1.4.2.2.4.3.7.3.3 0 .5-.1.7-.3L12 13.4l4.9 4.9c.2.2.4.3.7.3.3 0 .5-.1.7-.3.4-.4.4-1 0-1.4L13.4 12l4.9-4.9c.4-.4.4-1 0-1.4z"
+fill="currentColor"
+/>
+</svg>
+</button>
+<label for="username">Name or ID:</label>
+<input
+type="text"
+id="username"
+name="username"
+placeholder="Enter name or ID"
+required
+maxlength="50"
+/>
 
-          <button type="submit" id="submit">Add Contact</button>
-        </form>
-      </div>
-    </main>
+<label for="customname">Custom Name:</label>
+<input
+type="text"
+id="customname"
+name="customname"
+placeholder="Enter custom name"
+required
+maxlength="50"
+/>
 
-    <main id="setting-profile" class="invisible">
-      <div class="container">
-        <button id="exit-button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#ffff"
-          >
-            <path
-              d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
-            />
-          </svg>
-        </button>
-        <div class="profile-header">
-          <img
-            src="./images/profile-med.png"
-            alt="Foto de Perfil"
-            class="profile-picture"
-          />
-        </div>
-        <div class="user-info">
-          <p>
-            <strong>ID:</strong
-            ><span id="id-profile"> [identificador do Usuário]</span>
-          </p>
-          <p>
-            <strong>Nome:</strong
-            ><span id="nome-profile">[Nome do Usuário]</span>
-            <span id="editar-nome"
-              ><?xml version="1.0" ?><!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
-              <svg
-                enable-background="new 0 0 20 20"
-                height="20px"
-                id="Layer_1"
-                version="1.1"
-                viewBox="0 0 64 64"
-                width="20px"
-                xml:space="preserve"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-              >
-                <g>
-                  <path
-                    d="M55.736,13.636l-4.368-4.362c-0.451-0.451-1.044-0.677-1.636-0.677c-0.592,0-1.184,0.225-1.635,0.676l-3.494,3.484   l7.639,7.626l3.494-3.483C56.639,15.998,56.639,14.535,55.736,13.636z"
-                  />
-                  <polygon
-                    points="21.922,35.396 29.562,43.023 50.607,22.017 42.967,14.39  "
-                  />
-                  <polygon
-                    points="20.273,37.028 18.642,46.28 27.913,44.654  "
-                  />
-                  <path
-                    d="M41.393,50.403H12.587V21.597h20.329l5.01-5H10.82c-1.779,0-3.234,1.455-3.234,3.234v32.339   c0,1.779,1.455,3.234,3.234,3.234h32.339c1.779,0,3.234-1.455,3.234-3.234V29.049l-5,4.991V50.403z"
-                  />
-                </g></svg>
-          </span>
-          </p>
-          <p>
-            <strong>Usuário:</strong>
-            <span id="username-profile">[Username do Usuário]</span>
-          </p>
-          <p><strong>Bio:</strong></p>
-          <div id="bio">[Texto da Bio]</div>
-        </div>
-      </div>
-    </main>
+<button type="submit" id="submit">Add Contact</button>
+</form>
+</div>
+</main>
 
-    <main id="my-setting-profile" class="invisible">
-      <div class="container">
-        <button id="exit-button" class="exit-button-msp">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#ffff"
-          >
-            <path
-              d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
-            />
-          </svg>
-        </button>
-        <div class="profile-header">
-          <img
-            src="./images/profile-med.png"
-            alt="Foto de Perfil"
-            class="profile-picture"
-          />
-          <button type="file" class="edit-button">Editar Foto</button>
-        </div>
-        <form class="profile-form">
-          <label for="name">Nome:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Digite seu nome"
-          />
+<main id="setting-profile" class="invisible">
+<div class="container">
+<button id="exit-button">
+<svg
+xmlns="http://www.w3.org/2000/svg"
+height="24px"
+viewBox="0 -960 960 960"
+width="24px"
+fill="#ffff"
+>
+<path
+d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+/>
+</svg>
+</button>
+<div class="profile-header">
+<img
+src="./images/profile-med.png"
+alt="Foto de Perfil"
+class="profile-picture"
+/>
+</div>
+<div class="user-info">
+<p>
+<strong>ID:</strong
+><span id="id-profile"> [identificador do Usuário]</span>
+</p>
+<p>
+<strong>Nome:</strong
+><span id="nome-profile">[Nome do Usuário]</span>
+<span id="editar-nome"
+><?xml version="1.0" ?><!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg
+enable-background="new 0 0 20 20"
+height="20px"
+id="Layer_1"
+version="1.1"
+viewBox="0 0 64 64"
+width="20px"
+xml:space="preserve"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+<g>
+<path
+d="M55.736,13.636l-4.368-4.362c-0.451-0.451-1.044-0.677-1.636-0.677c-0.592,0-1.184,0.225-1.635,0.676l-3.494,3.484   l7.639,7.626l3.494-3.483C56.639,15.998,56.639,14.535,55.736,13.636z"
+/>
+<polygon
+points="21.922,35.396 29.562,43.023 50.607,22.017 42.967,14.39  "
+/>
+<polygon
+points="20.273,37.028 18.642,46.28 27.913,44.654  "
+/>
+<path
+d="M41.393,50.403H12.587V21.597h20.329l5.01-5H10.82c-1.779,0-3.234,1.455-3.234,3.234v32.339   c0,1.779,1.455,3.234,3.234,3.234h32.339c1.779,0,3.234-1.455,3.234-3.234V29.049l-5,4.991V50.403z"
+/>
+</g></svg
+></span>
+</p>
+<p>
+<strong>Usuário:</strong>
+<span id="username-profile">[Username do Usuário]</span>
+</p>
+<p>
+<strong>Bio:</strong>
+</p>
+<div id="bio">
+[Texto da Bio]
+</div>
+</div>
+</div>
+</main>
 
-          <label for="username">Usuário:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Digite seu usuário"
-          />
+<main id="my-setting-profile" class="invisible">
+<div class="container">
+<button id="exit-button" class="exit-button-msp">
+<svg
+xmlns="http://www.w3.org/2000/svg"
+height="24px"
+viewBox="0 -960 960 960"
+width="24px"
+fill="#ffff"
+>
+<path
+d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+/>
+</svg>
+</button>
+<div class="profile-header">
+<img
+src="./images/profile-med.png"
+alt="Foto de Perfil"
+class="profile-picture"
+/>
+<button type="file" class="edit-button">Editar Foto</button>
+</div>
+<form class="profile-form">
+<label for="my-name">Nome:</label>
+<input
+type="text"
+id="my-name"
+name="my-name"
+placeholder="Digite seu nome"
+/>
 
-          <label for="bio">Bio:</label>
-          <textarea
-            id="bio"
-            name="bio"
-            rows="4"
-            cols="50"
-            placeholder="Digite sua bio"
-          ></textarea>
+<label for="my-username">Usuário:</label>
+<input
+type="text"
+id="my-username"
+name="my-username"
+placeholder="Digite seu usuário"
+/>
 
-          <button type="submit" class="save-button">Salvar</button>
-        </form>
-      </div>
-    </main>
+<label for="my-bio">Bio:</label>
+<textarea
+id="my-bio"
+name="my-bio"
+rows="4"
+cols="50"
+placeholder="Digite sua bio"
+></textarea>
 
-    <main id="profile" style="display: none">
-      <header>
-        <button id="exitButton">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#ffff"
-          >
-            <path
-              d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
-            />
-          </svg>
-        </button>
-        <div id="photo">
-          <img src="./images/profile-min.png" alt="" height="40px" />
-        </div>
-        <div id="div-custom-name">Contact name</div>
-        <button id="serch">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <!-- Search circle -->
-            <circle
-              cx="11"
-              cy="11"
-              r="8"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-            <!-- Search handle -->
-            <line
-              x1="21"
-              y1="21"
-              x2="16.65"
-              y2="16.65"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-          </svg>
-        </button>
-        <div id="menu">•••</div>
-      </header>
-      <div id="serch-container" style="display: none">
-        <input type="text" class="input-text" /><button></button>
-      </div>
+<button type="submit" class="save-button">Salvar</button>
+</form>
+</div>
+</main>
 
-      <main id="profile-main">
-        <section id="msgs"></section>
-        <div id="msg">
-          <input type="text" name="msg" id="msg-input" maxlength="200" />
-          <button id="send" translate="no">enviar</button>
-        </div>
-      </main>
-    </main>
-    <main id="info"></main>
+<main id="profile" style="display: none">
+<header>
+<button id="exitButton">
+<svg
+xmlns="http://www.w3.org/2000/svg"
+height="24px"
+viewBox="0 -960 960 960"
+width="24px"
+fill="#ffff"
+>
+<path
+d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+/>
+</svg>
+</button>
+<div id="photo">
+<img src="./images/profile-min.png" alt="" height="40px" />
+</div>
+<div id="div-custom-name">
+Contact name
+</div>
+<button id="serch">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<!-- Search circle -->
+<circle
+cx="11"
+cy="11"
+r="8"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+/>
+<!-- Search handle -->
+<line
+x1="21"
+y1="21"
+x2="16.65"
+y2="16.65"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+/>
+</svg>
+</button>
+<div id="menu">
+•••
+</div>
+</header>
+<div id="serch-container" style="display: none">
+<input type="text" class="input-text" /><button></button>
+</div>
 
-    <!-- <footer>
+<main id="profile-main">
+<section id="msgs"></section>
+<div id="msg">
+<input type="text" name="msg" id="msg-input" maxlength="200" />
+<button id="send" translate="no">enviar</button>
+</div>
+</main>
+</main>
+<main id="info"></main>
+
+<!-- <footer>
     <p>
     direitos reservados a
     <a
@@ -305,15 +314,15 @@
     >
     </p>
     </footer> -->
-    <script>
-      // document.body.classList.add("profile-page");
-    </script>
-    <script src="/js/socket.io.js"></script>
-    <script type="module" src="/js/conect.js"></script>
-    <script type="module" src="js/profile.js"></script>
-    <script src="/js/env.js" type="module"></script>
-    <script type="module" src="js/home.js"></script>
-    <script type="module" src="/js/utils.js"></script>
-    <script type="module" src="/js/setting-profile.js"></script>
-  </body>
+<script>
+// document.body.classList.add("profile-page");
+</script>
+<script src="/js/socket.io.js"></script>
+<script type="module" src="/js/conect.js"></script>
+<script type="module" src="js/profile.js"></script>
+<script src="/js/env.js" type="module"></script>
+<script type="module" src="js/home.js"></script>
+<script type="module" src="/js/utils.js"></script>
+<script type="module" src="/js/setting-profile.js"></script>
+</body>
 </html>

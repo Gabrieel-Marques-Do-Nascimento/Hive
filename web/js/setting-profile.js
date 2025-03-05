@@ -1,5 +1,12 @@
 import { $profile_elemt } from "./profile.js";
 
+const my_name = document.getElementById("my-name");
+my_name.value = String(localStorage.getItem("hiveusername"));
+const my_username = document.getElementById("my-username");
+my_username.value = String(localStorage.getItem("hiveusername"));
+const my_bio = document.getElementById("my-bio");
+my_bio.value = localStorage.getItem("hivebio")? String(localStorage.getItem("hivebio")): "";
+// ============================================
 export const $background = document.getElementById("background");
 export let class_background = "background-visible";
 $background.classList.add("background-invisible");
@@ -49,7 +56,7 @@ function show_setting_profile_contact() {
   }
 
   $setting_profile_contact.classList.add("invisible");
-  elemen_destaque($setting_profile_contact, false)
+  elemen_destaque($setting_profile_contact, false);
 }
 
 $contact_photo.addEventListener("click", () => {
@@ -58,5 +65,3 @@ $contact_photo.addEventListener("click", () => {
 document.getElementById("exit-button").addEventListener("click", () => {
   show_setting_profile_contact();
 });
-
-

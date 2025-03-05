@@ -5,7 +5,15 @@ my_name.value = String(localStorage.getItem("hiveusername"));
 const my_username = document.getElementById("my-username");
 my_username.value = String(localStorage.getItem("hiveusername"));
 const my_bio = document.getElementById("my-bio");
-my_bio.value = localStorage.getItem("hivebio")? String(localStorage.getItem("hivebio")): "";
+my_bio.value = localStorage.getItem("hivebio")
+  ? String(localStorage.getItem("hivebio"))
+  : "";
+
+document.querySelector(".profile-form").addEventListener("submit", event => {
+  event.preventDefault();
+  console.log("profile atualizado ");
+ // fetch();
+});
 // ============================================
 export const $background = document.getElementById("background");
 export let class_background = "background-visible";

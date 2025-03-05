@@ -54,6 +54,9 @@ function label_name_status(
   timeout = 2000,
   exit = true
 ) {
+  if (!text){
+    text = "hello world"
+  }
   label_name.textContent = text;
   label_name.style.color = color;
   setTimeout(() => {

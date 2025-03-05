@@ -58,3 +58,5 @@ $contact_photo.addEventListener("click", () => {
 document.getElementById("exit-button").addEventListener("click", () => {
   show_setting_profile_contact();
 });
+
+

@@ -50,7 +50,7 @@ def mymesgs(token):
             for contact in user.contacts:
                 if contact:
                     contacts.append(
-                        {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at})
+                        {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at,'bio': '', 'id': contact.user.id})
         return jsonify([msgs, contacts])
     except AttributeError as e:
         app.logger.error(e)

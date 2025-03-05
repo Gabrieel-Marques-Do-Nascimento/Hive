@@ -1,5 +1,6 @@
 import { URL } from "./env.js";
 
+
 export const myTag = "hiveid";
 export const senderTag = "HiveSender";
 export const messageTag = "messages";
@@ -54,6 +55,19 @@ export function room(user_id, from_id) {
   }
 }
 
+
+
+
+// =============================================================
+
+export function contact_setting_profile(contact) {
+  document.getElementById("id-profile").innerHTML = contact.contact;
+  document.getElementById("nome-profile").innerHTML = contact.name;
+  document.getElementById("username-profile").innerHTML = contact.name;
+  //document.getElementById('created').innerHTML = contact.created;
+  document.getElementById("bio").innerHTML = !contact.bio? contact.bio : "Não informado";
+  }
+
 export function newUser(user) {
   let pessoaN = parseInt(user["other_Id"])
     ? parseInt(user["contact_Id"])
@@ -99,10 +113,14 @@ avatar.appendChild(image)
   let clone = item.cloneNode(true);
 
   clone.addEventListener("click", () => {
+   
+    contact_setting_profile(user)
+
     let messages = JSON.parse(localStorage.getItem(messageTag));
     localStorage.setItem(senderTag, String(pessoaN));
     document.getElementById("div-custom-name").textContent = hiveUserid;
     profile();
+
     const $messages_list = document.getElementById("msgs");
     $messages_list.innerHTML = "";
     messages.forEach(msg => {

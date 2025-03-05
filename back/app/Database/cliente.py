@@ -40,6 +40,7 @@ class Users(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), unique=True, nullable=False)
+    bio = db.Column(db.String(200), default="")
     email_verify = db.Column(db.Boolean, default=False)
     online = db.Column(db.DateTime, default=datetime.utcnow)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/active.css" />
     <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/class.css">
+    <link rel="stylesheet" href="css/setting-profile.css">
+    <link rel="shortcut icon" href="./images/hive-3.png" type="image/x-icon">
     <title>Hive Mensagens</title>
     <style></style>
   </head>
@@ -47,6 +49,7 @@
             <line x1="4" y1="18" x2="20" y2="18" stroke="#000" />
           </svg>
         </button>
+        <div id="profile-button"><img src="./images/profile-min.png" alt=""></div>
       </header>
       <div class="container"></div>
       <button id="add">
@@ -80,6 +83,75 @@
       </div>
     </main>
 
+
+<main id="setting-profile" class="invisible">
+
+  <div class="container">
+    <button id="exit-button">      <svg
+  xmlns="http://www.w3.org/2000/svg"
+  height="24px"
+  viewBox="0 -960 960 960"
+  width="24px"
+  fill="#ffff"
+>
+  <path
+    d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+  />
+</svg></button>
+    <div class="profile-header">
+        <img src="./images/profile-med.png" alt="Foto de Perfil" class="profile-picture">
+        
+    </div>
+    <div class="user-info">
+      <p><strong>ID:</strong><span id="id-profile"> [identificador do Usuário]</span></p>
+        <p><strong>Nome:</strong><span id="nome-profile">[Nome do Usuário]</span> <span id="editar-nome"><?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 20 20" height="20px" id="Layer_1" version="1.1" viewBox="0 0 64 64" width="20px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M55.736,13.636l-4.368-4.362c-0.451-0.451-1.044-0.677-1.636-0.677c-0.592,0-1.184,0.225-1.635,0.676l-3.494,3.484   l7.639,7.626l3.494-3.483C56.639,15.998,56.639,14.535,55.736,13.636z"/><polygon points="21.922,35.396 29.562,43.023 50.607,22.017 42.967,14.39  "/><polygon points="20.273,37.028 18.642,46.28 27.913,44.654  "/><path d="M41.393,50.403H12.587V21.597h20.329l5.01-5H10.82c-1.779,0-3.234,1.455-3.234,3.234v32.339   c0,1.779,1.455,3.234,3.234,3.234h32.339c1.779,0,3.234-1.455,3.234-3.234V29.049l-5,4.991V50.403z"/></g></svg></span></p>
+        <p><strong>Usuário:</strong> <span id="username-profile">[Username do Usuário]</span></p>
+        <p><strong>Bio:</strong></p>
+        <div id="bio">
+          [Texto da Bio]
+        </div>
+    </div>
+</div>
+  
+</main>
+
+<main id="my-setting-profile" class="invisible">
+
+        <div class="container">
+          <button id="exit-button" class="exit-button-msp">      <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#ffff"
+          >
+            <path
+              d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+            />
+          </svg></button>
+          <div class="profile-header">
+              <img src="./images/profile-med.png" alt="Foto de Perfil" class="profile-picture">
+              <button type="file" class="edit-button">Editar Foto</button>
+          </div>
+          <form class="profile-form">
+              <label for="name">Nome:</label>
+              <input type="text" id="name" name="name" placeholder="Digite seu nome">
+              
+              <label for="username">Usuário:</label>
+              <input type="text" id="username" name="username" placeholder="Digite seu usuário">
+              
+              <label for="bio">Bio:</label>
+              <textarea id="bio" name="bio" rows="4" cols="50" placeholder="Digite sua bio"></textarea>
+              
+              <button type="submit" class="save-button">Salvar</button>
+          </form>
+      </div>
+
+</main>
+
+
+
+
     <main id="profile" style="display: none">
       <header>
         <button id="exitButton">
@@ -96,7 +168,7 @@
           </svg>
         </button>
         <div id="photo">
-          <img src="./images/image.png" alt="" height="40px" />
+          <img src="./images/profile-min.png" alt="" height="40px" />
         </div>
         <div id="div-custom-name">Contact name</div>
         <button id="serch">
@@ -160,5 +232,6 @@
     <script src="/js/env.js" type="module"></script>
     <script type="module" src="js/home.js"></script>
     <script type="module" src="/js/utils.js"></script>
+    <script type="module" src="/js/setting-profile.js"></script>
   </body>
 </html>

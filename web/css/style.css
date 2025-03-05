@@ -14,15 +14,38 @@ body {
   font-weight: bold;
   justify-content: center;
 }
+#home header h2 {
+  margin: 0;
+  align-self: center;
+  margin-left: auto;
+
+}
 #home header #Downloads {
   margin: 0;
   background-color: rgba(255, 255, 255, 0.612);
   margin-left: 10%;
   align-self: flex-end;
   border-radius: 50%;
+  margin-left: auto;
 }
+
 #home header #Downloads:hover {
+  margin-left: auto;
   background-color: rgb(255, 254, 254);
+}
+#home header #profile-button {
+    margin-left: 3%;
+  align-self: flex-end;
+  background-color: rgba(255, 255, 255, 0.612);
+  border-radius: 50%;
+}
+#home header #profile-button:hover {
+  background-color: rgb(255, 254, 254);
+}
+#home header #profile-button img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; 
 }
 #home .container {
   max-width: 800px;

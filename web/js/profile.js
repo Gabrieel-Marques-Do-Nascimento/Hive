@@ -5,7 +5,7 @@ const $exit = document.getElementById("exitButton");
 const $msg_container = document.getElementById("msgs");
 const $send = document.getElementById("send");
 const $input_msg = document.getElementById("msg-input");
-const $profile_elemt = document.getElementById("profile");
+export const $profile_elemt = document.getElementById("profile");
 
 document.getElementById("serch").addEventListener("click", () => {
   const $input_serch = document.getElementById("serch-container");
@@ -24,6 +24,11 @@ $exit.addEventListener("click", () => {
   $profile_elemt.style.display = "none";
   $home_elemet.classList.remove("active");
   document.body.classList.remove("profile-page");
+
+// remove o perfil do usuario se estiver aberto referente ao modulo setting-profile.js
+if (!document.getElementById("setting-profile").classList.contains('invisible')){
+  document.getElementById("setting-profile").classList.add('invisible')
+}
 });
 
 $send.addEventListener("click", event => {

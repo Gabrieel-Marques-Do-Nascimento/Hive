@@ -1,0 +1,186 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+  
+  #setting-profile {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 2em;
+    transform: translate(-50%, -50%);
+    width: 40dvw; /* Fixed size, adjust as needed */
+
+    background-color: white; /* White background for a clean look */
+    border-radius: 8px; /* Rounded corners for modern look */
+    border-style: solid;
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  } 
+   .container {
+    padding: 20px; /* Padding inside the container */
+    text-align: center; /* Center aligning text and images */
+    background-color: white; 
+    border-radius: 8px;
+  }
+.container #exit-button {
+  position: absolute;
+    top: 30px;
+    left: 30px;
+    background-color: #b6b2b217;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  .container #exit-button:hover {
+    background-color: #555;
+  }
+  .container #exit-button svg {
+    width: 20px;
+    height: 20px;
+    fill: rgb(9, 9, 9);
+  }
+  .container #exit-button:hover svg{
+    fill: rgb(255, 255, 255);
+  }
+
+  #setting-profile .container ::after,  #setting-profile .container ::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095 , #ff4545 );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  border-radius: 8px;
+  animation: 3s spin linear infinite;
+}
+
+  @property --angle {
+    syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+  }
+@keyframes spin {
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+    }
+}
+
+
+
+
+  
+  .profile-header img {
+    width: 120px; /* Profile picture size */
+    height: 120px;
+    border-radius: 50%; /* Circular profile picture */
+    margin-bottom: 20px; /* Space below the image */
+  }
+  
+  .user-info {
+    text-align: left; /* Align texts to the left */
+  }
+  
+  .user-info p {
+    margin: 10px 0; /* Spacing between user info items */
+    color: #333; /* Darker color for better readability */
+  }
+ .user-info #editar-nome:hover {
+  background-color: #075e54;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+
+}
+  .user-info #bio {
+    color: #666;
+    padding: 6px;
+    border-radius: 3px;
+    margin-top: 10px;
+    height: 200px;
+    border: 0.4px solid #ccc;
+  }
+
+/* ---------------------- my profile --------------------------------*/
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+
+
+#my-setting-profile .container {    
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.577);
+    z-index: 999;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+#my-setting-profile .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#my-setting-profile .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#my-setting-profile .edit-button {
+    display: block;
+    margin: 10px auto;
+    padding: 8px 16px;
+    background-color: #075e54;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#my-setting-profile .user-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#my-setting-profile .user-info p {
+    margin: 8px 0;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  #setting-profile {
+    width: 80%;
+    padding: 10px;
+  }
+  #my-setting-profile .container {
+        width: 90%;
+    }
+
+    .container #exit-button {
+      position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+}

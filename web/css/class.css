@@ -12,3 +12,7 @@
   background-color: #ccc;
   transform: translateX(-50%);
 }
+
+.invisible {
+    display: none;
+}

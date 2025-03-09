@@ -157,7 +157,7 @@ class Hive(Client):
         self.server_login: dict = reponce.json()
         self.userId = self.server_login["id"]
         print(self.server_login["id"])
-        self.emit('registrar_usuario', {"id": self.userId})
+        # self.emit('registrar_usuario', {"id": self.userId})
         self.load_messages()
         httptoken: str = reponce.json().get("token")
         if httptoken:
@@ -177,8 +177,8 @@ class Hive(Client):
         @self.event
         def connect():
             if self.userId:
+                pass
 
-                self.emit('registrar_usuario', {"id": self.userId})
 
         @self.on("message_privada")
         def message(data):
@@ -192,7 +192,7 @@ class Hive(Client):
 
     def hive_connec(self):
         """Connect to the Hive server and register event handlers."""
-        self.connect(self.url)
+        self.connect(self.url, headers={'id':self.userId})
         self.logguer.info("conectado")
         # self.logguer.info(self.login().json())
         Thread(target=self.events).start()

@@ -223,8 +223,8 @@ class Hive(Client):
 
 if __name__ == "__main__":
     hive: Hive = Hive()
-
+    hive.hive_repl()
     def events():
         hive.hive_connec()
     Thread(target=events).start()
-    hive.hive_repl()
+    

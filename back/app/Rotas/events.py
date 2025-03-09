@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_socketio import emit, SocketIO, join_room, leave_room
 from datetime import datetime
 from Database.cliente import Users, Messages, Contacts, db
+import auth
 from flask import Flask
 
 
@@ -53,6 +54,10 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     def connect():
         pass
 
+
+    @socketio.on("bio")
+    def b(data):
+        pass
 
     @socketio.on("registrar_usuario")
     def registrar_usuario(data):

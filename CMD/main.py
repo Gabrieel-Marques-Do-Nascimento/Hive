@@ -156,6 +156,7 @@ class Hive(Client):
                                                           json={"email": user, "password": password})
         self.server_login: dict = reponce.json()
         self.userId = self.server_login["id"]
+        self.hive_connec()
         print(self.server_login["id"])
         # self.emit('registrar_usuario', {"id": self.userId})
         self.load_messages()
@@ -192,7 +193,7 @@ class Hive(Client):
 
     def hive_connec(self):
         """Connect to the Hive server and register event handlers."""
-        self.connect(self.url, headers={'id':self.userId})
+        self.connect(self.url, headers={'id':str(self.userId)})
         self.logguer.info("conectado")
         # self.logguer.info(self.login().json())
         Thread(target=self.events).start()

@@ -107,7 +107,6 @@ function create_user_label(users, contacts) {
 
 socket.on("connect", () => {
   console.log("conectado com id:", userId);
-  socket.emit("registrar_usuario", { id: userId });
 });
 
 let token = localStorage.getItem("1463token-as-savekjg");
@@ -177,7 +176,7 @@ socket.on("new-contact", function (data) {
     const pessoa = data["pessoa"];
     const chave = `contato_${pessoa}`;
 
-    let contact_list = JSON.parse(localStorage.getItem(contact_listTag));
+    let contact_list = JSON.parse(localStorage.getItem(contact_listTag))? JSON.parse(localStorage.getItem(contact_listTag)) : [];
     contact_list.push(data);
     localStorage.setItem(contact_listTag, JSON.stringify(contact_list));
     create_user_label([], contact_list);
@@ -185,6 +184,10 @@ socket.on("new-contact", function (data) {
     return;
   }
   label_name_status("usuario invalido", "red", 2000, false);
+});
+socket.on("status", data => {
+  console.log(data);
+
 });
 socket.on("error", data => {
   console.log(data);

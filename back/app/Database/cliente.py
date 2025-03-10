@@ -41,9 +41,10 @@ class Users(db.Model):
     password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), unique=True, nullable=False)
     bio = db.Column(db.String(200), default="")
+    update = db.Column(db.DateTime, default=datetime.now())
     email_verify = db.Column(db.Boolean, default=False)
-    online = db.Column(db.DateTime, default=datetime.utcnow)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    online = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now())
 
     def __repr__(self):
         return f'<Users {self.id}>'
@@ -68,7 +69,7 @@ class Contacts(db.Model):
                         nullable=False)  # Chave estrangeira para Users
     custom_name = db.Column(db.String(50), nullable=True)
     contact_Id = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.now())
     # Relacionamento com Users
     user = db.relationship('Users', backref=db.backref('contacts', lazy=True))
 
@@ -97,9 +98,24 @@ class Messages(db.Model):
     to = db.Column(db.Integer, nullable=True)  # para quem vai a mensagem
     other_Id = db.Column(db.Integer)  # id do outro usuario
     message = db.Column(db.String(200), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.now())
     # Relacionamento com Users
     user = db.relationship('Users', backref=db.backref('messages', lazy=True))
 
     def __repr__(self):
         return f'<Mensagem {self.id}>'
+
+
+# class Notify(db.Model):
+#     """Database model class for Notify table.
+#     This class represents the Notify table in the database and defines
+#     its schema and relationships.
+#     Attributes:
+#         id (int): Primary key for the notification
+#         user_id (int): Foreign key reference to Users table
+#         contact_update (int): Update status for contact
+#     """
+#     __tablename__ = 'notify'
+#     id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+#     contact_update = db.Column(db.Integer, nullable=False)

@@ -1,18 +1,20 @@
 import { $profile_elemt } from "./profile.js";
+import { socket } from "./conect.js";
+import { myTag } from "./utils.js";
 
 const my_name = document.getElementById("my-name");
-my_name.value = String(localStorage.getItem("hiveusername"));
+my_name.placeholder = String(localStorage.getItem("hiveusername"));
 const my_username = document.getElementById("my-username");
-my_username.value = String(localStorage.getItem("hiveusername"));
+my_username.placeholder = String(localStorage.getItem("hiveusername"));
 const my_bio = document.getElementById("my-bio");
-my_bio.value = localStorage.getItem("hivebio")
+my_bio.placeholder = localStorage.getItem("hivebio")
   ? String(localStorage.getItem("hivebio"))
   : "";
 
-document.querySelector(".profile-form").addEventListener("submit", event => {
+document.querySelector(".profile-form").addEventListener("submit", (event) => {
   event.preventDefault();
   console.log("profile atualizado ");
- // fetch();
+  // fetch();
 });
 // ============================================
 export const $background = document.getElementById("background");
@@ -72,4 +74,17 @@ $contact_photo.addEventListener("click", () => {
 });
 document.getElementById("exit-button").addEventListener("click", () => {
   show_setting_profile_contact();
+});
+
+const setting_form = document.querySelector(".profile-form");
+const bio_element = document.getElementById("my-bio");
+setting_form.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log(bio_element.value);
+  if (bio_element.value) {
+    console.log("bio atualizado");
+    socket.emit("bio", { bio: bio_element.value, id: localStorage.getItem(myTag) });
+    localStorage.setItem("hivebio", bio_element.value);
+    bio_element.value = "";
+  }
 });

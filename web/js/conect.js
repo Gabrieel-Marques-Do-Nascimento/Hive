@@ -1,6 +1,6 @@
 import { URL } from "./env.js";
 import {userId} from "./utils.js"
-export var socket = io.connect(URL);
+export var socket = io.connect(URL, {extraHeaders:{id: userId}});
 console.log("conectando...")
 
 /*

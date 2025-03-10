@@ -69,7 +69,8 @@ class Contacts(db.Model):
                         nullable=False)  # Chave estrangeira para Users
     custom_name = db.Column(db.String(50), nullable=True)
     contact_Id = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now())
+    # created_at = db.Column(db.DateTime, default=datetime.now())
+    update = db.Column(db.DateTime, default=datetime.now())
     # Relacionamento com Users
     user = db.relationship('Users', backref=db.backref('contacts', lazy=True))
 

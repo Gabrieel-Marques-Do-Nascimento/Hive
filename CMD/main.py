@@ -121,7 +121,7 @@ class Hive(Client):
 
     def on_messages(self, id: int):
         """Handle incoming messages."""
-        #print(self.messages)
+        # print(self.messages)
         for message in self.messages:
             if message['other_Id'] == id:
                 print(
@@ -144,7 +144,7 @@ class Hive(Client):
         else:
             pass
         user: str = self.hive_input(f"user:")
-        
+
         password: str = self.hive_input(f"password:")
         if not user:
             user = "Gabriel"
@@ -180,7 +180,6 @@ class Hive(Client):
             if self.userId:
                 pass
 
-
         @self.on("message_privada")
         def message(data):
             # print(self.server_login)
@@ -193,7 +192,7 @@ class Hive(Client):
 
     def hive_connec(self):
         """Connect to the Hive server and register event handlers."""
-        self.connect(self.url, headers={'id':str(self.userId)})
+        self.connect(self.url, headers={'id': str(self.userId)})
         self.logguer.info("conectado")
         # self.logguer.info(self.login().json())
         Thread(target=self.events).start()
@@ -225,7 +224,7 @@ class Hive(Client):
 if __name__ == "__main__":
     hive: Hive = Hive()
     hive.hive_repl()
+
     def events():
         hive.hive_connec()
     Thread(target=events).start()
-    

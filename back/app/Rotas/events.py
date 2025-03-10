@@ -66,6 +66,23 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
             emit("status", {'status':'atualizacoes', 'messages': all_messages},to=sid)
         return True
 
+    @socketio.on("status")
+    def _status(data):
+        contacts_update = []
+        for ct in data['contacts']:
+            contact = Users.query.filter_by(
+                user_Id=ct["id"], contact_Id=data["id"]).first()
+            if contact.update > datetime.strptime( ct["update"], 'YYYY-MM-DD HH:MM:SS.ffffff'):
+                contacts_update.append( {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at,'update':  contact.update, 'id': contact.user.id})
+            Contacts.query.filter_by(
+                user_Id=ct["id"], contact_Id=data["contact"]).update(dict(update=datetime.now()))
+        db.session.commit()
+        emit("status", {'status':'atualizacoes', 'contacts': contacts_update},to=request.sid)
+                
+
+
+        
+
     @socketio.on("connect")
     def connect():
         id = request.headers.get('id')

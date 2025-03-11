@@ -159,7 +159,8 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     def disconnect():
         socket_logger.info("Cliente desconectado")
 
-        for key,  user in ususarios_conectados.items():
+        temp = ususarios_conectados
+        for key,  user in temp.items():
             if ususarios_conectados[key] == request.sid:
                 socket_logger.info(f"Usuario {key}  desconectado")
                 del ususarios_conectados[key]

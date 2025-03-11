@@ -56,15 +56,24 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
         data_hora = datetime.now()
         print(data_hora)
         messages = Messages.query.filter(
-            user.online < Messages.created_at, Messages.user_Id == user.id ).all()
+            user.online < Messages.created_at, Messages.user_Id == user.id).all()
         print(messages)
         if len(messages) > 0:
             all_messages = [{
-                "message": message.message, "id": message.user_Id, "to":message.to, "other_Id":message.other_Id, 'created': message.created_at.strftime("%d/%m/%Y %H:%M:%S")
+                "message": message.message, "id": message.user_Id, "to": message.to, "other_Id": message.other_Id, 'created': message.created_at.strftime("%d/%m/%Y %H:%M:%S")
             } for message in messages]
             print(all_messages)
-            emit("status", {'status':'atualizacoes', 'messages': all_messages},to=sid)
+            emit("status", {'status': 'atualizacoes',
+                 'messages': all_messages}, to=sid)
         return True
+
+    @socketio.on("contact-status")
+    def contact_status(data):
+        print(data)
+        # online = []
+        # for ct in data:
+        #   if ususarios_conectados.get(ct):
+        #       online.append(ct)
 
     @socketio.on("status")
     def _status(data):
@@ -72,16 +81,14 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
         for ct in data['contacts']:
             contact = Users.query.filter_by(
                 user_Id=ct["id"], contact_Id=data["id"]).first()
-            if contact.update > datetime.strptime( ct["update"], 'YYYY-MM-DD HH:MM:SS.ffffff'):
-                contacts_update.append( {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at,'update':  contact.update, 'id': contact.user.id})
+            if contact.update > datetime.strptime(ct["update"], 'YYYY-MM-DD HH:MM:SS.ffffff'):
+                contacts_update.append({"contact": contact.contact_Id, "name": contact.custom_name,
+                                       'created': contact.created_at, 'update':  contact.update, 'id': contact.user.id})
             Contacts.query.filter_by(
                 user_Id=ct["id"], contact_Id=data["contact"]).update(dict(update=datetime.now()))
         db.session.commit()
-        emit("status", {'status':'atualizacoes', 'contacts': contacts_update},to=request.sid)
-                
-
-
-        
+        emit("status", {'status': 'atualizacoes',
+             'contacts': contacts_update}, to=request.sid)
 
     @socketio.on("connect")
     def connect():

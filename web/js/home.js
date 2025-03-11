@@ -28,7 +28,7 @@ const br = document.createElement("br");
 const preview = document.createElement("span");
 
 const time = document.createElement("div");
-const noview = document.createElement("div");
+export const noview = document.createElement("div");
 noview.classList.add("noview");
 const div = document.createElement("div");
 user_info.classList.add("user-info");
@@ -213,3 +213,38 @@ socket.on("message_privada", function (data) {
   save_msg(new_message);
   console.log(new_message);
 });
+socket.on('status', (data)=> {
+  console.log(data)
+  if(data.status == "online"){
+    console.log("online")
+   const noview = document.getElementById(`noview=${data.id}`)
+    if(noview){ 
+     
+      noview.style.backgroundColor = "green"
+    }
+  }else{
+    console.log("offline")
+
+    const noview = document.getElementById(`noview=${data.id}`)
+    if(noview){
+      noview.style.backgroundColor = "red"
+    }
+  }
+})
+
+
+let style = document.createElement("style");
+style.innerHTML = `
+.offline {
+    --color1: red;
+    --color2: white;
+    --color1:  rgb(205, 116, 116);
+}
+    #home .noview {
+    --color1:  rgb(211, 31, 31) ;
+    --color2: white;
+    --color1:  rgb(205, 116, 116) ;
+    
+    }
+`
+document.head.appendChild(style)

@@ -93,6 +93,7 @@ avatar.appendChild(image)
   const time = document.createElement("div");
   const noview = document.createElement("div");
   noview.classList.add("noview");
+  noview.id = `noview=${pessoaN}`;
   const div = document.createElement("div");
   user_info.classList.add("user-info");
   avatar.classList.add("avatar");

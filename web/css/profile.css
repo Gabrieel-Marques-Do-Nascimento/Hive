@@ -36,7 +36,12 @@
   cursor: pointer;
   margin-right: 15px;
 }
-
+#profile header button:hover {
+  color: #8d8888;
+}
+#profile header #status {
+ margin-left: auto;
+}
 #profile header #photo {
   height: 40px;
   width: 40px;

@@ -63,7 +63,17 @@ socket.on("message_privada", function (data) {
   }
   //save_msg(data.mensagem);
 });
-
+socket.on('contact-status', (data) => {
+  console.log(data)
+  const $status = document.getElementById('status')
+  if (data.status == 'online') {
+    $status.style.color = 'green'
+    $status.innerHTML = 'online'
+  } else {
+    $status.style.color = 'red'
+    $status.innerHTML = 'offline'
+  }
+})
 // $input_msg.addEventListener('focus', () => {
 //   x = window.matchMedia("(max-width: 768px)");
 //   if (x.matches) {

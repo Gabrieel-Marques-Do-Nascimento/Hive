@@ -131,7 +131,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     left: 50%;
     top: 50%;
-
+    color:#fff;
     transform: translate(-50%, -50%);
 }
 
@@ -166,7 +166,10 @@ body {
 #my-setting-profile .user-info p {
     margin: 8px 0;
 }
-
+label#my-bio {
+  position: relative;
+  left: -25%;
+}
 
 
 @media screen and (max-width: 768px) {

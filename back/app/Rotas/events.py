@@ -70,6 +70,11 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     @socketio.on("contact-status")
     def contact_status(data):
         print(data)
+        # if (data["contacts"], list):
+        #     pass
+        if data.get("id"):
+            __status = 'online' if ususarios_conectados.get(data["id"]) else 'offline'
+            socketio.emit("contact-status", {'status':__status}, to=ususarios_conectados[data["return"]])
         # online = []
         # for ct in data:
         #   if ususarios_conectados.get(ct):
@@ -159,9 +164,9 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     def disconnect():
         socket_logger.info("Cliente desconectado")
 
-        temp = ususarios_conectados
+        temp: dict = ususarios_conectados
         for key,  user in temp.items():
-            if ususarios_conectados[key] == request.sid:
+            if temp[key] == request.sid:
                 socket_logger.info(f"Usuario {key}  desconectado")
                 del ususarios_conectados[key]
                 try:

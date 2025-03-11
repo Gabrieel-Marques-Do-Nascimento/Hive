@@ -1,3 +1,4 @@
+import { socket } from "./conect.js";
 import { URL } from "./env.js";
 
 
@@ -68,6 +69,12 @@ export function contact_setting_profile(contact) {
   document.getElementById("bio").innerHTML = !contact.bio? contact.bio : "Não informado";
   }
 
+
+  /**
+   * cria um novo usuario e add a lista de users na home
+   * @param {*} user 
+   * @returns 
+   */
 export function newUser(user) {
   let pessoaN = parseInt(user["other_Id"])
     ? parseInt(user["contact_Id"])
@@ -116,7 +123,7 @@ avatar.appendChild(image)
   clone.addEventListener("click", () => {
    
     contact_setting_profile(user)
-
+    socket.emit("contact-status", {id: pessoaN, return: userId});
     let messages = JSON.parse(localStorage.getItem(messageTag));
     localStorage.setItem(senderTag, String(pessoaN));
     document.getElementById("div-custom-name").textContent = hiveUserid;
@@ -143,6 +150,12 @@ avatar.appendChild(image)
   return clone;
 }
 
+/**
+ * cria um elemento de mensagem
+ * @param {*} pai elemento pai
+ * @param {*} text texto da message
+ * @param {*} cloneId id da message
+ */
 export function create_msg_element(pai, text, cloneId) {
   console.log("new msg");
   const msgs = document.createElement("p");
@@ -151,7 +164,12 @@ export function create_msg_element(pai, text, cloneId) {
   clone.id = cloneId;
   pai.appendChild(clone);
 }
-
+ /**
+ * Creates a new message element and appends it to the messages container
+ * @param {string} message - The message text to display
+ * @param {string} type - The type of message ('user-msg' or 'sender-msg'), defaults to 'user-msg'
+ * @returns {void}
+ */
 export function new_msg(message, type = "user-msg") {
   if (!message) {
     return;
@@ -168,6 +186,11 @@ export function new_msg(message, type = "user-msg") {
   }
 }
 
+/**
+ * Saves a message to local storage
+ * @param {string} message - The message to save
+ * @returns {void}
+ */
 export function save_msg(message) {
   let __messages = JSON.parse(localStorage.getItem(messageTag));
   if (!__messages.length > 0) {
@@ -176,7 +199,11 @@ export function save_msg(message) {
   __messages.push(message);
   localStorage.setItem(messageTag, JSON.stringify(__messages));
 }
-
+/**
+ * Activates the profile view by showing profile elements and updating styles
+ * Sets up profile and home elements, adds active classes, and displays profile section
+ * @returns {void}
+ */
 export function profile() {
   const $profile_elemt = document.getElementById("profile");
   const $home_elemet = document.getElementById("home");
@@ -188,7 +215,6 @@ export function profile() {
   const $usernameSpan = document.getElementById("username");
   const $sendernameSpan = document.getElementById("sendername");
 }
-
 export function contact_exist(message, id) {
   let contact_exist_in = false;
   let __messages = JSON.parse(localStorage.getItem(messageTag));

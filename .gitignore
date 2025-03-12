@@ -7,3 +7,4 @@ back/app/instance/users.db
 /front/app/.kivy/*
 /app_testes/__pycache__/*
 back/app/logs/socket.log
+.env

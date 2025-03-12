@@ -30,16 +30,24 @@ usersTest = [
 
 url = "http://127.0.0.1:5000"
 
-for user in usersTest:
-    sleep(0.5)
-    resp = requests.post(url + "/create", json=user)
-    # resp = requests.post(url+"/login", json={'username':"Gabriel", "password": "20211613"})
-    print(resp.text)
+
+def creat_all_users():
+	for user in usersTest:
+	    sleep(0.5)
+	    resp = requests.post(url + "/create", json=user)
+	    # resp = requests.post(url+"/login", json={'username':"Gabriel", "password": "20211613"})
+	    print(resp.text)
+	
+	
+	"""
+	curl -X POST http://localhost:5000/login \
+	     -H "Content-Type: application/json" \
+	     -d '{"email": "Gabriel",  "password": "20211613"}'
+	
+	"""
+
+def creat_user(name="Gabriel",passworld="20211613", email= "gabriel@email.com.br"):
+	resp = requests.post(url+"/create", json={'username': name, "password": passworld, "email":email})
 
 
-"""
-curl -X POST http://localhost:5000/login \
-     -H "Content-Type: application/json" \
-     -d '{"email": "Gabriel",  "password": "20211613"}'
-
-"""
+creat_user()

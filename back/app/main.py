@@ -1,17 +1,9 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
-from flask_cors import CORS
-from datetime import datetime
-
+from flask import request, jsonify
 from auth import token_verify
 
-
-# local
-from Database import Users, Messages, Contacts, data_str
+from Database import Users
 from Rotas import create_app, socketIo, app, db
 
-
-# -------------------------------------------------------------
-# -------------------------------------------------------------
 with app.app_context():
     db.create_all()
 
@@ -20,13 +12,7 @@ with app.app_context():
 @token_verify
 def mymesgs(token):
     """
-    >>> Token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk0NDY5NDUsInVpZCI6MX0.NBKM_4OUNbcCTOpZKfTaE1qLG4CNNsnJ48IUh0iBY_I"
-
-    curl -X POST http://localhost:5000/my_msgs \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk5MzQ5MTIsInVpZCI6MX0.6uk2tajbWL63judZYGyrsrsaMWbHe_xDxp74Y0KPQzc" \
-     -H "uid: 1" \
-     -d '{ "id": 1 }'
+ Retorna as mensagens do usuário autenticado.
     """
     try:
         resp = request.get_json()
@@ -50,18 +36,17 @@ def mymesgs(token):
             for contact in user.contacts:
                 if contact:
                     contacts.append(
-                        {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at,'update':  contact.update, 'id': contact.user.id})
+                        {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at, 'update':  contact.update, 'id': contact.user.id})
         return jsonify([msgs, contacts])
     except AttributeError as e:
         app.logger.error(e)
-        return ['erro']
+        return jsonify([], [])  # ['erro']
     except Exception as e:
         app.logger.error(e)
         return jsonify([], [])  # ['erro']
 
 
 if __name__ == "__main__":
-    # app.run(debug=True)
     import os
-    print(os.path.join(os.path.dirname(__file__), ""))
-    socketIo.run(app, host="0.0.0.0")
+    port = int(os.environ.get("PORT"))
+    socketIo.run(app, host="0.0.0.0", port=port, allow_unsafe_werkzeug=True)

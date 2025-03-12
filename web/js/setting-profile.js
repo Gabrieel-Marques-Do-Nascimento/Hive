@@ -6,7 +6,7 @@ const my_name = document.getElementById("my-name");
 my_name.placeholder = String(localStorage.getItem("hiveusername"));
 const my_username = document.getElementById("my-username");
 my_username.placeholder = String(localStorage.getItem("hiveusername"));
-const my_bio = document.getElementById("my-bio");
+const my_bio = document.getElementById("text-my-bio");
 my_bio.placeholder = localStorage.getItem("hivebio")
   ? String(localStorage.getItem("hivebio"))
   : "";
@@ -77,11 +77,13 @@ document.getElementById("exit-button").addEventListener("click", () => {
 });
 
 const setting_form = document.querySelector(".profile-form");
-const bio_element = document.getElementById("my-bio");
+
 setting_form.addEventListener("click", (event) => {
+ 
   event.preventDefault();
-  console.log(bio_element.value);
-  if (bio_element.value) {
+   const bio_element = document.getElementById("text-my-bio");
+  console.log(document.getElementById("text-my-bio").value);
+  if (document.getElementById("text-my-bio").value) {
     console.log("bio atualizado");
     socket.emit("bio", { bio: bio_element.value, id: localStorage.getItem(myTag) });
     localStorage.setItem("hivebio", bio_element.value);

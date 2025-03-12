@@ -10,8 +10,7 @@ socket_bp = Blueprint("socket_pb", __name__)
 
 from .utils import setup_logger  # noqa: E402
 
-socket_logger = setup_logger("socket_logger", log_file="socket.log")
-# socket_logger.info("SocketIO initialized")
+
 
 ususarios_conectados = {}
 
@@ -29,10 +28,10 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
 
                         Args:
                                 data_base (dict): Dados da mensagem
-                >>> data_base: dict = {'destinatario_id': int, 'mensagem': str, 'id': int}
+>>> data_base: dict = {'destinatario_id': int, 'mensagem': str, 'id': int}
         """
         try:
-            socket_logger.info(f"Saving message: {data_base}")
+
             user = Users.query.filter_by(id=data_base["id"]).first()
             destinatario = Users.query.filter_by(
                 id=data_base["to"]).first()
@@ -46,7 +45,6 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
 
             return True
         except Exception as e:
-            socket_logger.error("Erro ao salvar mensagem: %s", e)
             return False
 
     def status(user: Users, sid) -> bool:
@@ -54,27 +52,28 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
             Atualiza o status do usuário"
         """
         data_hora = datetime.now()
-        print(data_hora)
+
         messages = Messages.query.filter(
             user.online < Messages.created_at, Messages.user_Id == user.id).all()
-        print(messages)
+
         if len(messages) > 0:
             all_messages = [{
                 "message": message.message, "id": message.user_Id, "to": message.to, "other_Id": message.other_Id, 'created': message.created_at.strftime("%d/%m/%Y %H:%M:%S")
             } for message in messages]
-            print(all_messages)
             emit("status", {'status': 'atualizacoes',
                  'messages': all_messages}, to=sid)
         return True
 
     @socketio.on("contact-status")
     def contact_status(data):
-        print(data)
+
         # if (data["contacts"], list):
         #     pass
         if data.get("id"):
-            __status = 'online' if ususarios_conectados.get(data["id"]) else 'offline'
-            socketio.emit("contact-status", {'status':__status}, to=ususarios_conectados[data["return"]])
+            __status = 'online' if ususarios_conectados.get(
+                data["id"]) else 'offline'
+            socketio.emit(
+                "contact-status", {'status': __status}, to=ususarios_conectados[data["return"]])
         # online = []
         # for ct in data:
         #   if ususarios_conectados.get(ct):
@@ -101,16 +100,15 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
         if id is None:
             socket_logger.error("ID não encontrado")
             return
-        socket_logger.info("Cliente conectado")
+
         ususarios_conectados[int(id)] = request.sid
-        socket_logger.info(
-            f"Usuario {id} conectado com o socket {request.sid}")
+
         user = Users.query.filter_by(id=id).first()
         status(user, request.sid)
 
     @socketio.on("bio")
     def b(data):
-        print(data)
+
         id = int(data["id"])
         user = Users.query.filter_by(id=id).first()
         user.bio = data["bio"]
@@ -121,11 +119,11 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     def send_message(data):
         destinatario_id = int(data["to"])
         mensagem = data["message"]
-        print(data)
+
         save_message(data)
         if destinatario_id in ususarios_conectados:
             destinatario_sid = ususarios_conectados[destinatario_id]
-            socket_logger.info("message-enviada:" + mensagem)
+
             emit("message_privada", {
                 "message": mensagem, "id": int(data["id"]), "to": int(destinatario_id), "other_Id": int(destinatario_id)
             }, to=destinatario_sid)
@@ -137,7 +135,6 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     @socketio.on('new-contact')
     def new_contact(data):
         try:
-            print(data)
             user = Users.query.filter_by(id=int(data["userId"])).first()
             constact = Users.query.filter_by(id=int(data["id"])).first()
             if constact and constact.id != int(data["userId"]):
@@ -156,23 +153,21 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
                         "message": "usuario nao encontrado"
                     }, broadcast=True)
         except Exception as e:
-            socket_logger.critical(f"Error: {e}")
             emit("error", {
                 "message": str(e)}, broadcast=True)
 
     @socketio.on('disconnect')
     def disconnect():
-        socket_logger.info("Cliente desconectado")
 
         temp: dict = ususarios_conectados
-        for key,  user in temp.items():
+        for key in temp.keys():
             if temp[key] == request.sid:
-                socket_logger.info(f"Usuario {key}  desconectado")
+
                 del ususarios_conectados[key]
                 try:
                     dbuser = Users.query.filter_by(id=int(key)).first()
                     dbuser.online = datetime.now()
                     db.session.commit()
-                except Exception as e:
-                    socket_logger.error(f"Error: {e}")
+                except Exception:
+                    pass
                 break

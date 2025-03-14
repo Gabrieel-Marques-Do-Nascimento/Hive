@@ -49,4 +49,4 @@ def mymesgs(token):
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT") or 5000)
-    socketIo.run(app, host="0.0.0.0", port=port, allow_unsafe_werkzeug=True)
+    socketIo.run(app, host="0.0.0.0", port=port, allow_unsafe_werkzeug=True, debug=False)

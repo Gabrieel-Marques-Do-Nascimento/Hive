@@ -3,7 +3,7 @@
 //dotenv.config()
 
 const resp = await fetch(
-  `https://${location.hostname}:${location.port}/.netlify/functions/api`
+  `http://${location.hostname}:${location.port}/.netlify/functions/api`
 );
 const json = await resp.json();
 export const URL = json.url;

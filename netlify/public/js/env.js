@@ -2,8 +2,11 @@
 //import {dotenv} from "./dotenv"
 //dotenv.config()
 
-
-export let URL=`/api`
+const resp = await fetch(
+  `http://${location.hostname}:${location.port}/.netlify/functions/api`
+);
+const json = await resp.json();
+export const URL = json.url;
 
 // Exemplo de uso das variáveis
 /*

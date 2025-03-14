@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Página de Login</title>
+	<title>Página de Login</title>	
+	<script src="../js/env.js" type="module"></script>
 	<style>
 		* {
 		margin: 0;
@@ -110,20 +111,18 @@
 			<a href="#">Criar conta</a>
 		</div>
 	</div>
-	<script src="../js/env.js" type="module"></script>
+
 	<script type="module">
 
 
 		import {URL} from "../js/env.js";
-		let url = "---+"
-		console.log(URL)
 
 		const form = document.getElementById('login-form');
 		form.addEventListener('submit', (event) => {
 		event.preventDefault();
 		const email = document.getElementById('email').value;
 		const password = document.getElementById('password').value;
-		fetch("/api/login", {
+		fetch(`${URL}/login`, {
 		method: 'POST',
 		headers: {
 		'Content-Type': 'application/json'

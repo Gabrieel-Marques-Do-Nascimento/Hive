@@ -97,7 +97,7 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     def connect():
         id = request.headers.get('id')
         if id is None:
-            socket_logger.error("ID não encontrado")
+            # .error("ID não encontrado")
             return
 
         ususarios_conectados[int(id)] = request.sid
@@ -141,7 +141,7 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
                                        custom_name=data["custom_name"])
                 db.session.add(newConatact)
                 db.session.commit()
-                socket_logger.info(f"User {constact.id} found")
+                # .info(f"User {constact.id} found")
                 emit(f"new-contact", {
                     "contact": constact.id,
                     "name": data["custom_name"]}, broadcast=True)

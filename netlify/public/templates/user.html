@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #666;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .username {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .status.online {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status.offline {
+            background-color: #fafafa;
+            color: #616161;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .messages-section {
+            margin-top: 2rem;
+        }
+
+        .messages-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .messages-list {
+            list-style: none;
+        }
+
+        .message-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                padding: 1rem;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-avatar" id="avatar"></div>
+            <div class="profile-info">
+                <h1 class="username" id="username"></h1>
+                <div class="status" id="status"></div>
+                <p id="email"></p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="viewCount">0</div>
+                <div class="stat-label">Visualizações</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="messageCount">0</div>
+                <div class="stat-label">Mensagens</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="memberSince"></div>
+                <div class="stat-label">Membro desde</div>
+            </div>
+        </div>
+
+        <div class="messages-section">
+            <div class="messages-header">
+                <h2>Mensagens Recentes</h2>
+            </div>
+            <ul class="messages-list" id="messagesList">
+                <!-- Mensagens serão inseridas aqui via JavaScript -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Simula dados recebidos do backend
+        const userData = {
+            id: 1,
+            username: "usuario_exemplo",
+            email: "exemplo@email.com",
+            email_verify: true,
+            online: new Date(),
+            created_at: new Date("2024-01-01"),
+            view: 1250,
+            messages: [
+                { id: 1, content: "Primeira mensagem", created_at: new Date() },
+                { id: 2, content: "Segunda mensagem", created_at: new Date() }
+            ]
+        };
+
+        // Função para atualizar a interface com os dados do usuário
+        function updateProfile(user) {
+            // Avatar (primeira letra do username)
+            document.getElementById('avatar').textContent = user.username[0].toUpperCase();
+            
+            // Informações básicas
+            document.getElementById('username').textContent = user.username;
+            document.getElementById('email').textContent = user.email;
+            
+            // Status online/offline
+            const statusEl = document.getElementById('status');
+            const lastOnline = new Date(user.online);
+            const isOnline = new Date() - lastOnline < 300000; // 5 minutos
+            
+            statusEl.className = `status ${isOnline ? 'online' : 'offline'}`;
+            statusEl.textContent = isOnline ? 'Online' : 'Offline';
+            
+            // Estatísticas
+            document.getElementById('viewCount').textContent = user.view.toLocaleString();
+            document.getElementById('messageCount').textContent = user.messages.length.toLocaleString();
+            document.getElementById('memberSince').textContent = new Date(user.created_at)
+                .toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' });
+            
+            // Lista de mensagens
+            const messagesList = document.getElementById('messagesList');
+            messagesList.innerHTML = user.messages
+                .map(msg => `
+                    <li class="message-item">
+                        <p>${msg.content}</p>
+                        <small>${new Date(msg.created_at).toLocaleDateString('pt-BR')}</small>
+                    </li>
+                `)
+                .join('');
+        }
+
+        // Inicializa a página com os dados
+        updateProfile(userData);
+
+        // Atualiza o status online a cada minuto
+        setInterval(() => {
+            const statusEl = document.getElementById('status');
+            const lastOnline = new Date(userData.online);
+            const isOnline = new Date() - lastOnline < 300000;
+            
+            statusEl.className = `status ${isOnline ? 'online' : 'offline'}`;
+            statusEl.textContent = isOnline ? 'Online' : 'Offline';
+        }, 60000);
+    </script>
+</body>
+</html>

@@ -8,3 +8,6 @@ back/app/instance/users.db
 /app_testes/__pycache__/*
 back/app/logs/socket.log
 .env
+
+# Local Netlify folder
+.netlify

@@ -11,7 +11,6 @@ socket_bp = Blueprint("socket_pb", __name__)
 from .utils import setup_logger  # noqa: E402
 
 
-
 ususarios_conectados = {}
 
 
@@ -87,7 +86,7 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
                 user_Id=ct["id"], contact_Id=data["id"]).first()
             if contact.update > datetime.strptime(ct["update"], 'YYYY-MM-DD HH:MM:SS.ffffff'):
                 contacts_update.append({"contact": contact.contact_Id, "name": contact.custom_name,
-                                       'created': contact.created_at, 'update':  contact.update, 'id': contact.user.id})
+                                       'update':  contact.update, 'id': contact.user.id})
             Contacts.query.filter_by(
                 user_Id=ct["id"], contact_Id=data["contact"]).update(dict(update=datetime.now()))
         db.session.commit()

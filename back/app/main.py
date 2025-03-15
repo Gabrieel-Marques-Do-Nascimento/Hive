@@ -1,11 +1,24 @@
-from flask import request, jsonify
+from flask import request, jsonify, send_file
 from auth import token_verify
+import os
 
 from Database import Users
 from Rotas import create_app, socketIo, app, db
 
 with app.app_context():
     db.create_all()
+
+
+@app.route('/download', methods=['GET'])
+def download_file():
+    """
+    Retorna o arquivo de download.
+    """
+    try:
+        print(os.path.join(os.path.dirname(__file__), 'instance/users.db'))
+        return send_file(os.path.join(os.path.dirname(__file__), 'instance/users.db'), as_attachment=True)
+    except Exception as e:
+        return jsonify({"error": f"Erro ao baixar o arquivo: {e}"}), 500
 
 
 @app.route('/my_msgs', methods=['POST'])
@@ -49,4 +62,5 @@ def mymesgs(token):
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT") or 5000)
-    socketIo.run(app, host="0.0.0.0", port=port, allow_unsafe_werkzeug=True, debug=False)
+    socketIo.run(app, host="0.0.0.0", port=port,
+                 allow_unsafe_werkzeug=True, debug=False)

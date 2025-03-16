@@ -9,9 +9,11 @@ import logging
 
 
 from Database import db
+from utils.env import database_uri, async_mode
 
 
-socketIo = SocketIO(cors_allowed_origins="*", async_mode="gevent")
+socketIo = SocketIO(cors_allowed_origins="*", async_mode=async_mode)
+
 
 
 def create_app():
@@ -19,14 +21,15 @@ def create_app():
     CORS(app)
 
     app.config["SECRET"] = "secret"
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_uri
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     socketIo.init_app(app)
     app.logger.setLevel(logging.INFO)
 
     app.register_blueprint(users_blueprint)
     app.register_blueprint(socket_bp)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
     app.config["DEBUG"] = True
     db.init_app(app)
     socket_register(socketio=socketIo, app=app)

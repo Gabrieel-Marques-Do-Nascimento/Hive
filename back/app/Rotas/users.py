@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from auth.JWT_C import token_update
-from Database.cliente import Users, db
+from Database import Users, db
 
 
 users_blueprint = Blueprint('users', __name__)

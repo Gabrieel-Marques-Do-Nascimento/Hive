@@ -9,10 +9,10 @@ import logging
 
 
 from Database import db
-from utils.env import database_uri, async_mode
+from utils import env
 
 
-socketIo = SocketIO(cors_allowed_origins="*", async_mode=async_mode)
+socketIo = SocketIO(cors_allowed_origins="*", async_mode=env.async_mode)
 
 
 
@@ -21,7 +21,7 @@ def create_app():
     CORS(app)
 
     app.config["SECRET"] = "secret"
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_uri
+    app.config["SQLALCHEMY_DATABASE_URI"] = env.database_uri
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     socketIo.init_app(app)
     app.logger.setLevel(logging.INFO)

@@ -1,2 +1,4 @@
 from .logger_flask import setup_logger
-import .env
+from .env_ import Env 
+
+env = Env()

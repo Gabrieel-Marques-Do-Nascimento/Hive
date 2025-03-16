@@ -5,13 +5,13 @@ import {
   contact_exist,
   save_msg,
   contact_listTag,
-  messageTag
+  messageTag,
 } from "./utils.js";
 import {
   class_background,
   $background,
   class_visible,
-  elemen_destaque
+  elemen_destaque,
 } from "./setting-profile.js";
 import { socket } from "./conect.js";
 const label_name = document.getElementById("label-name");
@@ -57,12 +57,14 @@ function label_name_status(
   if (!text) {
     text = "hello world";
   }
-  label_name.textContent = text;
-  label_name.style.color = color;
-  setTimeout(() => {
-    label_name.textContent = "Nome ou id:";
-    label_name.style.color = "black";
-  }, timeout);
+  if (label_name) {
+    label_name.textContent = text;
+    label_name.style.color = color;
+    setTimeout(() => {
+      label_name.textContent = "Nome ou id:";
+      label_name.style.color = "black";
+    }, timeout);
+  }
   if (exit) {
     setTimeout(() => {
       new_contact.style.display = "none";
@@ -75,12 +77,12 @@ let contacts = JSON.parse(localStorage.getItem(contact_listTag));
 function create_user_label(users, contacts) {
   console.log(users);
 
-  users.forEach(message => {
+  users.forEach((message) => {
     let vr = false;
     if (!contacts) {
       contacts = [];
     }
-    contacts.forEach(contact => {
+    contacts.forEach((contact) => {
       if (message.other_Id == contact.contact) {
         vr = true;
       }
@@ -90,14 +92,14 @@ function create_user_label(users, contacts) {
       console.log(contacts);
       contacts.push({
         contact: message.other_Id,
-        name: `contact id: ${message.other_Id}`
+        name: `contact id: ${message.other_Id}`,
       });
     }
   });
   localStorage.setItem(contact_listTag, JSON.stringify(contacts));
 
   lista.innerHTML = "";
-  contacts.forEach(contact => {
+  contacts.forEach((contact) => {
     console.log(contact);
     const clone = newUser(contact);
 
@@ -141,14 +143,14 @@ function new_contact_status() {
 const add = document.getElementById("add");
 add.addEventListener("click", () => {
   new_contact_status();
-  new_contact.addEventListener("submit", e => {
+  new_contact.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const user = document.getElementById("username");
     const $customname = document.getElementById("customname");
     let contacts = JSON.parse(localStorage.getItem(contact_listTag));
     let includes = false;
-    contacts.forEach(contact => {
+    contacts.forEach((contact) => {
       includes = contact.contact == parseInt(user.value);
     });
     if (includes) {
@@ -161,7 +163,7 @@ add.addEventListener("click", () => {
     socket.emit("new-contact", {
       id: parseInt(user.value),
       userId: userId,
-      custom_name: $customname.value
+      custom_name: $customname.value,
     });
     user.value = "";
   });
@@ -176,7 +178,9 @@ socket.on("new-contact", function (data) {
     const pessoa = data["pessoa"];
     const chave = `contato_${pessoa}`;
 
-    let contact_list = JSON.parse(localStorage.getItem(contact_listTag))? JSON.parse(localStorage.getItem(contact_listTag)) : [];
+    let contact_list = JSON.parse(localStorage.getItem(contact_listTag))
+      ? JSON.parse(localStorage.getItem(contact_listTag))
+      : [];
     contact_list.push(data);
     localStorage.setItem(contact_listTag, JSON.stringify(contact_list));
     create_user_label([], contact_list);
@@ -185,11 +189,10 @@ socket.on("new-contact", function (data) {
   }
   label_name_status("usuario invalido", "red", 2000, false);
 });
-socket.on("status", data => {
+socket.on("status", (data) => {
   console.log(data);
-
 });
-socket.on("error", data => {
+socket.on("error", (data) => {
   console.log(data);
   label_name_status("usuario invalido: " + data.message, "red", 2000, false);
 });
@@ -208,30 +211,28 @@ socket.on("message_privada", function (data) {
     message: data.message,
     to: data.to,
     other_Id: data.id,
-    id: userId
+    id: userId,
   };
   save_msg(new_message);
   console.log(new_message);
 });
-socket.on('status', (data)=> {
-  console.log(data)
-  if(data.status == "online"){
-    console.log("online")
-   const noview = document.getElementById(`noview=${data.id}`)
-    if(noview){ 
-     
-      noview.style.backgroundColor = "green"
+socket.on("status", (data) => {
+  console.log(data);
+  if (data.status == "online") {
+    console.log("online");
+    const noview = document.getElementById(`noview=${data.id}`);
+    if (noview) {
+      noview.style.backgroundColor = "green";
     }
-  }else{
-    console.log("offline")
+  } else {
+    console.log("offline");
 
-    const noview = document.getElementById(`noview=${data.id}`)
-    if(noview){
-      noview.style.backgroundColor = "red"
+    const noview = document.getElementById(`noview=${data.id}`);
+    if (noview) {
+      noview.style.backgroundColor = "red";
     }
   }
-})
-
+});
 
 let style = document.createElement("style");
 style.innerHTML = `
@@ -246,5 +247,5 @@ style.innerHTML = `
     --color1:  rgb(205, 116, 116) ;
     
     }
-`
-document.head.appendChild(style)
+`;
+document.head.appendChild(style);

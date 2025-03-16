@@ -196,6 +196,8 @@ export function save_msg(message) {
   if (!__messages.length > 0) {
     __messages = [];
   }
+  message.id = __messages.length;
+  message.created = new Date().toLocaleString();
   __messages.push(message);
   localStorage.setItem(messageTag, JSON.stringify(__messages));
 }

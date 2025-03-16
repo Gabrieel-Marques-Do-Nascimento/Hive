@@ -50,25 +50,28 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
         """
             Atualiza o status do usuário"
         """
-        data_hora = datetime.now()
+        try:
+            data_hora = datetime.now()
 
-        messages = Messages.query.filter(
-            user.online < Messages.created_at, Messages.user_Id == user.id).all()
+            messages = Messages.query.filter(
+                user.online < Messages.created_at, Messages.user_Id == user.id).all()
 
-        if len(messages) > 0:
-            all_messages = [{
-                "message": message.message, "id": message.user_Id, "to": message.to, "other_Id": message.other_Id, 'created': message.created_at.strftime("%d/%m/%Y %H:%M:%S")
-            } for message in messages]
-            emit("status", {'status': 'atualizacoes',
-                 'messages': all_messages}, to=sid)
-        return True
+            if len(messages) > 0:
+                all_messages = [{
+                    "message": message.message, "id": message.user_Id, "to": message.to, "other_Id": message.other_Id, 'created': message.created_at.strftime("%d/%m/%Y %H:%M:%S")
+                } for message in messages]
+                emit("status", {'status': 'atualizacoes',
+                                'messages': all_messages}, to=sid)
+            return True
+        except Exception as e:
+            return False
 
     @socketio.on("contact-status")
     def contact_status(data):
 
         # if (data["contacts"], list):
         #     pass
-        if data.get("id"):
+        if data.get("id") and ususarios_conectados:
             __status = 'online' if ususarios_conectados.get(
                 data["id"]) else 'offline'
             socketio.emit(
@@ -80,18 +83,25 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
 
     @socketio.on("status")
     def _status(data):
-        contacts_update = []
-        for ct in data['contacts']:
-            contact = Users.query.filter_by(
-                user_Id=ct["id"], contact_Id=data["id"]).first()
-            if contact.update > datetime.strptime(ct["update"], 'YYYY-MM-DD HH:MM:SS.ffffff'):
-                contacts_update.append({"contact": contact.contact_Id, "name": contact.custom_name,
-                                       'update':  contact.update, 'id': contact.user.id})
-            Contacts.query.filter_by(
-                user_Id=ct["id"], contact_Id=data["contact"]).update(dict(update=datetime.now()))
-        db.session.commit()
-        emit("status", {'status': 'atualizacoes',
-             'contacts': contacts_update}, to=request.sid)
+        try:
+            contacts_update = []
+            for ct in data['contacts']:
+                contact = Users.query.filter_by(
+                    user_Id=ct["id"], contact_Id=data["id"]).first()
+                if contact.update > datetime.strptime(ct["update"], 'YYYY-MM-DD HH:MM:SS.ffffff'):
+                    contacts_update.append({"contact": contact.contact_Id, "name": contact.custom_name,
+                                            'update':  contact.update, 'id': contact.user.id})
+                Contacts.query.filter_by(
+                    user_Id=ct["id"], contact_Id=data["contact"]).update(dict(update=datetime.now()))
+            db.session.commit()
+            emit("status", {'status': 'atualizacoes',
+                            'contacts': contacts_update}, to=request.sid)
+        except KeyError as e:
+            print(f'valor não encontrado: {e}')
+        except AttributeError as e:
+            print(f'valor não encontrado: {e}')
+        except Exception as e:
+            print(f'erro desconhecido: {e}')
 
     @socketio.on("connect")
     def connect():
@@ -99,11 +109,9 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
         if id is None:
             # .error("ID não encontrado")
             return
-
         ususarios_conectados[int(id)] = request.sid
-
         user = Users.query.filter_by(id=id).first()
-        status(user, request.sid)
+        _ = status(user, request.sid) if user else None
 
     @socketio.on("bio")
     def b(data):
@@ -124,7 +132,7 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
             destinatario_sid = ususarios_conectados[destinatario_id]
 
             emit("message_privada", {
-                "message": mensagem, "id": int(data["id"]), "to": int(destinatario_id), "other_Id": int(destinatario_id)
+                "message": mensagem, "id": int(data["id"]), "to": int(destinatario_id), "other_Id": int(destinatario_id), 'created_at': datetime.now().strftime("%d/%m/%Y %H:%M:%S")
             }, to=destinatario_sid)
         else:
             emit("error", {

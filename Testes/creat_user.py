@@ -50,4 +50,4 @@ def creat_user(name="Gabriel",passworld="20211613", email= "gabriel@email.com.br
 	resp = requests.post(url+"/create", json=usersTest[1])
 	print(resp.text)
 
-creat_user()
+creat_all_users()

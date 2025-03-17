@@ -9,16 +9,6 @@ with app.app_context():
     db.create_all()
 
 
-@app.route('/download', methods=['GET'])
-def download_file():
-    """
-    Retorna o arquivo de download.
-    """
-    try:
-        print(os.path.join(os.path.dirname(__file__), 'instance/users.db'))
-        return send_file(os.path.join(os.path.dirname(__file__), 'instance/users.db'), as_attachment=True)
-    except Exception as e:
-        return jsonify({"error": f"Erro ao baixar o arquivo: {e}"}), 500
 
 
 @app.route('/my_msgs', methods=['POST'])
@@ -42,15 +32,15 @@ def mymesgs(token):
             for mensage in user.messages:
                 if mensage:
                     msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
-                                 "to": mensage.to, "id": user.id})
+                                 "to": mensage.to, "id": user.id, 'created_at': mensage.created_at})
         if not user or not user.messages:
             msgs = []
         if user and user.contacts:
             for contact in user.contacts:
                 if contact:
                     contacts.append(
-                        {"contact": contact.contact_Id, "name": contact.custom_name, 'created': contact.created_at, 'update':  contact.update, 'id': contact.user.id})
-        return jsonify([msgs, contacts])
+                        {"contact": contact.contact_Id, "name": contact.custom_name, 'update':  contact.update, 'id': contact.user.id})
+        return jsonify([msgs, contacts, user.bio])
     except AttributeError as e:
         app.logger.error(e)
         return jsonify([], [])  # ['erro']

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    /* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f0f2f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Main container */
+#profile {
+  max-width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header styling */
+header {
+  background-color: #128C7E;
+  color: white;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+#exitButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+#exitButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+  background-color: #e0e0e0;
+}
+
+#photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#div-custom-name {
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: auto;
+}
+
+#status {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-right: 12px;
+}
+
+#serch, #menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 8px;
+  margin-left: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+#serch svg {
+  width: 20px;
+  height: 20px;
+}
+
+#serch:hover, #menu:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#menu {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+/* Search container */
+#serch-container {
+  padding: 8px 16px;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#serch-container input {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  outline: none;
+  font-size: 14px;
+}
+
+#serch-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #128C7E;
+  color: white;
+}
+
+/* Main content */
+#profile-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #e5ddd5;
+  background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23dbcec0' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M12 0h12v12H12V0zm16 16h12v12H28V16zm0-16h12v12H28V0zM12 16h12v12H12V16z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Messages section */
+#msgs {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#sender-msg, #user-msg {
+  max-width: 70%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+#sender-msg {
+  background-color: white;
+  align-self: flex-start;
+  border-top-left-radius: 0;
+}
+
+#user-msg {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+}
+
+.time {
+  display: block;
+  font-size: 10px;
+  color: #8c8c8c;
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* Message input */
+#msg {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  background-color: #f0f2f5;
+  border-top: 1px solid #e0e0e0;
+}
+
+#msg-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  outline: none;
+  font-size: 14px;
+}
+
+#send {
+  background-color: #128C7E;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+#send:hover {
+  background-color: #0b6b5d;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #sender-msg, #user-msg {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  #div-custom-name {
+    font-size: 14px;
+  }
+  #status {
+    display: none;
+  }
+  #sender-msg, #user-msg {
+    max-width: 85%;
+  }
+}
+</style>
+<body>
+    <main id="profile" style="display: flex;" class="active">
+        <header>
+        <button id="exitButton">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffff">
+        <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"></path>
+        </svg>
+        </button>
+        <div id="photo">
+        <img src="./images/profile-min.png" alt="" height="40px">
+        </div>
+        <div id="div-custom-name">contact id: 5</div>
+        <div id="status">status</div>
+        <button id="serch">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <!-- Search circle -->
+        <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2"></circle>
+        <!-- Search handle -->
+        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+        </svg>
+        </button>
+        <div id="menu">
+        •••
+        </div>
+        </header>
+        <div id="serch-container" style="display: none">
+        <input type="text" class="input-text"><button></button>
+        </div>
+        
+        <main id="profile-main">
+        <section id="msgs"><p id="sender-msg">Oi<br><span class="time">Sun, 16 Mar 2025 16:16:57 GMT</span></p><p id="sender-msg">Hello<br><span class="time">Sun, 16 Mar 2025 16:19:50 GMT</span></p><p id="sender-msg">Hello<br><span class="time">Sun, 16 Mar 2025 16:20:51 GMT</span></p><p id="sender-msg">Como vai<br><span class="time">Sun, 16 Mar 2025 16:21:02 GMT</span></p><p id="user-msg">ta off<br><span class="time">Sun, 16 Mar 2025 16:32:07 GMT</span></p><p id="sender-msg">Hello <br><span class="time">Sun, 16 Mar 2025 16:34:05 GMT</span></p><p id="sender-msg">Como vai aí que calor ne<br><span class="time">Sun, 16 Mar 2025 16:53:08 GMT</span></p><p id="sender-msg">Hello<br><span class="time">Sun, 16 Mar 2025 16:54:17 GMT</span></p><p id="sender-msg">Deu erro por que<br><span class="time">Sun, 16 Mar 2025 16:55:16 GMT</span></p><p id="sender-msg">Tem delay<br><span class="time">Sun, 16 Mar 2025 16:57:16 GMT</span></p><p id="user-msg">oi<br><span class="time">Sun, 16 Mar 2025 16:35:09 GMT</span></p><p id="user-msg">pio<br><span class="time">Sun, 16 Mar 2025 16:35:09 GMT</span></p><p id="sender-msg">Que foi não vá dormir <br><span class="time">16/03/2025, 17:33:43</span></p></section>
+        <div id="msg">
+        <input type="text" name="msg" id="msg-input" maxlength="200">
+        <button id="send" translate="no">enviar</button>
+        </div>
+        </main>
+        </main>
+</body>
+</html>

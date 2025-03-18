@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscrever-se</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+      padding: 20px;
+    }
+
+    #image-conteiner {
+      display: none;
+      text-align: center;
+      color: white;
+    }
+
+    #image-conteiner img {
+      width: 100%;
+      max-width: 160px;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .welcome-text {
+      margin-bottom: 25px;
+    }
+
+    .welcome-text h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      background: linear-gradient(to right, #ffffff, #ffd700, #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+    }
+
+    .welcome-text p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .features {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .feature-icon {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.3));
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 18px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .feature-text {
+      font-size: 14px;
+    }
+
+    .subscribe-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      padding: 40px 30px;
+      border-top: 3px solid rgba(255, 215, 0, 0.7);
+    }
+
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #a777e3, #ffd700);
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #ffd700;
+      box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+    }
+
+    input::placeholder, select::placeholder {
+      color: #aaa;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group input {
+      width: auto;
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+
+    .checkbox-group label {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .links {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .links a {
+      color: #6e8efb;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .links a:hover {
+      color: #ffd700;
+      text-decoration: underline;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80px;
+    }
+
+    .step-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step.active .step-number {
+      background: linear-gradient(135deg, #ffd700, #a777e3);
+    }
+
+    .step-title {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+    }
+
+    .step.active .step-title {
+      color: #333;
+      font-weight: 500;
+    }
+
+    .step-line {
+      height: 2px;
+      background-color: #ddd;
+      width: 60px;
+      margin: 15px 0;
+    }
+
+    /* Responsividade */
+    @media screen and (max-width: 640px) {
+      .subscribe-container {
+        padding: 30px 20px;
+      }
+      
+      h2 {
+        font-size: 24px;
+        margin-bottom: 25px;
+      }
+      
+      input, select, .submit-btn {
+        padding: 10px 12px;
+      }
+
+      .form-row {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+
+    /* Para exibir a imagem e boas-vindas em telas maiores */
+    @media screen and (min-width: 992px) {
+      body {
+        justify-content: space-evenly;
+      }
+      
+      #image-conteiner {
+        display: block;
+        width: 35%;
+        max-width: 450px;
+        position: relative;
+      }
+      
+      #image-conteiner::after {
+        content: "";
+        position: absolute;
+        bottom: -30px;
+        right: 30px;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0) 70%);
+        z-index: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="image-conteiner">
+    <img src="../images/profile-med.png" alt="Logo" />
+    <div class="welcome-text">
+      <h1>Junte-se a nós!</h1>
+      <p>Crie sua conta e tenha acesso a todas as funcionalidades da nossa plataforma de mensagens.</p>
+    </div>
+    <div class="features">
+      <div class="feature-item">
+        <div class="feature-icon">📱</div>
+        <div class="feature-text">Acesse de qualquer dispositivo</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-text">Comunicação segura e criptografada</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-text">Respostas rápidas em tempo real</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subscribe-container">
+    <h2>Criar Conta</h2>
+    
+    <div class="steps">
+      <div class="step active">
+        <div class="step-number">1</div>
+        <div class="step-title">Dados Pessoais</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-title">Verificação</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-title">Concluído</div>
+      </div>
+    </div>
+    
+    <form id="subscribe-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">Nome</label>
+          <input type="text" id="first-name" required placeholder="Seu nome" />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Sobrenome</label>
+          <input type="text" id="last-name" required placeholder="Seu sobrenome" />
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required placeholder="seu.email@exemplo.com" />
+      </div>
+      
+      <div class="form-group">
+        <label for="username">Nome de usuário</label>
+        <input type="text" id="username" required placeholder="Como você quer ser chamado" />
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" required placeholder="Crie uma senha segura" />
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirme a senha</label>
+          <input type="password" id="confirm-password" required placeholder="Digite a senha novamente" />
+        </div>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms" required />
+        <label for="terms">Li e concordo com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>.</label>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="newsletter" />
+        <label for="newsletter">Desejo receber novidades e atualizações por e-mail.</label>
+      </div>
+      
+      <button type="submit" class="submit-btn">Criar Conta</button>
+    </form>
+    
+    <div class="links">
+      <a href="login.html">Já tem uma conta? Entre aqui</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('subscribe-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      
+      if (password !== confirmPassword) {
+        alert('As senhas não coincidem. Por favor, tente novamente.');
+        return;
+      }
+      
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+      const username = document.getElementById('username').value;
+      const newsletter = document.getElementById('newsletter').checked;
+      
+      // Aqui você pode adicionar a lógica para enviar os dados para o servidor
+      console.log({
+        firstName,
+        lastName,
+        email,
+        username,
+        password,
+        newsletter
+      });
+      
+      // Simulação de sucesso
+      alert('Conta criada com sucesso! Você será redirecionado para a página de verificação.');
+      // window.location.href = "/verification.html";
+    });
+  </script>
+</body>
+</html>

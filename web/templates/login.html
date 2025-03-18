@@ -1,153 +1,340 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Página de Login</title>
-	<style>
-		* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		font-family: Arial, sans-serif;
-		}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Login</title>
 
-		body {
-		min-height: 100vh;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background: linear-gradient(45deg, #6b46c1, #4299e1);
-		}
+    <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', Arial, sans-serif;
+}
 
-		.login-container {
-		background-color: white;
-		padding: 2rem;
-		border-radius: 10px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		width: 100%;
-		max-width: 400px;
-		margin: 1rem;
-		}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  padding: 20px;
+}
 
-		.login-container h2 {
-		text-align: center;
-		color: #2d3748;
-		margin-bottom: 1.5rem;
-		}
+#image-conteiner {
+  display: none; /* Oculto por padrão em telas pequenas */
+  text-align: center;
+  color: white;
+}
 
-		.form-group {
-		margin-bottom: 1rem;
-		}
+#image-conteiner img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 215, 0, 0.3); /* Borda dourada sutil */
+}
 
-		.form-group label {
-		display: block;
-		margin-bottom: 0.5rem;
-		color: #4a5568;
-		}
+.welcome-text {
+  margin-bottom: 25px;
+}
 
-		.form-group input {
-		width: 100%;
-		padding: 0.75rem;
-		border: 1px solid #e2e8f0;
-		border-radius: 5px;
-		outline: none;
-		transition: border-color 0.2s;
-		}
+.welcome-text h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  /* Gradiente dourado sutil no texto */
+  background: linear-gradient(to right, #ffffff, #ffd700, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
 
-		.form-group input:focus {
-		border-color: #4299e1;
-		}
+.welcome-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
 
-		.submit-btn {
-		width: 100%;
-		padding: 0.75rem;
-		background-color: #4299e1;
-		color: white;
-		border: none;
-		border-radius: 5px;
-		cursor: pointer;
-		font-size: 1rem;
-		transition: background-color 0.2s;
-		}
+.features {
+  text-align: left;
+  margin-bottom: 30px;
+}
 
-		.submit-btn:hover {
-		background-color: #3182ce;
-		}
+.feature-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
 
-		.links {
-		margin-top: 1rem;
-		text-align: center;
-		}
+.feature-icon {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.3));
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  font-size: 18px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
 
-		.links a {
-		color: #4299e1;
-		text-decoration: none;
-		font-size: 0.875rem;
-		}
+.feature-text {
+  font-size: 14px;
+}
 
-		.links a:hover {
-		text-decoration: underline;
-		}
-	</style>
-</head>
-<body>
-	<div class="login-container">
-		<h2>Login</h2>
-		<form id="login-form">
-			<div class="form-group">
-				<label for="email">E-mail or name</label>
-				<input type="text" id="email" required placeholder="Digite seu e-mail ou nome">
-			</div>
-			<div class="form-group">
-				<label for="password">Senha</label>
-				<input autocomplete="on" type="password" id="password" required placeholder="Digite sua senha">
-			</div>
-			<button type="submit" class="submit-btn">Entrar</button>
-		</form>
-		<div class="links">
-			<a href="#">Esqueceu a senha?</a> •
-			<a href="#">Criar conta</a>
+.login-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  padding: 40px 30px;
+  border-top: 3px solid rgba(255, 215, 0, 0.7); /* Borda dourada no topo */
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #a777e3, #ffd700);
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ffd700;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.links {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.links a {
+  color: #6e8efb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.links a:hover {
+  color: #ffd700;
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media screen and (max-width: 480px) {
+  .login-container {
+    padding: 30px 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+  
+  input, .submit-btn {
+    padding: 10px 12px;
+  }
+}
+
+/* Para exibir a imagem e boas-vindas em telas maiores */
+@media screen and (min-width: 992px) {
+  body {
+    justify-content: space-evenly;
+  }
+  
+  #image-conteiner {
+    display: block;
+    width: 40%;
+    max-width: 500px;
+    position: relative;
+  }
+  
+  #image-conteiner::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0) 70%);
+    z-index: -1;
+  }
+}
+    </style>
+  </head>
+  <body>
+	<div id="image-conteiner">
+		<img src="../images/profile-med.png" alt="Logo" />
+		<div class="welcome-text">
+		  <h1>Bem-vindo!</h1>
+		  <p>Conecte-se à nossa plataforma de mensagens e comece a se comunicar com sua equipe em tempo real.</p>
 		</div>
-	</div>
-	<script src="../js/env.js" type="module"></script>
-	<script type="module">
+		<div class="features">
+		  <div class="feature-item">
+			<div class="feature-icon">📱</div>
+			<div class="feature-text">Acesse de qualquer dispositivo</div>
+		  </div>
+		  <div class="feature-item">
+			<div class="feature-icon">🔒</div>
+			<div class="feature-text">Comunicação segura e criptografada</div>
+		  </div>
+		  <div class="feature-item">
+			<div class="feature-icon">⚡</div>
+			<div class="feature-text">Respostas rápidas em tempo real</div>
+		  </div>
+		</div>
+	  </div>
+    <div class="login-container">
+      <h2>Login</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">E-mail or name</label>
+          <input
+            type="text"
+            id="email"
+            required
+            placeholder="Digite seu e-mail ou nome"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input
+            autocomplete="on"
+            type="password"
+            id="password"
+            required
+            placeholder="Digite sua senha"
+          />
+        </div>
+        <button type="submit" class="submit-btn">Entrar</button>
+      </form>
+      <div class="links">
+        <a href="#">Esqueceu a senha?</a> •
+        <a href="#">Criar conta</a>
+      </div>
+    </div>
+    <script src="../js/env.js" type="module"></script>
+    <script type="module">
+      import { URL } from "../js/env.js";
+      let url = "---+";
+      console.log(URL);
 
-
-		import {URL} from "../js/env.js";
-		let url = "---+"
-		console.log(URL)
-
-		const form = document.getElementById('login-form');
-		form.addEventListener('submit', (event) => {
-		event.preventDefault();
-		const email = document.getElementById('email').value;
-		const password = document.getElementById('password').value;
-		fetch(`${URL}/login`, {
-		method: 'POST',
-		headers: {
-		'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({email: email, password: password })
-		})
-		.then(response => response.json())
-		.then(data => {
-		console.log("data", data);
-		localStorage.setItem(data['token_name'], data['token']);
-		localStorage.setItem("hiveid", data["id"]);
-		localStorage.setItem("hiveusername", data["username"]);
-		localStorage.setItem("hovebio", data["bio"])
-		if (data['status'] === 'ok') {
-
-		window.location.href = '/';
-		} else {
-		alert('Credenciais inválidas');
-		}
-		})
-		.catch(error => {
-		console.error('Erro:', error);
-		});
-		})
-	</script>
-</body>
+      const form = document.getElementById("login-form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        fetch(`${URL}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email, password: password }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("data", data);
+            localStorage.setItem(data["token_name"], data["token"]);
+            localStorage.setItem("hiveid", data["id"]);
+            localStorage.setItem("hiveusername", data["username"]);
+            localStorage.setItem("hovebio", data["bio"]);
+            if (data["status"] === "ok") {
+              window.location.href = "/";
+            } else {
+              alert("Credenciais inválidas");
+            }
+          })
+          .catch((error) => {
+            console.error("Erro:", error);
+          });
+      });
+    </script>
+  </body>
 </html>

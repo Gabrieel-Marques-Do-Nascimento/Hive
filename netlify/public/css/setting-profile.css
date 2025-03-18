@@ -36,6 +36,7 @@ body {
     font-size: 14px;
     transition: background-color 0.3s ease;
   }
+
   .container #exit-button:hover {
     background-color: #555;
   }
@@ -47,6 +48,20 @@ body {
   .container #exit-button:hover svg{
     fill: rgb(255, 255, 255);
   }
+
+  .container #theme-button {
+    position: absolute;
+      top: 30px;
+      right: 30px;
+      background-color: #b6b2b217;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
 
   #setting-profile .container ::after,  #setting-profile .container ::before {
   content: '';

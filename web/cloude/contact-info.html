@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Main container styles */
+#setting-profile {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Exit button */
+#exit-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+#exit-button:hover {
+  background-color: #2563eb;
+}
+
+/* Profile header */
+.profile-header {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 20px;
+}
+
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #3b82f6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* User info section */
+.user-info {
+  padding: 20px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.user-info p {
+  margin: 12px 0;
+  font-size: 16px;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+}
+
+.user-info strong {
+  width: 80px;
+  display: inline-block;
+  color: #4b5563;
+}
+
+.user-info span {
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+/* Edit icon */
+#editar-nome {
+  margin-left: 10px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+#editar-nome:hover {
+  opacity: 1;
+}
+
+#editar-nome svg {
+  fill: #3b82f6;
+}
+
+/* Bio section */
+#bio {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 8px;
+  min-height: 60px;
+  color: #4b5563;
+  font-style: italic;
+}
+
+/* When bio is empty/undefined */
+#bio:empty::before,
+#bio:has(content: "undefined")::before {
+  content: "Adicione uma biografia...";
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 640px) {
+  .container {
+    padding: 15px;
+    border-radius: 0;
+  }
+  
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .user-info p {
+    font-size: 14px;
+  }
+  
+  #exit-button {
+    top: 15px;
+    left: 15px;
+    width: 36px;
+    height: 36px;
+  }
+}
+</style>
+<body>
+    <main id="setting-profile" class="visible">
+        <div class="container">
+        <button id="exit-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffff">
+        <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"></path>
+        </svg>
+        </button>
+        <div class="profile-header">
+        <img src="./images/profile-med.png" alt="Foto de Perfil" class="profile-picture">
+        </div>
+        <div class="user-info">
+        <p>
+        <strong>ID:</strong><span id="id-profile">5</span>
+        </p>
+        <p>
+        <strong>Nome:</strong><span id="nome-profile">contact id: 5</span>
+        <span id="editar-nome"><!--?xml version="1.0" ?-->
+        <svg enable-background="new 0 0 20 20" height="20px" id="Layer_1" version="1.1" viewBox="0 0 64 64" width="20px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g>
+        <path d="M55.736,13.636l-4.368-4.362c-0.451-0.451-1.044-0.677-1.636-0.677c-0.592,0-1.184,0.225-1.635,0.676l-3.494,3.484   l7.639,7.626l3.494-3.483C56.639,15.998,56.639,14.535,55.736,13.636z"></path>
+        <polygon points="21.922,35.396 29.562,43.023 50.607,22.017 42.967,14.39  "></polygon>
+        <polygon points="20.273,37.028 18.642,46.28 27.913,44.654  "></polygon>
+        <path d="M41.393,50.403H12.587V21.597h20.329l5.01-5H10.82c-1.779,0-3.234,1.455-3.234,3.234v32.339   c0,1.779,1.455,3.234,3.234,3.234h32.339c1.779,0,3.234-1.455,3.234-3.234V29.049l-5,4.991V50.403z"></path>
+        </g></svg>
+        </span>
+        </p>
+        <p>
+        <strong>Usuário:</strong>
+        <span id="username-profile">contact id: 5</span>
+        </p>
+        <p>
+        <strong>Bio:</strong>
+        </p>
+        <div id="bio">undefined</div>
+        </div>
+        </div>
+        </main>
+</body>
+</html>

@@ -9,11 +9,12 @@ import logging
 
 
 from Database import db
-from utils import env
+from utils import env, get_user
+
+
 
 
 socketIo = SocketIO(cors_allowed_origins="*", async_mode=env.async_mode)
-
 
 
 def create_app():
@@ -28,7 +29,6 @@ def create_app():
 
     app.register_blueprint(users_blueprint)
     app.register_blueprint(socket_bp)
-
 
     app.config["DEBUG"] = True
     db.init_app(app)

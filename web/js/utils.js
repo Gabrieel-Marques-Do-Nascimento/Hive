@@ -217,12 +217,12 @@ export function profile() {
 }
 export function contact_exist(message, id) {
   let contact_exist_in = false;
-  let __messages = JSON.parse(localStorage.getItem(messageTag));
-  if (!__messages.length > 0) {
-    __messages = [];
-  }
-  __messages.push();
-  localStorage.setItem(messageTag, JSON.stringify(__messages));
+  // let __messages = JSON.parse(localStorage.getItem(messageTag));
+  // if (!__messages.length > 0) {
+  //   __messages = [];
+  // }
+  // __messages.push(message);
+  // localStorage.setItem(messageTag, JSON.stringify(__messages));
   let constacts = JSON.parse(localStorage.getItem(contact_listTag));
   constacts.forEach(contact => {
     if (contact.contact == id) {
@@ -230,9 +230,12 @@ export function contact_exist(message, id) {
       console.log(contact);
     }
   });
+  if (!constacts) {
+    constacts = [];
+  }
   if (!contact_exist_in) {
     constacts.push({ contact: id, name: `contact id: ${id}` });
-    localStorage.setItem(contact_listTag, constacts);
+    localStorage.setItem(contact_listTag, JSON.stringify(constacts));
     location.reload();
   }
 }

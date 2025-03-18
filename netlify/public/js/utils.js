@@ -6,6 +6,7 @@ export const myTag = "hiveid";
 export const senderTag = "HiveSender";
 export const messageTag = "messages";
 export const contact_listTag = "contact-list";
+const bioTag ='hivebio'
 
 export let token = localStorage.getItem("1463token-as-savekjg");
 export let userId = parseInt(localStorage.getItem(myTag));
@@ -35,6 +36,7 @@ export function request_messages(create_user_label = null) {
         console.log("reseived: ", data);
         localStorage.setItem(messageTag, JSON.stringify(data[0]));
         localStorage.setItem(contact_listTag, JSON.stringify(data[1]));
+        localStorage.setItem(bioTag, data[2]);
 
         if (create_user_label) {
           create_user_label(data[0], data[1]);
@@ -65,7 +67,7 @@ export function contact_setting_profile(contact) {
   document.getElementById("id-profile").innerHTML = contact.contact;
   document.getElementById("nome-profile").innerHTML = contact.name;
   document.getElementById("username-profile").innerHTML = contact.name;
-  //document.getElementById('created').innerHTML = contact.created;
+  //document.getElementById('created_at').innerHTML = contact.created_at;
   document.getElementById("bio").innerHTML = !contact.bio? contact.bio : "Não informado";
   }
 
@@ -134,9 +136,9 @@ avatar.appendChild(image)
     messages.forEach(msg => {
       if (msg) {
         if (parseInt(msg.other_Id) == pessoaN && parseInt(msg.to) == userId) {
-          new_msg(msg.message, "sender-msg");
+          new_msg(msg.message, msg.created_at, "sender-msg");
         } else if (parseInt(msg.to) == pessoaN) {
-          new_msg(msg.message);
+          new_msg(msg.message, msg.created_at);
         }
       }
     });
@@ -170,7 +172,7 @@ export function create_msg_element(pai, text, cloneId) {
  * @param {string} type - The type of message ('user-msg' or 'sender-msg'), defaults to 'user-msg'
  * @returns {void}
  */
-export function new_msg(message, type = "user-msg") {
+export function new_msg(message,created_at=new Date().toLocaleString(), type = "user-msg") {
   if (!message) {
     return;
   }
@@ -179,6 +181,12 @@ export function new_msg(message, type = "user-msg") {
     const msgs = document.createElement("p");
     const clone = msgs.cloneNode(true);
     clone.textContent = message;
+    const span = document.createElement("span");
+    span.classList.add("time");
+    const br = document.createElement("br");
+    span.textContent = created_at;
+    clone.appendChild(br);
+    clone.appendChild(span);
     clone.id = type;
     msgs_container.appendChild(clone);
     if (type == "user-msg") {
@@ -197,7 +205,7 @@ export function save_msg(message) {
     __messages = [];
   }
   message.id = __messages.length;
-  message.created = new Date().toLocaleString();
+  message.created_at = new Date().toLocaleString();
   __messages.push(message);
   localStorage.setItem(messageTag, JSON.stringify(__messages));
 }
@@ -219,12 +227,12 @@ export function profile() {
 }
 export function contact_exist(message, id) {
   let contact_exist_in = false;
-  let __messages = JSON.parse(localStorage.getItem(messageTag));
-  if (!__messages.length > 0) {
-    __messages = [];
-  }
-  __messages.push();
-  localStorage.setItem(messageTag, JSON.stringify(__messages));
+  // let __messages = JSON.parse(localStorage.getItem(messageTag));
+  // if (!__messages.length > 0) {
+  //   __messages = [];
+  // }
+  // __messages.push(message);
+  // localStorage.setItem(messageTag, JSON.stringify(__messages));
   let constacts = JSON.parse(localStorage.getItem(contact_listTag));
   constacts.forEach(contact => {
     if (contact.contact == id) {
@@ -232,9 +240,12 @@ export function contact_exist(message, id) {
       console.log(contact);
     }
   });
+  if (!constacts) {
+    constacts = [];
+  }
   if (!contact_exist_in) {
     constacts.push({ contact: id, name: `contact id: ${id}` });
-    localStorage.setItem(contact_listTag, constacts);
+    localStorage.setItem(contact_listTag, JSON.stringify(constacts));
     location.reload();
   }
 }

@@ -90,3 +90,15 @@ setting_form.addEventListener("click", (event) => {
     bio_element.value = "";
   }
 });
+
+document.getElementById("theme-button").addEventListener("click", () => {
+  const $theme_button = document.getElementById("theme-button");
+  $theme_button.classList.toggle("theme-button-active");
+  if ($theme_button.classList.contains("theme-button-active")) {
+    localStorage.setItem("theme", "dark");
+    document.body.classList.add("dark-mode");
+    return;
+  }
+  localStorage.setItem("theme", "light");
+  document.body.classList.remove("dark-mode");
+});

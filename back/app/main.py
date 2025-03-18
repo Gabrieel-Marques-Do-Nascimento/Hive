@@ -3,12 +3,10 @@ from auth import token_verify
 import os
 
 from Database import Users
-from Rotas import create_app, socketIo, app, db
+from Rotas import create_app, socketIo, app, db, get_user
 
 with app.app_context():
     db.create_all()
-
-
 
 
 @app.route('/my_msgs', methods=['POST'])
@@ -22,7 +20,8 @@ def mymesgs(token):
         id = resp.get("id")  # Evita KeyError se "id" não existir
         if id is None:
             return jsonify({"error": "ID não fornecido"}), 400
-        user = Users.query.filter_by(id=id).first()
+        # user = Users.query.filter_by(id=id).first()
+        user = get_user.id(id)
         if not user:
             return jsonify({"error": "Usuário não encontrado"}), 404
         app.logger.info(resp)
@@ -32,7 +31,7 @@ def mymesgs(token):
             for mensage in user.messages:
                 if mensage:
                     msgs.append({"message": mensage.message, "other_Id": mensage.other_Id,
-                                 "to": mensage.to, "id": user.id, 'created_at': mensage.created_at})
+                                 "to": mensage.to, "id": user.id, 'created_at': mensage.created_at, 'mid': mensage.id})
         if not user or not user.messages:
             msgs = []
         if user and user.contacts:

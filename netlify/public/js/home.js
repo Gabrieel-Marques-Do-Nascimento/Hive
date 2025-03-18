@@ -166,6 +166,7 @@ add.addEventListener("click", () => {
       custom_name: $customname.value,
     });
     user.value = "";
+    elemen_destaque(new_contact, false);
   });
 });
 document.getElementById("exit").addEventListener("click", () => {
@@ -191,6 +192,15 @@ socket.on("new-contact", function (data) {
 });
 socket.on("status", (data) => {
   console.log(data);
+ let  _messages = data.messages;
+ if (_messages) {
+  let messages = JSON.parse(localStorage.getItem(messageTag))
+    ? JSON.parse(localStorage.getItem(messageTag))
+    : [];
+  localStorage.setItem(messageTag, JSON.stringify([...messages, ..._messages]));
+ 
+ }
+
 });
 socket.on("error", (data) => {
   console.log(data);

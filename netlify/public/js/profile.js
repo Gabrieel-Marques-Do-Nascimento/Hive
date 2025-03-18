@@ -59,7 +59,7 @@ socket.on("message_privada", function (data) {
   console.log(data);
   if (parseInt(data.to )== parseInt(userId) && parseInt(data.id )== parseInt(localStorage.getItem("HiveSender"))) {
     console.log(data);
-    new_msg(data.message, "sender-msg");
+    new_msg(data.message,data.created,  "sender-msg");
   }
   //save_msg(data.mensagem);
 });

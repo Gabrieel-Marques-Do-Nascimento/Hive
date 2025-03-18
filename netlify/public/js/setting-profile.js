@@ -85,8 +85,11 @@ setting_form.addEventListener("click", (event) => {
   console.log(document.getElementById("text-my-bio").value);
   if (document.getElementById("text-my-bio").value) {
     console.log("bio atualizado");
-    socket.emit("bio", { bio: bio_element.value, id: localStorage.getItem(myTag) });
-    localStorage.setItem("hivebio", bio_element.value);
+    let bio_value = bio_element.value
+    socket.emit("bio", { bio: bio_value , id: localStorage.getItem(myTag) });
+    localStorage.setItem("hivebio", bio_value);
+    
     bio_element.value = "";
+    bio_element.placeholder = bio_value;
   }
 });

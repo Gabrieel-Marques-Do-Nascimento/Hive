@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_socketio import emit, SocketIO, join_room, leave_room
 from datetime import datetime
 from Database import Users, Messages, Contacts, db
+from utils import get_user
 import auth
 from flask import Flask
 
@@ -31,9 +32,9 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
         """
         try:
 
-            user = Users.query.filter_by(id=data_base["id"]).first()
-            destinatario = Users.query.filter_by(
-                id=data_base["to"]).first()
+            user = get_user.id(id=data_base["id"])
+
+            destinatario = get_user.id(id=data_base["to"])
             user_message = Messages(
                 user=user, message=data_base["message"], other_Id=data_base["to"], to=data_base["to"])
             destinatario_message = Messages(
@@ -55,10 +56,10 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
 
             messages = Messages.query.filter(
                 user.online < Messages.created_at, Messages.user_Id == user.id).all()
-
+            print(messages, f"messages de {user.id}")
             if len(messages) > 0:
                 all_messages = [{
-                    "message": message.message, "id": message.user_Id, "to": message.to, "other_Id": message.other_Id, 'created': message.created_at.strftime("%d/%m/%Y %H:%M:%S")
+                    "message": message.message, "id": message.user_Id, "to": message.to, "other_Id": message.other_Id, 'created_at': message.created_at.strftime("%d/%m/%Y %H:%M:%S")
                 } for message in messages]
                 emit("status", {'status': 'atualizacoes',
                                 'messages': all_messages}, to=sid)
@@ -110,14 +111,13 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
             # .error("ID não encontrado")
             return
         ususarios_conectados[int(id)] = request.sid
-        user = Users.query.filter_by(id=id).first()
+        user = get_user.id(id=id)
         _ = status(user, request.sid) if user else None
 
     @socketio.on("bio")
     def b(data):
-
         id = int(data["id"])
-        user = Users.query.filter_by(id=id).first()
+        user = get_user.id(id=id)
         user.bio = data["bio"]
         user.update = datetime.now()
         db.session.commit()
@@ -142,8 +142,8 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
     @socketio.on('new-contact')
     def new_contact(data):
         try:
-            user = Users.query.filter_by(id=int(data["userId"])).first()
-            constact = Users.query.filter_by(id=int(data["id"])).first()
+            user = get_user.id(id=int(data["userId"]))
+            constact = get_user.id(id=int(data["id"]))
             if constact and constact.id != int(data["userId"]):
                 newConatact = Contacts(user_Id=user.id, contact_Id=constact.id,
                                        custom_name=data["custom_name"])
@@ -152,7 +152,7 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
                 # .info(f"User {constact.id} found")
                 emit(f"new-contact", {
                     "contact": constact.id,
-                    "name": data["custom_name"]}, broadcast=True)
+                    "name": data["custom_name"]}, to=request.sid)
 
             else:
                 emit(
@@ -172,7 +172,7 @@ def socket_register(socketio: SocketIO, app: Flask) -> None:
 
                 del ususarios_conectados[key]
                 try:
-                    dbuser = Users.query.filter_by(id=int(key)).first()
+                    dbuser = get_user.id(id=int(key))
                     dbuser.online = datetime.now()
                     db.session.commit()
                 except Exception:

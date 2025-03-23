@@ -7,14 +7,11 @@ const $send = document.getElementById("send");
 const $input_msg = document.getElementById("msg-input");
 export const $profile_elemt = document.getElementById("profile");
 
+
 document.getElementById("serch").addEventListener("click", () => {
-  const $input_serch = document.getElementById("serch-container");
-  if ($input_serch.style.display == "none") {
-    $input_serch.style.display = "block";
-    return;
-  }
-  $input_serch.style.display = "none";
-});
+  document.getElementById("serch-container").classList.toggle("active");
+  
+  });
 $exit.addEventListener("click", () => {
   // window.location.href = "/"
   console.log("clicked");

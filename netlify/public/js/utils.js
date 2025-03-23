@@ -1,5 +1,6 @@
 import { socket } from "./conect.js";
 import { URL } from "./env.js";
+import { user } from "./hivy.js";
 
 
 export const myTag = "hiveid";
@@ -9,10 +10,10 @@ export const contact_listTag = "contact-list";
 const bioTag ='hivebio'
 
 export let token = localStorage.getItem("1463token-as-savekjg");
-export let userId = parseInt(localStorage.getItem(myTag));
-export let fromId = parseInt(localStorage.getItem(senderTag));
+export let userId = user.id;
+export let fromId = user.otherId;
 console.log("from", fromId, "userid", userId);
-export let messages = JSON.parse(localStorage.getItem(messageTag));
+export let messages = user.messages;
 
 export function request_messages(create_user_label = null) {
   if (!localStorage.getItem(messageTag)) {
@@ -22,9 +23,9 @@ export function request_messages(create_user_label = null) {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        uid: parseInt(userId)
+        uid: userId
       },
-      body: JSON.stringify({ id: parseInt(userId) })
+      body: JSON.stringify({ id: userId })
     })
       .then(resp => {
         if (!resp.ok) {
@@ -34,9 +35,9 @@ export function request_messages(create_user_label = null) {
       })
       .then(data => {
         console.log("reseived: ", data);
-        localStorage.setItem(messageTag, JSON.stringify(data[0]));
-        localStorage.setItem(contact_listTag, JSON.stringify(data[1]));
-        localStorage.setItem(bioTag, data[2]);
+         user.messages= JSON.stringify(data[0]);
+        user.contacts=JSON.stringify(data[1]);
+        user.bio = data[2];
 
         if (create_user_label) {
           create_user_label(data[0], data[1]);
@@ -47,18 +48,6 @@ export function request_messages(create_user_label = null) {
       });
   }
 }
-
-export function room(user_id, from_id) {
-  if (parseInt(user_id) <= parseInt(from_id)) {
-    console.log(`channel:${user_id}${from_id}`);
-    return `${user_id}${from_id}`;
-  } else {
-    console.log(`channe:${from_id} ${user_id}`);
-    return `${from_id}${user_id}`;
-  }
-}
-
-
 
 
 // =============================================================

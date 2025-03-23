@@ -14,6 +14,7 @@ import {
   elemen_destaque,
 } from "./setting-profile.js";
 import { socket } from "./conect.js";
+
 const label_name = document.getElementById("label-name");
 const new_contact = document.getElementById("new-contact");
 const lista = document.createElement("ul");
@@ -72,7 +73,6 @@ function label_name_status(
   }
 }
 
-let contacts = JSON.parse(localStorage.getItem(contact_listTag));
 
 function create_user_label(users, contacts) {
   console.log(users);
@@ -129,20 +129,31 @@ if (token) {
   window.location.href = "templates/login.html";
 }
 
-function new_contact_status() {
-  if (new_contact.style.display == "none") {
-    new_contact.style.display = "block";
-    elemen_destaque(new_contact);
-    return;
-  }
+// function new_contact_status() {
+//   if (new_contact.style.display == "none") {
+//     new_contact.style.display = "block";
+//     elemen_destaque(new_contact);
+//     return;
+//   }
 
-  elemen_destaque(new_contact, false);
-  new_contact.style.display = "none";
-}
+//   elemen_destaque(new_contact, false);
+//   new_contact.style.display = "none";
+// }
+const addButton = document.getElementById('add');
+const popup = document.getElementById('popup');
+const exitButton = document.getElementById('exit');
+const form = document.getElementById('new-contact');
 
-const add = document.getElementById("add");
-add.addEventListener("click", () => {
-  new_contact_status();
+// Abrir popup
+addButton.addEventListener('click', function() {
+    popup.classList.add('active');
+});
+
+// Fechar popup
+exitButton.addEventListener('click', function() {
+    popup.classList.remove('active');
+});
+
   new_contact.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -166,9 +177,9 @@ add.addEventListener("click", () => {
       custom_name: $customname.value,
     });
     user.value = "";
-    elemen_destaque(new_contact, false);
+    // elemen_destaque(new_contact, false);
   });
-});
+
 document.getElementById("exit").addEventListener("click", () => {
   new_contact_status();
 });

@@ -12,13 +12,17 @@
 .profile-page #profile {
   margin: 0;
   padding: 0;
-
 }
 .profile-page #home {
   width: 40%;
   background-color: #f2f2f2;
   /* padding: 20px; */
 }
+.profile-page.dark-mode #home {
+  background: #121212;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
 .profile-page #profile {
   border: solid rgba(0, 0, 0, 0.701) 2px;
   width: 60%;
@@ -32,6 +36,104 @@
   height: 70dvh;
   overflow-y: scroll;
 }
+.profile-page.dark-mode #profile #msgs {
+  background-color: #121212;
+  border: 1px solid #333;
+}
+.profile-page.dark-mode #profile #msgs  p{
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-wrap: break-word;
+  position: relative;
+  clear: both;
+}
+.profile-page.dark-mode #profile #msgs #user-msg {
+  background: linear-gradient(135deg, #00b3ffc4, #0076d7cb, #7928cac3);
+  color: white;
+  float: right;
+  border-bottom-right-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.profile-page.dark-mode #profile #msgs p#user-msg:hover {
+  background: linear-gradient(135deg, #00c4ff, #0086e8, #8a32d9);
+}
+.profile-page.dark-mode #profile #msgs #sender-msg {
+
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    float: left;
+    border-bottom-left-radius: 4px;
+  }
+  .profile-page.dark-mode #profile #msgs  span.time {
+    display: block;
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+  }
+  .profile-page.dark-mode #profile #msgs::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+.profile-page #profile #msgs::-webkit-scrollbar {
+  width: 0.5em;
+}
+.profile-page #profile #msgs::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+  .profile-page #profile #msgs::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.profile-page.dark-mode #profile #profile-main #msg {
+  background-color: #171717;
+}
+.profile-page.dark-mode #profile #profile-main #msg input {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.profile-page.dark-mode #profile #profile-main #msg input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+.profile-page #profile #profile-main #msg input::placeholder {
+  color: #888;
+}
+.profile-page.dark-mode #profile #profile-main #msg input:hover {
+  border-color: #666;
+}
+.profile-page.dark-mode #profile #profile-main #msg input:disabled {
+  background-color: #333;
+  color: #999;
+}
+.profile-page.dark-mode #profile #profile-main #msg button#send {
+  background-color: #07d700;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.profile-page.dark-mode #profile #profile-main #msg button#send:hover {
+  background-color: #05a300;
+}
+.profile-page.dark-mode #profile #profile-main #msg button#send:disabled {
+  background-color: #333;
+  color: #999;
+  cursor: not-allowed;
+}
+
+
 .profile-page #home #add {
   position: fixed;
   bottom: 20px;

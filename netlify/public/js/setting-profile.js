@@ -2,13 +2,60 @@ import { $profile_elemt } from "./profile.js";
 import { socket } from "./conect.js";
 import { myTag } from "./utils.js";
 
+
+
+// =============== new structore =============================
+import { theme, darkTheme, ligthTheme,user } from "./hivy.js";
+
+// ================= theme =========================
+theme.start();
+const $theme = document.getElementById("theme-button");
+$theme.addEventListener("click", () => {
+  const dark_mode = darkTheme.value;
+  if (document.body.classList.contains(dark_mode)) {
+    document.body.classList.remove(dark_mode);
+    document.body.classList.add(ligthTheme.value);
+    theme.theme=ligthTheme;
+    console.log(ligthTheme)
+    return;
+  }
+  document.body.classList.add(dark_mode);
+  document.body.classList.remove(ligthTheme.value);
+  theme.theme=darkTheme;
+  console.log(darkTheme);
+});
+
+
+
+
+
+
+
+
+
+
+// =============== fault structore =============================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const my_name = document.getElementById("my-name");
-my_name.placeholder = String(localStorage.getItem("hiveusername"));
+my_name.placeholder = user.name;
 const my_username = document.getElementById("my-username");
-my_username.placeholder = String(localStorage.getItem("hiveusername"));
+my_username.placeholder = user.name;
 const my_bio = document.getElementById("text-my-bio");
-my_bio.placeholder = localStorage.getItem("hivebio")
-  ? String(localStorage.getItem("hivebio"))
+my_bio.placeholder = user.bio
+  ? user.bio
   : "";
 
 document.querySelector(".profile-form").addEventListener("submit", (event) => {
@@ -87,9 +134,11 @@ setting_form.addEventListener("click", (event) => {
     console.log("bio atualizado");
     let bio_value = bio_element.value
     socket.emit("bio", { bio: bio_value , id: localStorage.getItem(myTag) });
-    localStorage.setItem("hivebio", bio_value);
+    user.bio=bio_value;
     
     bio_element.value = "";
-    bio_element.placeholder = bio_value;
+    bio_element.placeholder = user.bio;
   }
 });
+
+

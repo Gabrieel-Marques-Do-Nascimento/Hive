@@ -1,0 +1,603 @@
+
+
+.dark-mode #home header h2 {
+    color: #fff;
+    /* margin-right: auto; */
+    font-weight: 600;
+    background: linear-gradient(45deg, #FFD700, #FF8C00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .dark-mode #home header #Downloads:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .dark-mode #home  header #Downloads svg {
+    stroke: #fff;
+  }
+
+
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Dark Mode Styles */
+  body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  
+  #home header {
+    display: flex;
+    background-color: #24292e;
+    color: white;
+    overflow: hidden;
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Dark Mode Header */
+  body.dark-mode #home header {
+    background-color: #1a1a1a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  #home header h2 {
+    margin: 0;
+    align-self: center;
+    margin-left: auto;
+  }
+  
+  #home header #Downloads {
+    margin: 0;
+    margin-right: 15px;
+    background-color: rgba(255, 255, 255, 0.612);
+    margin-left: 10%;
+    align-self: center;
+    justify-self: center;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: auto;
+    transition: background-color 0.3s ease;
+  }
+  
+  body.dark-mode #home header #Downloads {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  #home header #Downloads:hover {
+    margin-left: auto;
+    background-color: rgb(255, 254, 254);
+  }
+  
+  body.dark-mode #home header #Downloads:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  
+  #home header #profile-button {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+  }
+  
+  body.dark-mode #home header #profile-button {
+    border: 2px solid rgba(255, 255, 255, 0.15);
+  }
+  
+  #home header #profile-button:hover {
+    background-color: rgb(255, 254, 254);
+    transform: scale(1.1);
+  }
+  
+  body.dark-mode #home header #profile-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  #profile-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  #home .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  body.dark-mode #home .container {
+    background: #1e1e1e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  #home ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #home li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  body.dark-mode #home li {
+    border-bottom: 1px solid #333;
+  }
+  
+  #home li:last-child {
+    border-bottom: none;
+  }
+  
+  #home li:hover {
+    background-color: #f9f9f9;
+  }
+  
+  body.dark-mode #home li:hover {
+    background-color: #2a2a2a;
+  }
+  
+  #home .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  #home .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #d1d1d1;
+    margin-right: 10px;
+  }
+  
+  body.dark-mode #home .avatar {
+    background-color: #444;
+  }
+  
+  #home .username {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    text-transform: capitalize;
+  }
+  
+  body.dark-mode #home .username {
+    color: #e0e0e0;
+  }
+  
+  #home .message-preview {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  body.dark-mode #home .message-preview {
+    color: #aaa;
+  }
+  
+  #home .time {
+    font-size: 12px;
+    color: #999;
+  }
+  
+  body.dark-mode #home .time {
+    color: #777;
+  }
+  
+  #home #add {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #8f8f8f;
+    background-color: #44ff44;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  body.dark-mode #home #add {
+    background-color: #2d9c2d;
+    border: 1px solid #444;
+  }
+  
+  #home .noview {
+    position: relative;
+    height: 15px;
+    border: 1px solid black;
+    background-color: var(--color1);
+    height: 30px;
+    width: 30px;
+    left: 0;
+    border-radius: 50%;
+    animation: noview_aniamtion 2s infinite linear;
+  }
+  
+  body.dark-mode #home .noview {
+    border: 1px solid #555;
+  }
+  
+  #home #new-contact {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 35px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  body.dark-mode #home #new-contact {
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  #home #new-contact label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  body.dark-mode #home #new-contact label {
+    color: #e0e0e0;
+  }
+  
+  #home #new-contact input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.dark-mode #home #new-contact input {
+    background-color: #333;
+    border-color: #444;
+    color: #e0e0e0;
+  }
+  
+  #home #new-contact input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+  
+  body.dark-mode #home #new-contact input:focus {
+    border-color: #2d9c2d;
+    box-shadow: 0 0 5px rgba(45, 156, 45, 0.5);
+  }
+  
+  #home #new-contact #submit {
+    width: 100%;
+    padding: 15px;
+    background-color: #60b263;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  body.dark-mode #home #new-contact #submit {
+    background-color: #2d9c2d;
+  }
+  
+  #home #new-contact #submit:hover {
+    background-color: #45a049;
+  }
+  
+  body.dark-mode #home #new-contact #submit:hover {
+    background-color: #237023;
+  }
+  
+  #home #new-contact #exit {
+    position: relative;
+    left: 80%;
+    border: none;
+    width: 60px;
+    align-self: center;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #888;
+  }
+  
+  body.dark-mode #home #new-contact #exit {
+    background-color: #8b0000;
+  }
+  
+  #exit svg {
+    width: 50px;
+    height: auto;
+    color: rgb(255, 255, 255);
+  }
+  
+  /* Theme Toggle Button */
+  #theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background-color 0.3s ease;
+  }
+  
+  body.dark-mode #theme-toggle {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  @media screen and (max-width: 768px) {
+    #home header {
+      max-height: 80px;
+    }
+  }
+  
+  @property --color1 {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: #37a437;
+  }
+  
+  @property --color2 {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: white;
+  }
+  
+  @property --color3 {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: #aeeeae;
+  }
+  
+  body.dark-mode {
+    --color1: #2d9c2d;
+    --color2: #333;
+    --color3: #1e5e1e;
+  }
+  
+  @keyframes noview_aniamtion {
+    0% {
+      background-color: var(--color1);
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1);
+      background-color: var(--color2);
+    }
+    100% {
+      background-color: var(--color3);
+      transform: scale(1);
+    }
+  }
+
+/* elementos de entrada */
+
+
+/* Light Mode Input/Textarea Styles */
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  resize: vertical; /* For textarea */
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+/* Dark Mode Input/Textarea Styles */
+body.dark-mode input, 
+body.dark-mode textarea {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark-mode select {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+  /* Change dropdown arrow color for dark mode */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+  border-color: #2d9c2d;
+  box-shadow: 0 0 5px rgba(45, 156, 45, 0.5);
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #777;
+}
+
+/* Disabled state */
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+body.dark-mode input:disabled,
+body.dark-mode textarea:disabled,
+body.dark-mode select:disabled {
+  background-color: #222;
+  color: #555;
+  border-color: #333;
+}
+
+/* Custom styling for checkbox and radio */
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* File input */
+input[type="file"] {
+  padding: 8px;
+  cursor: pointer;
+}
+
+body.dark-mode input[type="file"]::file-selector-button {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode input[type="file"]::file-selector-button:hover {
+  background-color: #444;
+}
+
+/* Range input */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #ddd;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  padding: 0;
+}
+
+body.dark-mode input[type="range"] {
+  background: #444;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+body.dark-mode input[type="range"]::-webkit-slider-thumb {
+  background: #2d9c2d;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+  border: none;
+}
+
+body.dark-mode input[type="range"]::-moz-range-thumb {
+  background: #2d9c2d;
+}
+
+/* Date inputs */
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"] {
+  padding-right: 12px;
+}
+
+body.dark-mode input[type="date"],
+body.dark-mode input[type="time"],
+body.dark-mode input[type="datetime-local"] {
+  color-scheme: dark;
+}
+
+/* Color input */
+input[type="color"] {
+  height: 40px;
+  padding: 4px;
+}
+
+
+
+
+
+
+
+
+

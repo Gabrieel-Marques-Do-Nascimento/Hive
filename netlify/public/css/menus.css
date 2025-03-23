@@ -18,6 +18,9 @@
     position: relative;
     display: none;
 }
+body.dark-mode .moom {
+    display: block;
+}
 .moom::before {
     content: '';
     border-radius: 50%;
@@ -73,3 +76,103 @@
         box-shadow: none;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+#theme-button > * {
+  
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+ }
+ #theme-button{
+     /* position: fixed; */
+     top: 20px;
+     right: 20px;
+     z-index: 9999;
+     cursor: pointer;
+     padding: 0;
+     box-shadow: inset #87CEEB 0px 0px 10px;
+ }
+
+ /* .moom {
+     width: 40px;
+     height: 40px;
+     background-color: #FDB813;
+     border-radius: 50%;
+     box-shadow: 0 0 15px #FDB813, 0 0 30px #FDB813;
+     position: relative;
+     animation: pulsate 5s infinite alternate;
+ } */
+
+ .sol {
+     width:35px;
+     height: 35px;
+     background-color: #FDB813;
+     border-radius: 50%;
+     box-shadow: 0 0 20px #FDB813, 0 0 30px #FDB813;
+     position: relative;
+     animation: pulsate 5s infinite alternate;
+ }
+ body.dark-mode .sol {
+     display: none;
+ }
+ .raios {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     animation: rotate 20s linear infinite;
+ }
+ 
+ .raio {
+     position: absolute;
+     width: 5px;
+     height: 10px;
+     background-color: #FDB813;
+     left: 50%;
+     top: 79%;
+     margin-left: -2px;
+     margin-top: -15px;
+     border-radius: 5px;
+ }
+ 
+ .raio:nth-child(1) { transform: rotate(0deg) translateY(-25px); }
+ .raio:nth-child(2) { transform: rotate(45deg) translateY(-25px); }
+ .raio:nth-child(3) { transform: rotate(90deg) translateY(-25px); }
+ .raio:nth-child(4) { transform: rotate(135deg) translateY(-25px); }
+ .raio:nth-child(5) { transform: rotate(180deg) translateY(-25px); }
+ .raio:nth-child(6) { transform: rotate(225deg) translateY(-25px); }
+ .raio:nth-child(7) { transform: rotate(270deg) translateY(-25px); }
+ .raio:nth-child(8) { transform: rotate(315deg) translateY(-25px); }
+ 
+ @keyframes pulsate {
+     0% { transform: scale(1); }
+     50% { transform: scale(1.05); }
+     100% { transform: scale(1); }
+ }
+ 
+ @keyframes rotate {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+ }
+ 
+ .horizonte {
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     height: 30%;
+     background-color: #228B22;
+     z-index: -1;
+ }

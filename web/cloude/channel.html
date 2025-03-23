@@ -119,11 +119,13 @@ header {
 #serch-container {
   padding: 8px 16px;
   background-color: #f0f2f5;
-  display: flex;
+  display: none;
   align-items: center;
   border-bottom: 1px solid #e0e0e0;
 }
-
+#serch-container.active {
+display: flex;
+}
 #serch-container input {
   flex: 1;
   padding: 10px 12px;

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animação do Sol</title>
+    <style>
+        body {
+            background-color: #87CEEB;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .sol {
+            width: 150px;
+            height: 150px;
+            background-color: #FDB813;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FDB813, 0 0 100px #FDB813;
+            position: relative;
+            animation: pulsate 5s infinite alternate;
+        }
+        
+        .raios {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .raio {
+            position: absolute;
+            width: 10px;
+            height: 50px;
+            background-color: #FDB813;
+            left: 50%;
+            top: 79%;
+            margin-left: -5px;
+            margin-top: -75px;
+            border-radius: 5px;
+        }
+        
+        .raio:nth-child(1) { transform: rotate(0deg) translateY(-90px); }
+        .raio:nth-child(2) { transform: rotate(45deg) translateY(-90px); }
+        .raio:nth-child(3) { transform: rotate(90deg) translateY(-90px); }
+        .raio:nth-child(4) { transform: rotate(135deg) translateY(-90px); }
+        .raio:nth-child(5) { transform: rotate(180deg) translateY(-90px); }
+        .raio:nth-child(6) { transform: rotate(225deg) translateY(-90px); }
+        .raio:nth-child(7) { transform: rotate(270deg) translateY(-90px); }
+        .raio:nth-child(8) { transform: rotate(315deg) translateY(-90px); }
+        
+        @keyframes pulsate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .horizonte {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            background-color: #228B22;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="horizonte"></div>
+    <div class="sol">
+        <div class="raios">
+            <div class="raio"></div>
+            <div class="raio"></div>
+            <div class="raio"></div>
+            <div class="raio"></div>
+            <div class="raio"></div>
+            <div class="raio"></div>
+            <div class="raio"></div>
+            <div class="raio"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -6,33 +6,77 @@ from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
 from kivymd.uix.label import MDLabel
 from kivymd.font_definitions import theme_font_styles
-
+import sqlite3
 from datetime import datetime
 # testes
 from app_testes.loggeuer_teste_init import ActivationTime
-from app_testes.users_teste import users10
-users = users10
+# from app_testes.users_teste import users10
+users = []
 
+
+# ==============  user ===============
+class USER:
+    def __init__(self, user):
+        self.user: dict = user
+        self.id: int = user["contact"]
+        self.name: str = user["name"]
+        self.update: str = user["update"]
+        self.null: str = "null"
+        self.user_id: int = user["id"]
+
+
+# ============== data base ===============
+
+class UserDB:
+    def __init__(self):
+        self.conn = sqlite3.connect('hivy.db')
+        self.cursor = self.conn.cursor()
+
+        # Criar tabela de usuários se não existir
+        self.cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+                    id TEXT,
+                    name TEXT,
+                    contact TEXT,
+                    update_time TEXT
+                    )
+                    ''')
+
+    def create(self, user: USER):
+        """
+        Cria um novo usuário no banco de dados.
+        """
+        self.cursor.execute("INSERT INTO users (id, name, contact, update_time) VALUES (?, ?, ?, ?)",
+                            (user.user_id, user.name, user.id, user.update))
+        self.conn.commit()
+        self.conn.close()
+        return True
+    
+    def All(self):
+        self.cursor.execute("SELECT * FROM users")
+        return self.cursor.fetchall()
+    
+    def select(self, id):
+        self.cursor.execute("SELECT * FROM users WHERE id=?", (id,))
+        return self.cursor.fetchone()
 
 # pass logguer time active app
-#active = ActivationTime(__file__)
-#active.file_name("Hive-messages-app", filetimename=True)
-#active.clear()
+# active = ActivationTime(__file__)
+# active.file_name("Hive-messages-app", filetimename=True)
+# active.clear()
 # primeiro para iniciar
-#active.debug(logg=False)
-
+# active.debug(logg=False)
 # ===========================================
 # =====°===°====   BackEnd-API    =======°=°=====
 # ===========================================
-
 sio = socketio.AsyncClient()
 
-# @sio.event
-# def connect():
-# print("connected")
-# sio.emit("registrar_usuario", {"id":4})
-# sio.connect("http://localhost:5000")
-# sio.wait()
+@sio.event
+def connect():
+    print("connected")
+sio.emit("registrar_usuario", {"id":4})
+sio.connect("http://localhost:5000")
+sio.wait()  # noqa: F704
 
 
 # ===========================================
@@ -123,14 +167,13 @@ class Contact(ThreeLineAvatarListItem):
         tertiary_text (str): Contact's online status
     """
 
-    def __init__(self, user, **kwargs):
+    def __init__(self, user: USER, **kwargs):
         super().__init__(**kwargs)
-        
-        self.add_widget(MDLabel(text=user["name"], font_size="20sp",
+        self.add_widget(MDLabel(text=user.name, font_size="20sp",
                         font_style=theme_font_styles[6], pos_hint={"x": .2, "center_y": .5}))
-        self.add_widget(MDLabel(text=user["message"], font_style=theme_font_styles[7],
+        self.add_widget(MDLabel(text=user.null, font_style=theme_font_styles[7],
                         font_size="16sp", pos_hint={"x": .5, "center_y": .75}))
-        self.add_widget(MDLabel(text=user["online"], font_size="14sp",
+        self.add_widget(MDLabel(text='indefinido', font_size="14sp",
                         font_style=theme_font_styles[7], pos_hint={"x": .8, "center_y": .75}))
 
 
@@ -150,17 +193,17 @@ class HomeScreen(MDScreen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        
+
         self.name = 'home'
 
     def on_enter(self):
         """
         espera o arquivo kv ser caregado antes de executar o cofigo abaixo
         """
-        
+
         self.load_contacts()
 
-    def callback_screen(self, instace, user):
+    def callback_screen(self, instace, user: USER):
         """
         function calbeck:
 
@@ -170,14 +213,14 @@ class HomeScreen(MDScreen):
         """
         userdate = user
         screen = self.parent.get_screen("messages")
-        screen.ids.topbar.title = userdate["name"]
+        screen.ids.topbar.title = userdate.name
         self.manager.transition.direction = "up"
         self.manager.current = "messages"
 
-    def create_contacts(self, user):
+    def create_contacts(self, user: USER):
         """
         """
-        
+
         user_item = Contact(user=user)
         # Adicionando labels personalizados
         # criar uma tela de msgs
@@ -185,33 +228,30 @@ class HomeScreen(MDScreen):
             on_press=lambda x:
             self.callback_screen(x, user))
         self.ids.contacts_list.add_widget(user_item)
-        
-    
 
-    
     def load_contacts(self):
         """
         add os elementos da lista aos contatos
         """
 
         if hasattr(self.ids, "contacts_list"):
-        	self.ids.contacts_list.clear_widgets()
-        	for user in users:
-        		self.create_contacts(user=user)
-        	     
-                
-    
+            self.ids.contacts_list.clear_widgets()
+            for user in users:
+                _user = USER(user)
+                self.create_contacts(user=_user)
+
     def reseived_message(self):
-    	"""
-    	resebe as mensssagens e lida com os novas mensages resebidas de pessoas que nunca enviarao
-    	"""
-    	pass
+        """
+        resebe as mensssagens e lida com os novas mensages resebidas de pessoas que nunca enviarao
+        """
+        pass
+
 
 class Messages(MDScreen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        
+
         self.messages = []
         self.title = "HIVE"
         self.name = 'messages'
@@ -257,12 +297,12 @@ class HiveApp(MDApp):
     """
     class principal
     """
-    
+
     def run2(self):
-    	
-    	def decorado():
-    		self.run()
-    	decorado()
+
+        def decorado():
+            self.run()
+        decorado()
 
     def build(self):
         """
@@ -276,10 +316,10 @@ class HiveApp(MDApp):
         Returns:
             ScreenManager: The main application screen manager
         """
-        from kivy.clock import  Clock
+        from kivy.clock import Clock
         Clock.schedule_once(lambda dt: self.start_socket(), 1)
         Builder.load_string(KV)
-        
+
         sm = ScreenManager()
         sm.add_widget(HomeScreen())
         sm.add_widget(Messages())
@@ -325,7 +365,7 @@ class HiveApp(MDApp):
         """
         from threading import Thread
         import asyncio
-        
+
         def run():
             asyncio.run(self.connect_socket())
         Thread(target=run, daemon=True).start()
@@ -333,5 +373,3 @@ class HiveApp(MDApp):
 
 if __name__ == "__main__":
     HiveApp().run()
-    
-    

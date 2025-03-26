@@ -43,8 +43,11 @@ KV_Loader = """
             text: "Bem-vindo ao App!"
             halign: "center"
 """
+
+
 class Loader(BaseName):
-	name = "loader"
+    name = "loader"
+
 
 loader = Loader()
 
@@ -52,13 +55,15 @@ loader = Loader()
 class LoaderScreen(MDScreen):
     pass
 
+
 class HomeScreenTeste(MDScreen):
     pass
 
+
 class LoaderApp(BaseApp):
     def __init__(self, *args, **kwargs):
-    	super().__init__(*args,**kwargs)
-    	self.switch_to = self.home
+        super().__init__(*args, **kwargs)
+
     def build(self):
         self.app_builder.load_string(KV_Loader)
         self.sm.add_widget(LoaderScreen(name="loader"))
@@ -69,7 +74,8 @@ class LoaderApp(BaseApp):
         return self.sm
 
     def switch_to_home(self, dt):
-        self.sm.current = self.switch_to.name
+        self.sm.current = self.home.name
+
 
 if __name__ == "__main__":
     LoaderApp().run()

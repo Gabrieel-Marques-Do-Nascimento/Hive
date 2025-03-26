@@ -2,17 +2,18 @@ import socketio
 
 sio = socketio.AsyncClient()
 
-#@sio.event
-#def connect():
+# @sio.event
+# def connect():
 #    print("connected")
-#sio.emit("registrar_usuario", {"id":4})
-#sio.connect("http://localhost:5000")
-#sio.wait()  # noqa: F704
+# sio.emit("registrar_usuario", {"id":4})
+# sio.connect("http://localhost:5000")
+# sio.wait()  # noqa: F704
 
 
 class Socket:
     def __init__(self, id):
-    	self.id = id
+        self.id = id
+
     async def connect_socket(self):
         """
         Establishes an asynchronous socket connection to the server.
@@ -27,14 +28,13 @@ class Socket:
 
         try:
             # print("socket conectado")
-            await sio.connect("http://127.0.0.1:5000", {"extraHeaders":{"id" :self.id}})
-            
+            await sio.connect("http://127.0.0.1:5000", {"extraHeaders": {"id": self.id}})
+
             await sio.wait()
             await sio.on("enveto")
 
         except Exception:
             pass
-
 
     def start_socket(self):
         """
@@ -50,6 +50,7 @@ class Socket:
             asyncio.run(self.connect_socket())
         Thread(target=run, daemon=True).start()
 
+
 if __name__ == "__main__":
-	socket = Socket(1)
-	socket.start_socket()
+    socket = Socket(1)
+    socket.start_socket()

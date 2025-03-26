@@ -43,14 +43,19 @@ Add_Contact_KV = """
                     on_release: app.add_contact()
 
 """
+
+
 class ADD(BaseName):
-	name="add_contact"
+    name = "add_contact"
+
 
 addcontact = ADD()
+
 
 class ContactScreen(BaseScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
 
 class ContactApp(BaseApp):
     def build(self):
@@ -63,7 +68,8 @@ class ContactApp(BaseApp):
         contact_id = self.root.get_screen(addcontact.name).ids.contact_id.text
 
         if name and contact_id:
-            self.show_dialog("Contato adicionado!", f"Nome: {name}\nID: {contact_id}")
+            self.show_dialog("Contato adicionado!",
+                             f"Nome: {name}\nID: {contact_id}")
         else:
             self.show_dialog("Erro", "Preencha todos os campos!")
 
@@ -76,6 +82,5 @@ class ContactApp(BaseApp):
 #        dialog.open()
 
 
-  
 if __name__ == "__main__":
     ContactApp().run()

@@ -4,6 +4,10 @@ from kivymd.uix.screen import MDScreen
 
 
 from extend_base import  Base, BaseApp, BaseScreen
+from utils import Requestist
+
+requestt =  Requestist()
+
 
 Login_KV = """
 ScreenManager:
@@ -63,11 +67,15 @@ class LoginApp(BaseApp):
     def login(self):
         username = self.root.get_screen("login").ids.username.text
         password = self.root.get_screen("login").ids.password.text
+        requestt.login(data={"email": username, "password": password}).json()
+        if requestt.status_code == 200 and requestt.json["status"] == "ok":
+            self.show_dialog("Login bem-sucedido", f"Bem-vindo, {username}!")
+            self.sm.current = self.home.name
 
         if username == "admin" and password == "1234":
             self.show_dialog("Login bem-sucedido", "Bem-vindo, Admin!")
-        else:
-            self.show_dialog("Erro", "Usuário ou senha inválidos!")
+        # else:
+        #     self.show_dialog("Erro", "Usuário ou senha inválidos!")
 
  
 
@@ -78,6 +86,9 @@ class LoginApp(BaseApp):
         else:
             field.password = True
             field.icon_right = "eye-off"
+
+    def switch_to_login(self, dt):
+        self.sm.current = login.name
 
 if __name__ == "__main__":
     LoginApp().run()

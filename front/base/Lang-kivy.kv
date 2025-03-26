@@ -1,0 +1,161 @@
+<Contact>:
+    #on_press: app.root.current = "messages"
+    ImageLeftWidget:
+        source: "assets/cogwheel (1).png"
+
+<HomeScreen>:
+	BoxLayout:
+		orientation: "vertical"
+
+		MDTopAppBar:
+			title: "HIVE"
+			elevation: 4
+			pos_hint: {"top":1}
+
+		ScrollView:
+			MDList:
+				id: contacts_list
+				padding: 10
+				spacing: 5
+				
+		BoxLayout:
+		    size_hint_y: None
+            height: "48dp"
+		    adaptive_height: True
+		    spacing: 5
+		    padding: 5
+		    orientation: "vertical"  # Para centralizar mais facilmente
+		    MDIconButton:
+		        id: addContact
+		        icon: "plus"
+		        pos_hint: {"center_x": 0.5}  # Centraliza horizontalmente
+		        on_release: root.add()
+		        
+<Messages>:
+	BoxLayout:
+		orientation: "vertical"
+		MDTopAppBar:
+			title: "HIVE"
+			elevation: 4
+			pos_hint: {"top":1}
+			id: topbar
+			left_action_items: [["arrow-collapse-left", lambda x: app.callback()]]
+			icon: "git"
+		ScrollView:
+			id: scroll_view2
+			
+			MDList:
+				id: chat_list
+				padding: 10
+				spacing: 5
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.08
+            adaptive_height: True
+            spacing: 5
+            padding: 5
+            MDTextField:
+                id: message_input
+                hint_text: "Digite sua mensagem..."
+                helper_text: "Pressione enviar ou o botão para enviar"
+                helper_text_mode: "on_error"
+                multiline: False
+            MDIconButton:
+                icon: "send"
+                on_release: root.send_message()
+
+<ADDScreen>:
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "10dp"
+
+        MDTopAppBar:
+            title: "Adicionar Contato"
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: "20dp"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "20dp"
+
+                MDTextField:
+                    id: contact_name
+                    hint_text: "Nome do Contato"
+                    mode: "fill"
+
+                MDTextField:
+                    id: contact_id
+                    hint_text: "ID do Contato"
+                    mode: "fill"
+                    input_filter: "int"
+
+                MDRaisedButton:
+                    text: "Adicionar Contato"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: app.add_contact()
+                    
+<LoginScreen>:
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "10dp"
+
+        MDTopAppBar:
+            title: "Login"
+        
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "20dp"
+                spacing: "20dp"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                MDTextField:
+                    id: username
+                    hint_text: "Usuário"
+                    mode: "fill"
+                    icon_right: "account"
+
+                MDTextField:
+                    id: password
+                    hint_text: "Senha"
+                    password: True
+                    mode: "fill"
+                    icon_right: "eye-off"
+                    on_touch_down: app.toggle_password_visibility(self)
+
+                MDRaisedButton:
+                    text: "Entrar"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: app.login()
+
+<LoaderScreen>:
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: "20dp"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDIcon:
+            icon: "android"  # Substitua pelo ícone do seu app
+            halign: "center"
+            font_size: "100dp"
+
+        MDLabel:
+            text: "Carregando..."
+            halign: "center"
+            theme_text_color: "Secondary"
+
+        MDSpinner:
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {"center_x": 0.5}
+            active: True

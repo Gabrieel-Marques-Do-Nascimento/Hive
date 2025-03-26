@@ -4,7 +4,10 @@ from kivymd.uix.screenmanager import ScreenManager
 from kivymd.uix.list import ThreeLineAvatarListItem, TwoLineListItem
 from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
+from kivy.clock import  Clock
 from kivymd.uix.label import MDLabel
+from kivymd.uix.dialog import  MDDialog
+from kivymd.uix.button import  MDFlatButton
 from kivymd.font_definitions import theme_font_styles
 import sqlite3
 from datetime import datetime
@@ -114,8 +117,10 @@ KV = """
 		    padding: 5
 		    orientation: "vertical"  # Para centralizar mais facilmente
 		    MDIconButton:
+		        id: addContact
 		        icon: "plus"
 		        pos_hint: {"center_x": 0.5}  # Centraliza horizontalmente
+		        on_release: root.add()
 		        
 <Messages>:
 	name: "messages"
@@ -150,7 +155,121 @@ KV = """
             MDIconButton:
                 icon: "send"
                 on_release: root.send_message()
+
+<ADD>:
+    name: "add_contact"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "10dp"
+
+        MDTopAppBar:
+            title: "Adicionar Contato"
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: "20dp"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "20dp"
+
+                MDTextField:
+                    id: contact_name
+                    hint_text: "Nome do Contato"
+                    mode: "fill"
+
+                MDTextField:
+                    id: contact_id
+                    hint_text: "ID do Contato"
+                    mode: "fill"
+                    input_filter: "int"
+
+                MDRaisedButton:
+                    text: "Adicionar Contato"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: app.add_contact()
+                    
+<LoginScreen>:
+    name: "login"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "10dp"
+
+        MDTopAppBar:
+            title: "Login"
+        
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "20dp"
+                spacing: "20dp"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                MDTextField:
+                    id: username
+                    hint_text: "Usuário"
+                    mode: "fill"
+                    icon_right: "account"
+
+                MDTextField:
+                    id: password
+                    hint_text: "Senha"
+                    password: True
+                    mode: "fill"
+                    icon_right: "eye-off"
+                    on_touch_down: app.toggle_password_visibility(self)
+
+                MDRaisedButton:
+                    text: "Entrar"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: app.login()
+
+<LoaderScreen>:
+    name: "loader"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: "20dp"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDIcon:
+            icon: "android"  # Substitua pelo ícone do seu app
+            halign: "center"
+            font_size: "100dp"
+
+        MDLabel:
+            text: "Carregando..."
+            halign: "center"
+            theme_text_color: "Secondary"
+
+        MDSpinner:
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {"center_x": 0.5}
+            active: True
+
+
 """
+
+class LoaderScreen(MDScreen):
+    pass
+
+
+class LoginScreen(MDScreen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+
+class ADD(MDScreen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
 
 class Contact(ThreeLineAvatarListItem):
@@ -245,7 +364,12 @@ class HomeScreen(MDScreen):
         resebe as mensssagens e lida com os novas mensages resebidas de pessoas que nunca enviarao
         """
         pass
-
+       
+    def add(self):
+        screen = self.parent.get_screen("add_contact")
+        self.manager.transition.direction = "up"
+        self.manager.current = "add_contact"
+    	
 
 class Messages(MDScreen):
 
@@ -321,9 +445,38 @@ class HiveApp(MDApp):
         Builder.load_string(KV)
 
         sm = ScreenManager()
+        self.sm = sm
+        sm.add_widget(LoaderScreen(name="loader"))
+        sm.add_widget(LoginScreen())
         sm.add_widget(HomeScreen())
         sm.add_widget(Messages())
+        sm.add_widget(ADD())
+        
+        # Troca de tela após 3 segundos
+        Clock.schedule_once(self.switch_to_home, 3)
+        
         return sm
+
+
+    def add_contact(self):
+        name = self.root.get_screen("add_contact").ids.contact_name.text
+        contact_id = self.root.get_screen("add_contact").ids.contact_id.text
+
+        if name and contact_id:
+            self.show_dialog("Contato adicionado!", f"Nome: {name}\nID: {contact_id}")
+        else:
+            self.show_dialog("Erro", "Preencha todos os campos!")
+
+    def show_dialog(self, title, text):
+        dialog = MDDialog(
+            title=title,
+            text=text,
+            buttons=[MDFlatButton(text="OK", on_release=lambda x: dialog.dismiss())],
+        )
+        dialog.open()
+
+ 
+
 
     def callback(self):
         """
@@ -370,6 +523,27 @@ class HiveApp(MDApp):
             asyncio.run(self.connect_socket())
         Thread(target=run, daemon=True).start()
 
+    def login(self):
+        username = self.root.get_screen("login").ids.username.text
+        password = self.root.get_screen("login").ids.password.text
+
+        if username == "admin" and password == "1234":
+            self.show_dialog("Login bem-sucedido", "Bem-vindo, Admin!")
+        else:
+            self.show_dialog("Erro", "Usuário ou senha inválidos!")
+
+
+
+    def toggle_password_visibility(self, field):
+        if field.password:
+            field.password = False
+            field.icon_right = "eye"
+        else:
+            field.password = True
+            field.icon_right = "eye-off"
+
+    def switch_to_home(self, dt):
+        self.sm.current = "home"
 
 if __name__ == "__main__":
     HiveApp().run()
